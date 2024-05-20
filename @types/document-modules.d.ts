@@ -62,6 +62,15 @@ declare module '*/global.gql' {
 }
     
 
+declare module '*/post.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AllPosts: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/seo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

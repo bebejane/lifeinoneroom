@@ -1,0 +1,15 @@
+.image {
+  --height: 10vh;
+  height: var(--height);
+
+  figure {
+    img {
+      height: var(--height);
+      object-fit: contain;
+    }
+  }
+
+  &.open {
+    --height: 100vh;
+  }
+}

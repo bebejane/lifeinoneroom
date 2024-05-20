@@ -1,0 +1,8 @@
+.text {
+  --height: 10vh;
+  height: var(--height);
+
+  &.open {
+    --height: 100vh;
+  }
+}

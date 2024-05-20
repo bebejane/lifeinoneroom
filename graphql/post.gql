@@ -1,0 +1,33 @@
+query AllPosts($first: IntType = 100, $skip: IntType = 0) {
+	allImages(first: $first, skip: $skip) {
+		__typename
+		id
+		image {
+			...ImageFragment
+		}
+		textToVoice
+		background {
+			hex
+		}
+		colorBackground {
+			hex
+		}
+		_publishedAt
+	}
+	_allImagesMeta {
+		count
+	}
+	allTexts(first: $first, skip: $skip) {
+		__typename
+		id
+		text {
+			blocks
+			links
+			value
+		}
+		_publishedAt
+	}
+	_allTextsMeta {
+		count
+	}
+}

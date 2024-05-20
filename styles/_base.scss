@@ -12,6 +12,10 @@
 	@include mq($until: tablet) {}
 }
 
+html {
+	box-sizing: border-box;
+}
+
 body {
 	width: 100%;
 	font-size: 100%;
@@ -21,20 +25,12 @@ body {
 	font-family: $body-font;
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
-}
-
-html {
-	box-sizing: border-box;
-}
-
-html,
-body {
-	//height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 main {
 	display: block;
-	padding: var(--outer-margin);
 }
 
 ::-webkit-scrollbar {
@@ -121,6 +117,12 @@ select {
 	background-position-x: calc(100% - 1em);
 	background-position-y: center;
 	color: var(--black);
+}
+
+section {
+	width: 100%;
+	position: relative;
+	cursor: pointer;
 }
 
 .page-error {
