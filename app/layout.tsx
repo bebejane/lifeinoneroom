@@ -26,10 +26,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 
 export async function generateMetadata() {
 
-  const { site: { globalSeo, faviconMetaTags } } = await apiQuery<GlobalQuery, GlobalQueryVariables>(GlobalDocument, {
-    variables: {},
-    revalidate: 60 * 60
-  });
+  const { site: { globalSeo, faviconMetaTags } } = await apiQuery<GlobalQuery, GlobalQueryVariables>(GlobalDocument);
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
