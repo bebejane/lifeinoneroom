@@ -2,6 +2,10 @@
   --height: 10vh;
   height: var(--height);
 
+  p {
+    margin-top: unset;
+  }
+
   &.open {
     --height: 100vh;
   }

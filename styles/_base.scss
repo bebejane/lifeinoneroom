@@ -6,6 +6,7 @@
 	--navbar-height: calc(1em + calc(2 * var(--outer-margin)));
 	--background: var(--white);
 	--foreground: var(--black);
+	--line-height: 1;
 
 	@include mq($from: tablet) {}
 
