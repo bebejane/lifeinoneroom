@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'A Life in a Room',
-    short_name: 'A Life in a Room',
-    description: 'A Life in a Room',
+    name: 'Life in one room',
+    short_name: 'Life in one room',
+    description: 'Life in one room',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
