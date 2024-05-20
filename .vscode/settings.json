@@ -1,0 +1,8 @@
+{
+  "files.exclude": {
+    "node_modules": false,
+    ".vscode": false,
+    ".next": false,
+    "@types": false
+  }
+}
