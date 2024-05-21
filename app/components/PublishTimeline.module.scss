@@ -1,0 +1,18 @@
+.timeline {
+  position: fixed;
+  top: 0;
+  right: 0;
+  right: var(--outer-margin);
+  height: 100vh;
+  z-index: var(--z-timeline);
+  color: var(--black);
+
+  a {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--black);
+    z-index: 1;
+    white-space: nowrap;
+  }
+}

@@ -4,12 +4,15 @@ import { AllPostsDocument } from '@graphql';
 import { DraftMode } from 'next-dato-utils/components';
 import ImagePost from './components/ImagePost';
 import TextPost from './components/TextPost';
+import PublishTimeline from './components/PublishTimeline';
 
 export default async function Home() {
 
   const { allImages, allTexts, draftUrl } = await apiQuery<AllPostsQuery, AllPostsQueryVariables>(AllPostsDocument, {
-    all: true
+    all: true,
+    tags: ['image', 'text']
   })
+
   const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._publishedAt > b._publishedAt ? 1 : -1) as (ImageRecord | TextRecord)[]
 
   return (
@@ -21,6 +24,7 @@ export default async function Home() {
             <TextPost key={post.id} data={post as TextRecord} />
             : null
       ))}
+      <PublishTimeline posts={allPosts} />
       <DraftMode url={draftUrl} />
     </>
   )

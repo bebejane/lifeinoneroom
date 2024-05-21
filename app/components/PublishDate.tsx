@@ -1,5 +1,6 @@
 'use client'
 
+import { useStore } from '@lib/store'
 import s from './PublishDate.module.scss'
 import { format } from 'date-fns'
 
@@ -8,6 +9,10 @@ export type Props = {
 }
 
 export default function PublishDate({ date }: Props) {
+
+  const [expanded] = useStore(state => [state.expanded])
+
+  if (expanded) return null
 
   return (
     <div className={s.date}>
