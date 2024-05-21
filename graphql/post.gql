@@ -13,6 +13,7 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 			hex
 		}
 		_publishedAt
+		_createdAt
 	}
 	_allImagesMeta {
 		count
@@ -26,6 +27,7 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 			value
 		}
 		_publishedAt
+		_createdAt
 	}
 	_allTextsMeta {
 		count
