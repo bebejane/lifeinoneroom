@@ -1,3 +1,4 @@
+import os from 'os';
 import dotenv from 'dotenv'; dotenv.config();
 import ElevenLabs from 'elevenlabs-node';
 import { buildClient, uploadLocalFileAndReturnPath } from '@datocms/cma-client-node';
@@ -30,7 +31,7 @@ export const generate = async (item: any, item_type: string) => {
 	const { field, type } = postTypeMap[item_type];
 	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field].value) : null;
 	const fileName = `${id}.mp3`;
-	const localPath = `/tmp/${fileName}`;
+	const localPath = `${os.tmpdir}/${fileName}`;
 
 	if (!textInput) throw new Error('No text found');
 
