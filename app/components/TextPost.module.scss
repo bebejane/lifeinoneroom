@@ -1,16 +1,17 @@
 .text {
-  --height: 10vh;
+  --height: 4rem;
   height: var(--height);
   background-color: #f0f0f0;
+  padding-top: 1.5em;
 
   p {
     padding-left: 20%;
     padding-right: 20%;
+    margin-bottom: 0;
   }
 
   &.open {
     --height: auto;
-    padding-top: 1em;
     padding-bottom: 1rem;
   }
 }
