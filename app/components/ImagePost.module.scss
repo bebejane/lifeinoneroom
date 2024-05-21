@@ -11,8 +11,10 @@
 
   &.open {
     --height: 100vh;
+
     figure {
       padding: calc(2 * var(--outer-margin));
+
       img {
         height: calc(100vh - 4 * var(--outer-margin));
       }

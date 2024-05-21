@@ -18,6 +18,7 @@ export default function PublishTimeline({ posts }: Props) {
   const [timeline, setTimeline] = useState<{ id: string, y: number, date: string }[] | null>(null)
   const [active, setActive] = useState<string | null>(null)
   const { scrolledPosition, isScrolling } = useScrollInfo()
+  const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (!posts) return
@@ -26,13 +27,15 @@ export default function PublishTimeline({ posts }: Props) {
     const maxDate = new Date(sortedPosts[sortedPosts.length - 1]._firstPublishedAt).getTime()
     const minDate = new Date(sortedPosts[0]._firstPublishedAt).getTime()
     const range = maxDate - minDate
+    const labelHeight = ref.current?.querySelector('a')?.clientHeight ?? 0
+    const h = (ref.current?.offsetHeight ?? 0) - labelHeight
 
     const timeline = sortedPosts.map(({ id, _firstPublishedAt }) => ({
       id,
-      y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * (height - 20),
+      y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * h,
       date: _firstPublishedAt
     }))
-    console.log(timeline)
+
     setTimeline(timeline)
 
   }, [width, height, posts])
@@ -58,7 +61,7 @@ export default function PublishTimeline({ posts }: Props) {
   if (!expanded) return null
 
   return (
-    <nav id="timeline" className={s.timeline}>
+    <nav id="timeline" className={s.timeline} ref={ref}>
       {timeline?.map(({ id, y, date }) => (
         <a key={id} href={`#${id}`} style={{ top: `${y}px` }}>
           {id === active && format(new Date(date), 'MMM dd yyyy')} ·

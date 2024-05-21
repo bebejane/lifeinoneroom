@@ -1,0 +1,22 @@
+.section {
+  --height: 4rem;
+  height: var(--height);
+  background-color: #f0f0f0;
+  padding-top: 1.5em;
+
+  p {
+    padding-left: 20%;
+    padding-right: 20%;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+  }
+
+  &.open {
+    --height: auto;
+    padding-bottom: 1rem;
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+}
