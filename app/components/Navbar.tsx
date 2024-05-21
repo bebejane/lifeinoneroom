@@ -22,9 +22,13 @@ export default function Navbar({ }: Props) {
       <button className={cn(s.button, s.toggle)} onClick={() => setExpanded(!expanded)}>
         {expanded ? 'Compress' : 'Expand'}
       </button>
-      <Link href="/about">
-        <button className={cn(s.button, s.about)}>About</button>
-      </Link>
+      <div className={s.about}>
+        <img className={s.settings} src="/images/crip-symbol.svg"></img>
+
+        <Link href="/about">
+          <button className={cn(s.button)}>About</button>
+        </Link>
+      </div>
     </>
   );
 }

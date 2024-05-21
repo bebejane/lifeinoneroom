@@ -1,14 +1,42 @@
 .button {
-  position: fixed;
-  z-index: var(--z-navbar);
+  border: 2px solid var(--black);
+  background-color: transparent;
+  //color: var(--white);
+  margin: var(--outer-margin);
+  border-radius: 2rem;
+  padding: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  font-size: 1rem;
+
+  &:hover {
+    background-color: var(--black);
+    color: var(--white);
+  }
 }
 
 .toggle {
+  position: fixed;
+  z-index: var(--z-navbar);
   top: 0;
-  left: 0;
+  right: 0;
 }
 
 .about {
-  bottom: 0;
+  position: fixed;
+  z-index: var(--z-navbar);
+  top: 0rem;
   left: 0;
+  display: flex;
+  flex-direction: row;
+
+  img {
+    margin-top: var(--outer-margin);
+    margin-left: var(--outer-margin);
+    margin-right: calc(-0.5 * var(--outer-margin));
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--black);
+    border-radius: 50%;
+  }
 }
