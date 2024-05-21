@@ -11,7 +11,7 @@ const client = buildClient({
 
 const voice = new ElevenLabs({
 	apiKey: process.env.ELEVENLABS_API_KEY,
-	voiceId: 'pNInz6obpgDQGcFmaJgB', // A Voice ID from Elevenlabs
+	voiceId: 'pNInz6obpgDQGcFmaJgB',
 });
 
 const postTypeMap = {
@@ -29,13 +29,16 @@ export const generate = async (item: any, item_type: string) => {
 
 	const { id } = item;
 	const { field, type } = postTypeMap[item_type];
-	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field].value) : null;
+	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field]) : null;
 	const fileName = `${id}.mp3`;
 	const localPath = `${os.tmpdir}/${fileName}`;
 
 	if (!textInput) throw new Error('No text found');
 
 	try {
+		console.log('generating audio', textInput.length)
+		console.time('generate')
+
 		const res = await voice.textToSpeech({
 			// Required Parameters
 			fileName: localPath, // The name of your audio file
@@ -48,6 +51,8 @@ export const generate = async (item: any, item_type: string) => {
 			speakerBoost: true, // The speaker boost for the converted speech
 			withTimestamps: true
 		})
+
+		console.timeEnd('generate')
 
 		const u = await upload(localPath, fileName, item.audio?.upload_id);
 		await client.items.update(id, { audio: { upload_id: u.id } });
