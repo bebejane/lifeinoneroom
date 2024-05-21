@@ -19,7 +19,12 @@ export default function TextPost({ data: { id, text } }: LayoutProps) {
   }, [expanded])
 
   return (
-    <section id={id} key={id} className={cn(s.text, open && s.open)} onClick={() => setOpen(!open)}>
+    <section
+      id={id}
+      key={id}
+      className={cn(s.text, open && s.open)}
+      onClick={() => !expanded && setOpen(!open)}
+    >
       <Content content={text} />
     </section>
   );

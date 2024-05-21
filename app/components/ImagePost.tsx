@@ -26,14 +26,13 @@ export default function ImagePost({ data: { id, image, textToVoice, background, 
       key={id}
       className={cn(s.image, open && s.open)}
       style={{ backgroundColor: background?.hex }}
-      onClick={() => setOpen(!open)}
+      onClick={() => !expanded && setOpen(!open)}
     >
       {image.responsiveImage &&
         <figure>
           <Image data={image.responsiveImage} />
         </figure>
       }
-      {textToVoice}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );
