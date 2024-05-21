@@ -19,7 +19,7 @@ export default function ImagePost({ data: { id, image, textToVoice, background, 
       id={id}
       key={id}
       className={cn(s.image, open && s.open)}
-      style={{ backgroundColor: colorBackground?.hex }}
+      style={{ backgroundColor: background?.hex }}
       onClick={() => setOpen(!open)}
     >
       {image.responsiveImage &&

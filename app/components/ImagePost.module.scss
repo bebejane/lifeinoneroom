@@ -11,5 +11,11 @@
 
   &.open {
     --height: 100vh;
+    figure {
+      padding: var(--outer-margin);
+      img {
+        height: calc(100vh - 2 * var(--outer-margin));
+      }
+    }
   }
 }

@@ -1,12 +1,16 @@
 .text {
   --height: 10vh;
   height: var(--height);
+  background-color: #f0f0f0;
 
   p {
-    margin-top: unset;
+    padding-left: 20%;
+    padding-right: 20%;
   }
 
   &.open {
-    --height: 100vh;
+    --height: auto;
+    padding-top: 1em;
+    padding-bottom: 1rem;
   }
 }
