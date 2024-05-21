@@ -23,7 +23,9 @@ export default function Navbar({ }: Props) {
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <div className={s.about}>
-        <img className={s.settings} src="/images/crip-symbol.svg"></img>
+        <figure>
+          <img className={s.settings} src="/images/crip-symbol.svg"></img>
+        </figure>
 
         <Link href="/about">
           <button className={cn(s.button)}>About</button>

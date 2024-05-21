@@ -12,6 +12,8 @@
   &:hover {
     background-color: var(--black);
     color: var(--white);
+    border-color: var(--white);
+    cursor: pointer;
   }
 }
 
@@ -30,13 +32,29 @@
   display: flex;
   flex-direction: row;
 
-  img {
+  figure {
     margin-top: var(--outer-margin);
     margin-left: var(--outer-margin);
     margin-right: calc(-0.5 * var(--outer-margin));
     width: 3rem;
     height: 3rem;
-    border: 2px solid var(--black);
     border-radius: 50%;
+
+    display: block;
+    img {
+      border-radius: 50%;
+      display: inline;
+      width: 3rem;
+      height: 3rem;
+      border: 2px solid var(--black);
+    }
+    &:hover {
+      background-color: var(--black);
+      cursor: pointer;
+
+      img {
+        filter: invert(100%);
+      }
+    }
   }
 }
