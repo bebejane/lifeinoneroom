@@ -3,17 +3,21 @@ import { apiQuery } from 'next-dato-utils/api';
 import { GlobalDocument } from '@graphql';
 import { Metadata } from 'next';
 import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
+import Navbar from './components/Navbar';
 
 export type LayoutProps = {
   children: React.ReactNode
+  modal: React.ReactNode
 }
 
-export default async function RootLayout({ children }: LayoutProps) {
+export default async function RootLayout({ children, modal }: LayoutProps) {
 
   return (
     <>
       <html lang="en">
         <body id="root" >
+          <Navbar />
+          {modal}
           <main>
             {children}
           </main>

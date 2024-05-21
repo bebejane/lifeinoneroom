@@ -1,0 +1,14 @@
+.button {
+  position: fixed;
+  z-index: var(--z-navbar);
+}
+
+.toggle {
+  top: 0;
+  left: 0;
+}
+
+.about {
+  bottom: 0;
+  left: 0;
+}

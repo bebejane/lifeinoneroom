@@ -4,7 +4,8 @@ import s from './ImagePost.module.scss'
 import cn from 'classnames'
 import { Image } from 'react-datocms'
 import PublishDate from './PublishDate'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useStore } from '../../lib/store'
 
 export type LayoutProps = {
   data: ImageRecord
@@ -12,7 +13,12 @@ export type LayoutProps = {
 
 export default function ImagePost({ data: { id, image, textToVoice, background, colorBackground, _publishedAt } }: LayoutProps) {
 
-  const [open, setOpen] = useState(false)
+  const [expanded] = useStore(state => [state.expanded])
+  const [open, setOpen] = useState(true)
+
+  useEffect(() => {
+    setOpen(expanded)
+  }, [expanded])
 
   return (
     <section

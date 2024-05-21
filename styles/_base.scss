@@ -8,11 +8,12 @@
 	--foreground: var(--black);
 	--line-height: 1;
 
-	@include mq($from: tablet) {
-	}
+	--z-navbar: 1000;
+	--z-modal: 2000;
 
-	@include mq($until: tablet) {
-	}
+	@include mq($from: tablet) {}
+
+	@include mq($until: tablet) {}
 }
 
 html {
@@ -63,11 +64,9 @@ a {
 	text-decoration: none;
 	color: var(--foreground);
 
-	&:hover {
-	}
+	&:hover {}
 
-	&:visited {
-	}
+	&:visited {}
 }
 
 article p a {
@@ -89,16 +88,13 @@ button {
 	color: var(--foreground);
 	border: 0;
 
-	@include mq($from: tablet) {
-	}
+	@include mq($from: tablet) {}
 
 	&.back {
-		@include mq($from: tablet) {
-		}
+		@include mq($from: tablet) {}
 	}
 
-	&:hover {
-	}
+	&:hover {}
 }
 
 figcaption {
@@ -107,14 +103,12 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {
-}
+hr {}
 
 input,
 textarea,
 select {
-	&:focus {
-	}
+	&:focus {}
 }
 
 select {

@@ -3,14 +3,20 @@
 import s from './TextPost.module.scss'
 import cn from 'classnames'
 import { Content } from '@components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useStore } from '../../lib/store';
 
 export type LayoutProps = {
   data: TextRecord
 }
 
 export default function TextPost({ data: { id, text } }: LayoutProps) {
-  const [open, setOpen] = useState(false)
+  const [expanded] = useStore(state => [state.expanded])
+  const [open, setOpen] = useState(true)
+
+  useEffect(() => {
+    setOpen(expanded)
+  }, [expanded])
 
   return (
     <section id={id} key={id} className={cn(s.text, open && s.open)} onClick={() => setOpen(!open)}>
