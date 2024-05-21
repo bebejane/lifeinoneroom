@@ -1,9 +1,9 @@
 .timeline {
   position: fixed;
-  top: 0;
+  top: 6rem;
   right: 0;
   right: var(--outer-margin);
-  height: 100vh;
+  height: calc(100vh - 8rem);
   z-index: var(--z-timeline);
   color: var(--black);
 

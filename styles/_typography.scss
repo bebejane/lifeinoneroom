@@ -4,7 +4,7 @@ body {
   font-weight: normal;
 
   @include mq($from: tablet) {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   @include mq($from: wide) {
@@ -28,7 +28,6 @@ h1 {
   padding-bottom: var(--space);
   line-height: 1.25;
   font-family: $headline-font;
-
 }
 
 h2 {
@@ -67,7 +66,7 @@ p.intro,
     padding-right: 0.5em;
   }
 
-  >p {
+  > p {
     padding: 0;
   }
 }
@@ -77,15 +76,7 @@ p.intro,
 footer,
 footer nav,
 figcaption,
-.caption label {}
-
-nav,
-.mid,
-button,
-.mid input,
-.mid select {
-  font-family: $headline-font;
-  font-size: 0.75rem;
+.caption label {
 }
 
 strong,
@@ -126,10 +117,10 @@ article {
     padding-left: 0;
   }
 
-  p+h3,
-  ul+h3,
-  ul+h2,
-  p+h2 {
+  p + h3,
+  ul + h3,
+  ul + h2,
+  p + h2 {
     padding-top: 1rem;
   }
 

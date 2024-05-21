@@ -12,9 +12,9 @@
   &.open {
     --height: 100vh;
     figure {
-      padding: var(--outer-margin);
+      padding: calc(2 * var(--outer-margin));
       img {
-        height: calc(100vh - 2 * var(--outer-margin));
+        height: calc(100vh - 4 * var(--outer-margin));
       }
     }
   }
