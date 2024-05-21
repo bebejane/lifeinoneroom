@@ -1,5 +1,5 @@
 query AllPosts($first: IntType = 100, $skip: IntType = 0) {
-	allImages(first: $first, skip: $skip) {
+	allImages(first: $first, skip: $skip, orderBy: _firstPublishedAt_DESC) {
 		__typename
 		id
 		image {
@@ -12,13 +12,13 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 		colorBackground {
 			hex
 		}
-		_publishedAt
+		_firstPublishedAt
 		_createdAt
 	}
 	_allImagesMeta {
 		count
 	}
-	allTexts(first: $first, skip: $skip) {
+	allTexts(first: $first, skip: $skip, orderBy: _firstPublishedAt_DESC) {
 		__typename
 		id
 		text {
@@ -26,8 +26,7 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 			links
 			value
 		}
-		_publishedAt
-		_createdAt
+		_firstPublishedAt
 	}
 	_allTextsMeta {
 		count

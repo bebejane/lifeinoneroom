@@ -19,19 +19,18 @@ export default function PublishTimeline({ posts }: Props) {
   const [active, setActive] = useState<string | null>(null)
   const { scrolledPosition, isScrolling } = useScrollInfo()
 
-
   useEffect(() => {
     if (!posts) return
 
-    const sortedPosts = posts.sort((a, b) => new Date(a._createdAt).getTime() > new Date(b._createdAt).getTime() ? 1 : -1)
-    const maxDate = new Date(sortedPosts[sortedPosts.length - 1]._createdAt).getTime()
-    const minDate = new Date(sortedPosts[0]._createdAt).getTime()
+    const sortedPosts = posts.sort((a, b) => new Date(a._firstPublishedAt).getTime() > new Date(b._firstPublishedAt).getTime() ? 1 : -1)
+    const maxDate = new Date(sortedPosts[sortedPosts.length - 1]._firstPublishedAt).getTime()
+    const minDate = new Date(sortedPosts[0]._firstPublishedAt).getTime()
     const range = maxDate - minDate
 
-    const timeline = posts.map(({ id, _createdAt }) => ({
+    const timeline = posts.map(({ id, _firstPublishedAt }) => ({
       id,
-      y: ((new Date(_createdAt).getTime() - minDate) / range) * (height - 20),
-      date: _createdAt
+      y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * (height - 20),
+      date: _firstPublishedAt
     }))
 
     setTimeline(timeline)
@@ -40,22 +39,19 @@ export default function PublishTimeline({ posts }: Props) {
 
   useEffect(() => {
 
-    //if (isScrolling) return
-
     const sections = document.body.querySelectorAll('section');
     let mostVisible = sections[0];
     let ratio = 0;
-    // find most visible section based on scrolledPosition
-    sections.forEach(section => {
+
+    sections.forEach((section, i) => {
       const rect = section.getBoundingClientRect();
-      const visibleArea = scrolledPosition - rect.bottom
-      const visibleRatio = height / visibleArea;
+      const visibleRatio = Math.max(0, Math.min(rect.bottom, height) - Math.max(rect.top, 0)) / height
       if (visibleRatio > ratio) {
         mostVisible = section;
         ratio = visibleRatio;
       }
     });
-    mostVisible && setActive(mostVisible.id);
+    setActive(mostVisible.id ?? null);
 
   }, [height, scrolledPosition, isScrolling])
 
