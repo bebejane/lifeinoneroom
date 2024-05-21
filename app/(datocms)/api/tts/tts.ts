@@ -1,5 +1,8 @@
 import os from 'os';
-import dotenv from 'dotenv'; dotenv.config();
+import dotenv from 'dotenv';
+dotenv.config();
+import fs from "fs";
+import OpenAI from "openai";
 import { ElevenLabsClient } from "elevenlabs";
 import { createWriteStream } from "fs";
 import { buildClient, uploadLocalFileAndReturnPath } from '@datocms/cma-client-node';
@@ -13,6 +16,9 @@ const client = buildClient({
 const elevenlabs = new ElevenLabsClient({
 	apiKey: process.env.ELEVENLABS_API_KEY,
 });
+
+console.log(process.env.OPENAI_API_KEY)
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const postTypeMap = {
 	"image": {
@@ -38,11 +44,11 @@ export const generate = async (item: any, item_type: string) => {
 		console.log('generating audio', textInput.length)
 		console.time('generate')
 
-		const { filePath, alignment } = await createAudioFileFromText(textInput, `${os.tmpdir}/${fileName}`);
+		const { filePath, transcription } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`);
 
 		console.timeEnd('generate')
 
-		const u = await upload(filePath, fileName, item.audio?.upload_id, alignment);
+		const u = await upload(filePath, fileName, item.audio?.upload_id, transcription);
 		await client.items.update(id, { audio: { upload_id: u.id } });
 		await client.items.publish(id);
 
@@ -86,13 +92,33 @@ async function createAudioFileFromText(text: string, filePath: string): Promise<
 			buffer = Buffer.from(buffer)
 			const fileStream = createWriteStream(filePath)
 			fileStream.write(buffer);
-			resolve({ filePath, alignment })
+			resolve({ filePath, transcription: alignment })
 		} catch (error) {
 			console.log(error)
 			reject(error);
 		}
 	});
 };
+
+async function createAudioFileFromTextOpenAI(text: string, filePath: string): Promise<any> {
+
+	const mp3 = await openai.audio.speech.create({
+		model: "tts-1",
+		voice: "alloy",
+		input: text,
+	});
+
+	const buffer = Buffer.from(await mp3.arrayBuffer());
+	await fs.promises.writeFile(filePath, buffer);
+	const transcription = await openai.audio.transcriptions.create({
+		file: fs.createReadStream(filePath),
+		model: "whisper-1",
+		response_format: "verbose_json",
+		timestamp_granularities: ["word"],
+	});
+	//@ts-ignore
+	return { filePath, transcription: { words: JSON.stringify(transcription.words) } };
+}
 
 
 async function upload(localPath: string, filename: string, upload_id?: string, custom_data: any = {}) {
