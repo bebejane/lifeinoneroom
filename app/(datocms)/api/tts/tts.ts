@@ -17,7 +17,6 @@ const elevenlabs = new ElevenLabsClient({
 	apiKey: process.env.ELEVENLABS_API_KEY,
 });
 
-console.log(process.env.OPENAI_API_KEY)
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const postTypeMap = {
@@ -41,7 +40,7 @@ export const generate = async (item: any, item_type: string) => {
 	if (!textInput) throw new Error('No text found');
 
 	try {
-		console.log('generating audio', textInput.length)
+		console.log('generating audio', textInput.length + ' characters')
 		console.time('generate')
 
 		const { filePath, transcription } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`);
@@ -57,48 +56,6 @@ export const generate = async (item: any, item_type: string) => {
 		throw new Error('Failed to generate audio');
 	}
 }
-
-async function createAudioFileFromText(text: string, filePath: string): Promise<any> {
-	return new Promise<any>(async (resolve, reject) => {
-		try {
-
-			const voice_id = "pNInz6obpgDQGcFmaJgB"
-			const body = {
-				text,
-				voice: "pNInz6obpgDQGcFmaJgB",
-				model_id: "eleven_multilingual_v2",
-				voice_settings: {
-					similarity_boost: 0.5,
-					stability: 0.5,
-					use_speaker_boost: true,
-					style: 1
-				}
-			}
-
-			const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice_id}/with-timestamps`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"xi-api-key": process.env.ELEVENLABS_API_KEY,
-				},
-				body: JSON.stringify(body),
-			})
-
-			const json = await response.json()
-			const blob = b64toBlob(json.audio_base64)
-			const alignment = json.alignment;
-
-			let buffer = await blob.arrayBuffer();
-			buffer = Buffer.from(buffer)
-			const fileStream = createWriteStream(filePath)
-			fileStream.write(buffer);
-			resolve({ filePath, transcription: alignment })
-		} catch (error) {
-			console.log(error)
-			reject(error);
-		}
-	});
-};
 
 async function createAudioFileFromTextOpenAI(text: string, filePath: string): Promise<any> {
 
@@ -157,3 +114,46 @@ function b64toBlob(data: string): Blob {
 	}
 	return new Blob([ab], { type: 'audio/mpeg' });
 }
+
+async function createAudioFileFromText(text: string, filePath: string): Promise<any> {
+	return new Promise<any>(async (resolve, reject) => {
+		try {
+
+			const voice_id = "pNInz6obpgDQGcFmaJgB"
+			const body = {
+				text,
+				voice: "pNInz6obpgDQGcFmaJgB",
+				model_id: "eleven_multilingual_v2",
+				voice_settings: {
+					similarity_boost: 0.5,
+					stability: 0.5,
+					use_speaker_boost: true,
+					style: 1
+				}
+			}
+
+			const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice_id}/with-timestamps`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"xi-api-key": process.env.ELEVENLABS_API_KEY,
+				},
+				body: JSON.stringify(body),
+			})
+
+			const json = await response.json()
+			const blob = b64toBlob(json.audio_base64)
+			const alignment = json.alignment;
+
+			let buffer = await blob.arrayBuffer();
+			buffer = Buffer.from(buffer)
+			const fileStream = createWriteStream(filePath)
+			fileStream.write(buffer);
+			resolve({ filePath, transcription: alignment })
+		} catch (error) {
+			console.log(error)
+			reject(error);
+		}
+	});
+};
+

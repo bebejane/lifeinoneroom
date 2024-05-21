@@ -11,7 +11,7 @@ export type LayoutProps = {
   data: ImageRecord
 }
 
-export default function ImagePost({ data: { id, image, textToVoice, background, colorBackground, _firstPublishedAt } }: LayoutProps) {
+export default function ImagePost({ data: { id, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: LayoutProps) {
 
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
@@ -33,6 +33,7 @@ export default function ImagePost({ data: { id, image, textToVoice, background, 
           <Image data={image.responsiveImage} />
         </figure>
       }
+      {audio && <audio src={audio.url} controls />}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

@@ -1,12 +1,20 @@
 .image {
   --height: 4rem;
   height: var(--height);
+  position: relative;
 
   figure {
     img {
       height: var(--height);
       object-fit: contain;
     }
+  }
+
+  audio {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
   }
 
   &.open {
