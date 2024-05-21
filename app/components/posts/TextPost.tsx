@@ -4,13 +4,14 @@ import s from './TextPost.module.scss'
 import cn from 'classnames'
 import { Content } from '@components';
 import { useEffect, useState } from 'react';
-import { useStore } from '../../lib/store';
+import { useStore } from '@lib/store';
+import PublishDate from '../PublishDate';
 
 export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, text } }: LayoutProps) {
+export default function TextPost({ data: { id, text, _firstPublishedAt } }: LayoutProps) {
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
 
@@ -26,6 +27,7 @@ export default function TextPost({ data: { id, text } }: LayoutProps) {
       onClick={() => !expanded && setOpen(!open)}
     >
       <Content content={text} />
+      <PublishDate date={_firstPublishedAt} />
     </section>
   );
 }

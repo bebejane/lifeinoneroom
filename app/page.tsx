@@ -1,9 +1,8 @@
-import s from './page.module.scss'
 import { apiQuery } from 'next-dato-utils/api';
 import { AllPostsDocument } from '@graphql';
 import { DraftMode } from 'next-dato-utils/components';
-import ImagePost from './components/ImagePost';
-import TextPost from './components/TextPost';
+import ImagePost from './components/posts/ImagePost';
+import TextPost from './components/posts/TextPost';
 import PublishTimeline from './components/PublishTimeline';
 
 export default async function Home() {

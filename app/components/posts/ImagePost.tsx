@@ -3,9 +3,9 @@
 import s from './ImagePost.module.scss'
 import cn from 'classnames'
 import { Image } from 'react-datocms'
-import PublishDate from './PublishDate'
+import PublishDate from '../PublishDate'
 import { useEffect, useState } from 'react'
-import { useStore } from '../../lib/store'
+import { useStore } from '@lib/store'
 
 export type LayoutProps = {
   data: ImageRecord
