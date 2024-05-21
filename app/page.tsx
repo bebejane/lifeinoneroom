@@ -13,7 +13,7 @@ export default async function Home() {
     tags: ['image', 'text']
   })
 
-  const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._publishedAt > b._publishedAt ? 1 : -1) as (ImageRecord | TextRecord)[]
+  const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._firstPublishedAt > b._firstPublishedAt ? 1 : -1) as (ImageRecord | TextRecord)[]
 
   return (
     <>

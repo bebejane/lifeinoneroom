@@ -27,12 +27,12 @@ export default function PublishTimeline({ posts }: Props) {
     const minDate = new Date(sortedPosts[0]._firstPublishedAt).getTime()
     const range = maxDate - minDate
 
-    const timeline = posts.map(({ id, _firstPublishedAt }) => ({
+    const timeline = sortedPosts.map(({ id, _firstPublishedAt }) => ({
       id,
       y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * (height - 20),
       date: _firstPublishedAt
     }))
-
+    console.log(timeline)
     setTimeline(timeline)
 
   }, [width, height, posts])
