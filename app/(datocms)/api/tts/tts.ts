@@ -1,6 +1,7 @@
 import os from 'os';
 import dotenv from 'dotenv'; dotenv.config();
-import ElevenLabs from 'elevenlabs-node';
+import { ElevenLabsClient } from "elevenlabs";
+import { createWriteStream } from "fs";
 import { buildClient, uploadLocalFileAndReturnPath } from '@datocms/cma-client-node';
 import { render } from 'datocms-structured-text-to-plain-text';
 
@@ -9,9 +10,8 @@ const client = buildClient({
 	environment: process.env.DATOCMS_ENVIRONMENT,
 });
 
-const voice = new ElevenLabs({
+const elevenlabs = new ElevenLabsClient({
 	apiKey: process.env.ELEVENLABS_API_KEY,
-	voiceId: 'pNInz6obpgDQGcFmaJgB',
 });
 
 const postTypeMap = {
@@ -31,7 +31,6 @@ export const generate = async (item: any, item_type: string) => {
 	const { field, type } = postTypeMap[item_type];
 	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field]) : null;
 	const fileName = `${id}.mp3`;
-	const localPath = `${os.tmpdir}/${fileName}`;
 
 	if (!textInput) throw new Error('No text found');
 
@@ -39,22 +38,11 @@ export const generate = async (item: any, item_type: string) => {
 		console.log('generating audio', textInput.length)
 		console.time('generate')
 
-		const res = await voice.textToSpeech({
-			// Required Parameters
-			fileName: localPath, // The name of your audio file
-			textInput, // The text you wish to convert to speech
-			voiceId: '21m00Tcm4TlvDq8ikWAM', // A different Voice ID from the default
-			stability: 0.5, // The stability for the converted speech
-			similarityBoost: 0.5, // The similarity boost for the converted speech
-			modelId: 'eleven_multilingual_v2', // The ElevenLabs Model ID
-			style: 1, // The style exaggeration for the converted speech
-			speakerBoost: true, // The speaker boost for the converted speech
-			withTimestamps: true
-		})
+		const { filePath, alignment } = await createAudioFileFromText(textInput, `${os.tmpdir}/${fileName}`);
 
 		console.timeEnd('generate')
 
-		const u = await upload(localPath, fileName, item.audio?.upload_id);
+		const u = await upload(filePath, fileName, item.audio?.upload_id, alignment);
 		await client.items.update(id, { audio: { upload_id: u.id } });
 		await client.items.publish(id);
 
@@ -64,22 +52,82 @@ export const generate = async (item: any, item_type: string) => {
 	}
 }
 
-async function upload(localPath: string, filename: string, upload_id?: string) {
+async function createAudioFileFromText(text: string, filePath: string): Promise<any> {
+	return new Promise<any>(async (resolve, reject) => {
+		try {
 
-	console.log('uploading', upload_id)
+			const voice_id = "pNInz6obpgDQGcFmaJgB"
+			const body = {
+				text,
+				voice: "pNInz6obpgDQGcFmaJgB",
+				model_id: "eleven_multilingual_v2",
+				voice_settings: {
+					similarity_boost: 0.5,
+					stability: 0.5,
+					use_speaker_boost: true,
+					style: 1
+				}
+			}
+
+			const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice_id}/with-timestamps`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"xi-api-key": process.env.ELEVENLABS_API_KEY,
+				},
+				body: JSON.stringify(body),
+			})
+
+			const json = await response.json()
+			const blob = b64toBlob(json.audio_base64)
+			const alignment = json.alignment;
+
+			let buffer = await blob.arrayBuffer();
+			buffer = Buffer.from(buffer)
+			const fileStream = createWriteStream(filePath)
+			fileStream.write(buffer);
+			resolve({ filePath, alignment })
+		} catch (error) {
+			console.log(error)
+			reject(error);
+		}
+	});
+};
+
+
+async function upload(localPath: string, filename: string, upload_id?: string, custom_data: any = {}) {
+
+	console.log('uploading', upload_id ? 'update' : 'create')
 	console.time('upload')
 
-	const upload = upload_id ?
+	let upload = null
+	const default_field_metadata = { en: { alt: '', title: '', custom_data } }
+
+	if (upload_id) {
 		await client.uploads.update(upload_id, {
 			path: await uploadLocalFileAndReturnPath(client, localPath, { filename })
 		})
-		:
-		await client.uploads.createFromLocalFile({
+		upload = await client.uploads.update(upload_id, { default_field_metadata });
+	} else {
+		upload = await client.uploads.createFromLocalFile({
 			localPath,
 			filename,
 			skipCreationIfAlreadyExists: true,
-			id: upload_id
+			default_field_metadata
 		});
+	}
 	console.timeEnd('upload')
 	return upload;
+}
+
+function b64toBlob(data: string): Blob {
+
+	var byteString = atob(data);
+	var ab = new ArrayBuffer(byteString.length);
+	var ia = new Uint8Array(ab);
+
+	for (var i = 0; i < byteString.length; i++) {
+		ia[i] = byteString.charCodeAt(i);
+	}
+	return new Blob([ab], { type: 'audio/mpeg' });
 }

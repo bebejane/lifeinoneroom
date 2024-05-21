@@ -11,7 +11,7 @@ export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, text, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, text, audio, _firstPublishedAt } }: LayoutProps) {
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
 
@@ -27,6 +27,7 @@ export default function TextPost({ data: { id, text, _firstPublishedAt } }: Layo
       onClick={() => !expanded && setOpen(!open)}
     >
       <Content content={text} />
+      {audio && <audio src={audio.url} controls />}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

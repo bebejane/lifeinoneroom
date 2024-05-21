@@ -5,6 +5,9 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 		image {
 			...ImageFragment
 		}
+		audio {
+			...AudioFragment
+		}
 		textToVoice
 		background {
 			hex
@@ -24,6 +27,9 @@ query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 			blocks
 			links
 			value
+		}
+		audio {
+			...AudioFragment
 		}
 		_firstPublishedAt
 	}
