@@ -32,7 +32,6 @@ export default function Navbar({ }: Props) {
         <figure>
           <img className={s.settings} src="/images/crip-symbol.svg"></img>
         </figure>
-
         <Link href="/about">
           <button className={cn(s.button)}>About</button>
         </Link>
