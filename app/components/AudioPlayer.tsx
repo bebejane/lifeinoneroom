@@ -8,6 +8,7 @@ type Props = {
 }
 
 export default function AudioPlayer({ audio }: Props) {
+
   const ref = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
 
@@ -21,7 +22,6 @@ export default function AudioPlayer({ audio }: Props) {
     const onPlay = () => setPlaying(true)
     const onPaused = () => setPlaying(false)
 
-
     player.addEventListener('ended', onEnd)
     player.addEventListener('play', onPlay)
     player.addEventListener('pause', onPaused)
@@ -34,6 +34,14 @@ export default function AudioPlayer({ audio }: Props) {
     }
   }, [])
 
+  useEffect(() => {
+    if (!playing) return
+    document.querySelectorAll('audio').forEach((audio) => {
+      if (audio.id !== ref.current.id)
+        audio.pause()
+    })
+  }, [playing])
+
   return (
     <>
       <img
@@ -43,7 +51,7 @@ export default function AudioPlayer({ audio }: Props) {
         alt="Audio player"
         onClick={handleClick}
       />
-      <audio className={s.audio} ref={ref} aria-hidden={true}>
+      <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
         <source src={audio.url} type="audio/mpeg" />
       </audio>
     </>
