@@ -16,4 +16,9 @@
   &.playing {
     opacity: 1;
   }
+
+  &.compressed {
+    width: 30px;
+    top: var(--outer-margin);
+  }
 }
