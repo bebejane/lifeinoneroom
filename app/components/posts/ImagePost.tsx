@@ -21,6 +21,13 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
     setOpen(expanded)
   }, [expanded])
 
+  useEffect(() => {
+    if (open && !expanded) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [open, expanded, id])
+
+
   return (
     <section
       id={id}
@@ -30,8 +37,8 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
       onClick={() => !expanded && setOpen(!open)}
     >
       {image.responsiveImage &&
-        <figure>
-          <Image data={image.responsiveImage} />
+        <figure >
+          <Image data={{ ...image.responsiveImage, alt: textToVoice }} />
         </figure>
       }
       {audio && <AudioPlayer audio={audio} />}

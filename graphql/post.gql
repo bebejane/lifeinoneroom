@@ -44,6 +44,7 @@ fragment ImagePostFragment on ImageRecord {
 fragment TextPostFragment on TextRecord {
 	__typename
 	id
+	title
 	text {
 		blocks
 		links

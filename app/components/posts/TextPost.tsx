@@ -12,13 +12,20 @@ export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, text, audio, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, title, text, audio, _firstPublishedAt } }: LayoutProps) {
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
 
   useEffect(() => {
     setOpen(expanded)
   }, [expanded])
+
+  useEffect(() => {
+    if (open && !expanded) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [open, expanded, id])
+
 
   return (
     <section
@@ -27,7 +34,11 @@ export default function TextPost({ data: { id, text, audio, _firstPublishedAt } 
       className={cn(s.text, open && s.open)}
       onClick={() => !expanded && setOpen(!open)}
     >
-      <Content content={text} />
+      {open ?
+        <Content content={text} />
+        :
+        <h2>{title}</h2>
+      }
       {audio && <AudioPlayer audio={audio} />}
       <PublishDate date={_firstPublishedAt} />
     </section>

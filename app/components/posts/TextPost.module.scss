@@ -12,6 +12,14 @@
     font-size: 0.9rem;
   }
 
+  h2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   &.open {
     --height: auto;
     padding-bottom: 1rem;
@@ -19,6 +27,7 @@
     audio {
       display: block;
     }
+
     p {
       margin-bottom: 1.5rem;
     }
