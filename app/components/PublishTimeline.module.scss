@@ -14,5 +14,17 @@
     color: var(--black);
     z-index: 1;
     white-space: nowrap;
+
+    span {
+      opacity: 0;
+
+      &.active {
+        opacity: 1;
+      }
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
   }
 }

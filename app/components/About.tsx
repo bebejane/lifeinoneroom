@@ -22,9 +22,11 @@ export default function About({ modal, about }: Props) {
   }
 
   return (
-    <div className={s.about}>
+    <article className={s.about}>
       <Content content={about.text} />
-      {modal && <button className={cn(s.close)} onClick={handleClose}>Close</button>}
-    </div>
+      {modal &&
+        <button className={cn(s.close)} onClick={handleClose}>Close</button>
+      }
+    </article>
   );
 }
