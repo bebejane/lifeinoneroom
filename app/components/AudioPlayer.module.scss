@@ -1,0 +1,19 @@
+.player {
+  display: none;
+}
+
+.icon {
+  position: absolute;
+  top: calc(2 * var(--outer-margin));
+  left: calc(1 * var(--outer-margin));
+  z-index: 2;
+  width: 150px;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 3rem;
+  opacity: 0.8;
+
+  &.playing {
+    opacity: 1;
+  }
+}

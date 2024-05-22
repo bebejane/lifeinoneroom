@@ -6,6 +6,7 @@ import { Image } from 'react-datocms'
 import PublishDate from '../PublishDate'
 import { useEffect, useState } from 'react'
 import { useStore } from '@lib/store'
+import AudioPlayer from '../AudioPlayer'
 
 export type LayoutProps = {
   data: ImageRecord
@@ -33,7 +34,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
           <Image data={image.responsiveImage} />
         </figure>
       }
-      {audio && <audio src={audio.url} controls />}
+      {audio && <AudioPlayer audio={audio} />}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

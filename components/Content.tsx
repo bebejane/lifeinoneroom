@@ -1,5 +1,6 @@
 import { StructuredContent } from 'next-dato-utils/components'
-import * as Blocks from './blocks/index'
+//import * as Blocks from './blocks/index'
+const Blocks = {}
 
 export type Props = {
   id?: string

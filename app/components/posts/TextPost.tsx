@@ -2,10 +2,11 @@
 
 import s from './TextPost.module.scss'
 import cn from 'classnames'
-import { Content } from '@components';
+import Content from '@components/Content';
 import { useEffect, useState } from 'react';
 import { useStore } from '@lib/store';
 import PublishDate from '../PublishDate';
+import AudioPlayer from '../AudioPlayer';
 
 export type LayoutProps = {
   data: TextRecord
@@ -27,7 +28,7 @@ export default function TextPost({ data: { id, text, audio, _firstPublishedAt } 
       onClick={() => !expanded && setOpen(!open)}
     >
       <Content content={text} />
-      {audio && <audio src={audio.url} controls />}
+      {audio && <AudioPlayer audio={audio} />}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );
