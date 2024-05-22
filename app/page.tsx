@@ -18,7 +18,7 @@ export default async function Home() {
             : null
       ))}
       <PublishTimeline posts={allPosts} />
-      <DraftMode url={draftUrl} />
+      <DraftMode url={draftUrl} tag={['image', 'text', 'about']} />
     </>
   )
 }

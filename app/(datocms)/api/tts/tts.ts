@@ -1,23 +1,11 @@
 import os from 'os';
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'; dotenv.config();
 import fs from "fs";
 import OpenAI from "openai";
 import { ElevenLabsClient } from "elevenlabs";
 import { createWriteStream } from "fs";
 import { buildClient, uploadLocalFileAndReturnPath } from '@datocms/cma-client-node';
 import { render } from 'datocms-structured-text-to-plain-text';
-
-const client = buildClient({
-	apiToken: process.env.DATOCMS_API_TOKEN,
-	environment: process.env.DATOCMS_ENVIRONMENT,
-});
-
-const elevenlabs = new ElevenLabsClient({
-	apiKey: process.env.ELEVENLABS_API_KEY,
-});
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const postTypeMap = {
 	"image": {
@@ -29,6 +17,10 @@ const postTypeMap = {
 		type: 'structured_text'
 	}
 }
+
+const client = buildClient({ apiToken: process.env.DATOCMS_API_TOKEN, environment: process.env.DATOCMS_ENVIRONMENT });
+const elevenlabs = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const generate = async (item: any, item_type: string) => {
 
@@ -50,6 +42,12 @@ export const generate = async (item: any, item_type: string) => {
 		const u = await upload(filePath, fileName, item.audio?.upload_id, transcription);
 		await client.items.update(id, { audio: { upload_id: u.id } });
 		await client.items.publish(id);
+
+		try {
+			fs.unlinkSync(filePath);
+		} catch (e) {
+			console.error('Failed to delete file', filePath)
+		}
 
 	} catch (e) {
 		console.error(e);
@@ -115,7 +113,7 @@ function b64toBlob(data: string): Blob {
 	return new Blob([ab], { type: 'audio/mpeg' });
 }
 
-async function createAudioFileFromText(text: string, filePath: string): Promise<any> {
+async function createAudioFileFromTextElvenLabs(text: string, filePath: string): Promise<any> {
 	return new Promise<any>(async (resolve, reject) => {
 		try {
 

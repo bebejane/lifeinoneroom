@@ -2,6 +2,7 @@
 
 import { useStore } from '@lib/store'
 import s from './PublishTimeline.module.scss'
+import cn from 'classnames'
 import { format } from 'date-fns'
 import { useWindowSize } from 'react-use'
 import { useEffect, useRef, useState } from 'react'
@@ -64,7 +65,9 @@ export default function PublishTimeline({ posts }: Props) {
     <nav id="timeline" className={s.timeline} ref={ref}>
       {timeline?.map(({ id, y, date }) => (
         <a key={id} href={`#${id}`} style={{ top: `${y}px` }}>
-          {id === active && format(new Date(date), 'MMM dd yyyy')} ·
+          <span className={cn(id === active && s.active)}>
+            {format(new Date(date), 'MMM dd yyyy')}
+          </span> ·
         </a>
       ))}
     </nav>
