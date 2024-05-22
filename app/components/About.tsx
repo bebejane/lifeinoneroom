@@ -3,7 +3,7 @@
 import s from './About.module.scss'
 import cn from 'classnames'
 import { useStore } from '@lib/store'
-import { Content } from '@components'
+import Content from '@components/Content'
 import { useRouter } from 'next/navigation'
 
 export type Props = {
