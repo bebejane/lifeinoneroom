@@ -1,6 +1,6 @@
 .button {
   border: 2px solid var(--black);
-  background-color: transparent;
+  background-color: var(--white);
   //color: var(--white);
   margin: var(--outer-margin);
   border-radius: 2rem;
@@ -47,6 +47,7 @@
       width: 3rem;
       height: 3rem;
       border: 2px solid var(--black);
+      background-color: var(--white);
     }
     &:hover {
       background-color: var(--black);

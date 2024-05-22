@@ -10,15 +10,12 @@
     }
   }
 
-  audio {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-  }
-
   &.open {
     --height: 100vh;
+
+    audio {
+      display: block;
+    }
 
     figure {
       padding: calc(2 * var(--outer-margin));
