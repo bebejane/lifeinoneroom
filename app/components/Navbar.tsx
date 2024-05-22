@@ -5,6 +5,7 @@ import cn from 'classnames'
 import { useStore } from '@lib/store'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 export type Props = {
 
@@ -13,9 +14,14 @@ export type Props = {
 export default function Navbar({ }: Props) {
 
   const pathname = usePathname()
-  const [setShowAbout, showAbout, setExpanded, expanded] = useStore(state => [state.setShowAbout, state.showAbout, state.setExpanded, state.expanded])
+  const [setExpanded, expanded] = useStore(state => [state.setExpanded, state.expanded])
 
-  if (pathname === '/about') return null
+  useEffect(() => {
+    document.querySelector('main').classList.toggle('compressed', !expanded)
+  }, [expanded])
+
+  if (pathname === '/about')
+    return null
 
   return (
     <>
