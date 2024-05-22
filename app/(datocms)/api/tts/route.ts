@@ -1,3 +1,4 @@
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { generate } from './tts'
 
 export const runtime = "nodejs"
@@ -13,6 +14,9 @@ export async function POST(request: Request) {
   if (event_type === 'publish') {
     try {
       await generate({ ...entity.attributes, id: entity.id }, api_key)
+      revalidatePath('/')
+      revalidatePath(`/posts/${entity.attributes.slug}`)
+      revalidateTag(entity.id)
     } catch (e) {
       return Response.json({ success: false, error: e.message })
     }
