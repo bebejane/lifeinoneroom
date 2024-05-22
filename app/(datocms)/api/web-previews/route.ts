@@ -1,22 +1,14 @@
 import { NextRequest } from 'next/server';
 import { webPreviews, cors } from 'next-dato-utils/route-handlers';
+import { buildRoute } from '@lib/routes';
 
 export const runtime = "edge"
 
 export async function POST(req: NextRequest) {
 
   return await webPreviews(req, async ({ item, itemType, locale }) => {
-
-    let path = null;
-
-    const { slug } = item.attributes
-
-    switch (itemType.attributes.api_key) {
-      default:
-        break;
-    }
-
-    return path
+    const routes = await buildRoute(itemType.attributes.api_key, item.attributes)
+    return routes?.[0]
   })
 }
 

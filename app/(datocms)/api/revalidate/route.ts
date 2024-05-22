@@ -1,4 +1,5 @@
 import { revalidate } from 'next-dato-utils/route-handlers';
+import { buildRoute } from '@lib/routes';
 
 export const runtime = "edge"
 export const dynamic = "force-dynamic"
@@ -11,18 +12,9 @@ export async function POST(req: Request) {
     const { id } = entity
     const paths: string[] = []
     const tags: string[] = [api_key, id].filter(t => t)
-
-    switch (api_key) {
-      case 'post': case 'image':
-        paths.push(`/`)
-        break
-      case 'about':
-        paths.push(`/`)
-        paths.push(`/about`)
-        break
-      default:
-        break
-    }
+    const routes = await buildRoute(api_key, entity.attributes)
+    if (routes)
+      paths.push(...routes)
 
     return await revalidate(paths, tags, true)
   })

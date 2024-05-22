@@ -1,39 +1,56 @@
 query AllPosts($first: IntType = 100, $skip: IntType = 0) {
 	allImages(first: $first, skip: $skip, orderBy: _firstPublishedAt_DESC) {
-		__typename
-		id
-		image {
-			...ImageFragment
-		}
-		audio {
-			...AudioFragment
-		}
-		textToVoice
-		background {
-			hex
-		}
-		colorBackground {
-			hex
-		}
-		_firstPublishedAt
+		...ImagePostFragment
 	}
 	_allImagesMeta {
 		count
 	}
 	allTexts(first: $first, skip: $skip, orderBy: _firstPublishedAt_DESC) {
-		__typename
-		id
-		text {
-			blocks
-			links
-			value
-		}
-		audio {
-			...AudioFragment
-		}
-		_firstPublishedAt
+		...TextPostFragment
 	}
 	_allTextsMeta {
 		count
 	}
+}
+
+query Post($slug: String) {
+	image(filter: { slug: { eq: $slug } }) {
+		...ImagePostFragment
+	}
+	text(filter: { slug: { eq: $slug } }) {
+		...TextPostFragment
+	}
+}
+
+fragment ImagePostFragment on ImageRecord {
+	__typename
+	id
+	image {
+		...ImageFragment
+	}
+	audio {
+		...AudioFragment
+	}
+	textToVoice
+	background {
+		hex
+	}
+	colorBackground {
+		hex
+	}
+	_firstPublishedAt
+}
+
+fragment TextPostFragment on TextRecord {
+	__typename
+	id
+	text {
+		blocks
+		links
+		value
+	}
+	audio {
+		...AudioFragment
+	}
+	_firstPublishedAt
 }
