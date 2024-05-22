@@ -38,6 +38,9 @@ body {
 
 main {
 	display: block;
+
+	&.compressed {
+	}
 }
 
 ::-webkit-scrollbar {
