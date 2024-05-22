@@ -47,13 +47,15 @@ export default function AudioPlayer({ audio }: Props) {
 
   return (
     <>
-      <img
-        aria-label="Play button"
+      <figure aria-label="Play button"
         className={cn(s.icon, playing && s.playing, !expanded && s.compressed)}
-        src="/images/sound-symbol.svg"
-        alt="Audio player"
         onClick={handleClick}
-      />
+      >
+        <img
+          src="/images/sound-symbol.svg"
+          alt="Audio player"
+        />
+      </figure>
       <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
         <source src={audio.url} type="audio/mpeg" />
       </audio>

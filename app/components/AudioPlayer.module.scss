@@ -7,18 +7,30 @@
   top: calc(2 * var(--outer-margin));
   left: calc(1 * var(--outer-margin));
   z-index: 2;
-  width: 150px;
-  background: transparent;
+  background: var(--white);
   border: 2px solid;
   border-radius: 3rem;
   opacity: 0.8;
+  width: 3rem;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+
+  img {
+    //position: absolute;
+    width: 1.5rem;
+    height: 1.5rem !important;
+    max-height: 2rem;
+  }
 
   &.playing {
     opacity: 1;
   }
 
   &.compressed {
-    width: 30px;
-    top: var(--outer-margin);
+    //display: none;
+    top: 0.5rem;
   }
 }
