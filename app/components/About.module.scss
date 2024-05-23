@@ -3,8 +3,15 @@
 
   .close {
     position: fixed;
-    top: 0;
-    right: 0;
+    top: var(--outer-margin);
+    right: var(--outer-margin);
     z-index: 1;
+    border: 2px solid var(--black);
+    background-color: var(--white);
+    border-radius: 2rem;
+    padding: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1rem;
   }
 }
