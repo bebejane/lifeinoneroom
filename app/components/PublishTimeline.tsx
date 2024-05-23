@@ -24,14 +24,13 @@ export default function PublishTimeline({ posts }: Props) {
   useEffect(() => {
     if (!posts) return
 
-    const sortedPosts = posts.sort((a, b) => new Date(a._firstPublishedAt).getTime() > new Date(b._firstPublishedAt).getTime() ? 1 : -1)
-    const maxDate = new Date(sortedPosts[sortedPosts.length - 1]._firstPublishedAt).getTime()
-    const minDate = new Date(sortedPosts[0]._firstPublishedAt).getTime()
+    const maxDate = new Date(posts[posts.length - 1]._firstPublishedAt).getTime()
+    const minDate = new Date(posts[0]._firstPublishedAt).getTime()
     const range = maxDate - minDate
     const labelHeight = ref.current?.querySelector('a')?.clientHeight ?? 0
     const h = (ref.current?.offsetHeight ?? 0) - labelHeight
 
-    const timeline = sortedPosts.map(({ id, _firstPublishedAt }) => ({
+    const timeline = posts.map(({ id, _firstPublishedAt }) => ({
       id,
       y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * h,
       date: _firstPublishedAt

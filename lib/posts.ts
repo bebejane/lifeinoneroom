@@ -7,7 +7,7 @@ export const getAllPosts = async (): Promise<{ allPosts: (ImageRecord | TextReco
     tags: ['image', 'text']
   })
 
-  const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._firstPublishedAt > b._firstPublishedAt ? 1 : -1) as (ImageRecord | TextRecord)[]
+  const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._firstPublishedAt > b._firstPublishedAt ? -1 : 1) as (ImageRecord | TextRecord)[]
   return { allPosts, draftUrl }
 }
 
