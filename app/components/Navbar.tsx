@@ -25,17 +25,14 @@ export default function Navbar({ }: Props) {
 
   return (
     <>
-      <button
-        className={cn(s.button, s.toggle)}
-        onClick={() => setExpanded(!expanded)}
-      >
+      <button className={cn(s.button, s.toggle)} onClick={() => setExpanded(!expanded)}>
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <nav className={s.about}>
         <figure>
           <img aria-label="Enable accessibility" role="button" className={s.settings} src="/images/crip-symbol.svg" />
         </figure>
-        <Link href="/about">
+        <Link href="/about" prefetch={true}>
           <button role="link" className={s.button}>About</button>
         </Link>
       </nav>

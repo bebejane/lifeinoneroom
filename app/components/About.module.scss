@@ -13,5 +13,14 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     font-size: 1rem;
+
+    @include mq($from: desktop) {
+      &:hover {
+        background-color: var(--black);
+        color: var(--white);
+        border-color: var(--white);
+        cursor: pointer;
+      }
+    }
   }
 }

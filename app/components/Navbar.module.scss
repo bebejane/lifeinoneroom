@@ -1,7 +1,6 @@
 .button {
   border: 2px solid var(--black);
   background-color: var(--white);
-  //color: var(--white);
   margin: var(--outer-margin);
   border-radius: 2rem;
   padding: 1em;
@@ -9,11 +8,13 @@
   padding-bottom: 0.5em;
   font-size: 1rem;
 
-  &:hover {
-    background-color: var(--black);
-    color: var(--white);
-    border-color: var(--white);
-    cursor: pointer;
+  @include mq($from: desktop) {
+    &:hover {
+      background-color: var(--black);
+      color: var(--white);
+      border-color: var(--white);
+      cursor: pointer;
+    }
   }
 }
 
@@ -41,6 +42,7 @@
     border-radius: 50%;
 
     display: block;
+
     img {
       border-radius: 50%;
       display: inline;
@@ -49,6 +51,7 @@
       border: 2px solid var(--black);
       background-color: var(--white);
     }
+
     &:hover {
       background-color: var(--black);
       cursor: pointer;

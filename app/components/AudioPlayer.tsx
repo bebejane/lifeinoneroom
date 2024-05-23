@@ -1,8 +1,9 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+
 import s from './AudioPlayer.module.scss'
 import cn from 'classnames'
-import { useStore } from '../../lib/store'
+import { useEffect, useRef, useState } from 'react'
+import { useStore } from '@lib/store'
 
 type Props = {
   audio: FileField
@@ -47,7 +48,8 @@ export default function AudioPlayer({ audio }: Props) {
 
   return (
     <>
-      <figure aria-label="Play button"
+      <figure
+        aria-label="Play"
         className={cn(s.icon, playing && s.playing, !expanded && s.compressed)}
         onClick={handleClick}
       >
