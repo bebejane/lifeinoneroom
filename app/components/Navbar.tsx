@@ -23,9 +23,13 @@ export default function Navbar({ }: Props) {
   if (pathname === '/about')
     return null
 
+  const handleClick = () => {
+    setExpanded(!expanded)
+  }
+
   return (
     <>
-      <button className={cn(s.button, s.toggle)} onClick={() => setExpanded(!expanded)}>
+      <button className={cn(s.button, s.toggle)} onClick={handleClick}>
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <nav className={s.about}>

@@ -1,13 +1,11 @@
-.image {
+.post {
   --height: 4rem;
   height: var(--height);
   position: relative;
 
-  figure {
-    img {
-      height: var(--height);
-      object-fit: contain;
-    }
+  .image {
+    height: var(--height);
+    object-fit: contain;
   }
 
   &.open {
@@ -19,10 +17,10 @@
 
     figure {
       padding: calc(2 * var(--outer-margin));
+    }
 
-      img {
-        height: calc(100vh - 4 * var(--outer-margin));
-      }
+    .image {
+      height: calc(100vh - 4 * var(--outer-margin)) !important;
     }
   }
 }

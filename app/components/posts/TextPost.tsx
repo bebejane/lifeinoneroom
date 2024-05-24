@@ -20,19 +20,20 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
     setOpen(expanded)
   }, [expanded])
 
-  useEffect(() => {
-    if (open && !expanded) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [open, expanded, id])
-
+  const handleClick = () => {
+    !expanded && setOpen(!open)
+    const shouldScroll = !expanded && !open
+    shouldScroll && setTimeout(() => {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
 
   return (
     <section
       id={id}
       key={id}
       className={cn(s.text, open && s.open)}
-      onClick={() => !expanded && setOpen(!open)}
+      onClick={handleClick}
     >
       {open ?
         <Content content={text} />

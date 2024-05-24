@@ -5,7 +5,9 @@ export interface StoreState {
   desktop: boolean,
   showAbout: boolean,
   expanded: boolean,
+  open: string[]
   playing: string,
+  setOpen: (open: string[]) => void,
   setPlaying: (playing: string) => void,
   setExpanded: (expanded: boolean) => void,
   setShowAbout: (showAbout: boolean) => void,
@@ -17,6 +19,10 @@ const useStore = create<StoreState>((set) => ({
   showAbout: false,
   expanded: true,
   playing: null,
+  open: [],
+  setOpen: (open: string[]) => {
+    set((state) => ({ open }))
+  },
   setPlaying: (playing: string) => {
     set((state) => ({ playing }))
   },

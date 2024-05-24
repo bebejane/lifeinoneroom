@@ -21,24 +21,29 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
     setOpen(expanded)
   }, [expanded])
 
-  useEffect(() => {
-    if (open && !expanded) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [open, expanded, id])
-
+  const handleClick = () => {
+    !expanded && setOpen(!open)
+    const shouldScroll = !expanded && !open
+    shouldScroll && setTimeout(() => {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
 
   return (
     <section
       id={id}
       key={id}
-      className={cn(s.image, open && s.open)}
+      className={cn(s.post, open && s.open)}
       style={{ backgroundColor: background?.hex }}
-      onClick={() => !expanded && setOpen(!open)}
+      onClick={handleClick}
     >
       {image.responsiveImage &&
         <figure >
-          <Image data={{ ...image.responsiveImage, alt: textToVoice }} />
+          <Image
+            data={{ ...image.responsiveImage, alt: textToVoice }}
+            pictureClassName={s.image}
+            placeholderClassName={s.image}
+          />
         </figure>
       }
       {audio && <AudioPlayer audio={audio} />}
