@@ -8,11 +8,11 @@ import { useEffect, useState } from 'react'
 import { useStore } from '@lib/store'
 import AudioPlayer from '../AudioPlayer'
 
-export type LayoutProps = {
+export type Props = {
   data: ImageRecord
 }
 
-export default function ImagePost({ data: { id, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: LayoutProps) {
+export default function ImagePost({ data: { id, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: Props) {
 
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
@@ -46,7 +46,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
           />
         </figure>
       }
-      {audio && <AudioPlayer audio={audio} />}
+      <AudioPlayer audio={audio} open={open} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

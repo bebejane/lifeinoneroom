@@ -7,13 +7,16 @@ import { useStore } from '@lib/store'
 
 type Props = {
   audio: FileField
+  open: boolean
 }
 
-export default function AudioPlayer({ audio }: Props) {
+export default function AudioPlayer({ audio, open }: Props) {
+
 
   const [expanded] = useStore((state) => [state.expanded])
   const ref = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
+
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -21,6 +24,7 @@ export default function AudioPlayer({ audio }: Props) {
   }
 
   useEffect(() => {
+    if (!ref.current) return
     const player = ref.current
     const onEnd = () => setPlaying(false)
     const onPlay = () => setPlaying(true)
@@ -46,11 +50,13 @@ export default function AudioPlayer({ audio }: Props) {
     })
   }, [playing])
 
+  if (!audio) return null
+
   return (
     <>
       <figure
         aria-label="Play"
-        className={cn(s.icon, playing && s.playing, !expanded && s.compressed)}
+        className={cn(s.icon, playing && s.playing, !expanded && !open && s.compressed)}
         onClick={handleClick}
       >
         <img

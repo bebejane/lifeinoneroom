@@ -17,9 +17,9 @@
   align-items: center;
   justify-content: center;
   padding: 0 !important;
+  transition: all 0.1s ease-in-out;
 
   img {
-    //position: absolute;
     width: 1.5rem;
     height: 1.5rem !important;
     max-height: 2rem;
@@ -30,7 +30,6 @@
   }
 
   &.compressed {
-    //display: none;
     top: 0.5rem;
   }
 }

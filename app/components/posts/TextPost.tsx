@@ -13,6 +13,7 @@ export type LayoutProps = {
 }
 
 export default function TextPost({ data: { id, title, text, audio, _firstPublishedAt } }: LayoutProps) {
+
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
 
@@ -40,7 +41,7 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
         :
         <h2>{title}</h2>
       }
-      {audio && <AudioPlayer audio={audio} />}
+      <AudioPlayer audio={audio} open={open} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );
