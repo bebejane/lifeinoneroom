@@ -16,6 +16,7 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
 
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
+  const [lineStyles, setLineStyles] = useState<React.CSSProperties | null>(null)
 
   useEffect(() => {
     setOpen(expanded)
@@ -29,15 +30,28 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
     }, 100)
   }
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget as HTMLDivElement
+    const height = ((window.scrollY + e.clientY) - target.offsetTop) / target.offsetTop
+    setLineStyles({ height: `${(1 - height) * 100}%` })
+  }
+
   return (
     <section
-      id={id}
+      id={'post-' + id}
       key={id}
       className={cn(s.text, open && s.open)}
       onClick={handleClick}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setLineStyles(null)}
     >
       {open ?
-        <Content content={text} />
+        <>
+          <Content content={text} />
+          <div className={cn(s.line, lineStyles && s.show)}>
+            <div style={lineStyles} />
+          </div>
+        </>
         :
         <h2>{title}</h2>
       }
