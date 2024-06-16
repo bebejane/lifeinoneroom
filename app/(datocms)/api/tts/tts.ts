@@ -2,8 +2,6 @@ import os from 'os';
 import dotenv from 'dotenv'; dotenv.config();
 import fs from "fs";
 import OpenAI from "openai";
-import { ElevenLabsClient } from "elevenlabs";
-import { createWriteStream } from "fs";
 import { buildClient, uploadLocalFileAndReturnPath } from '@datocms/cma-client-node';
 import { render } from 'datocms-structured-text-to-plain-text';
 
@@ -17,10 +15,11 @@ const postTypeMap = {
 		type: 'structured_text'
 	}
 }
+type Voice = "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer"
 
 const client = buildClient({ apiToken: process.env.DATOCMS_API_TOKEN, environment: process.env.DATOCMS_ENVIRONMENT });
-const elevenlabs = new ElevenLabsClient({ apiKey: process.env.ELEVENLABS_API_KEY });
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const voices: Voice[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 
 export const generate = async (item: any, item_type: string) => {
 
@@ -35,11 +34,11 @@ export const generate = async (item: any, item_type: string) => {
 		console.log('generating audio', textInput.length + ' characters')
 		console.time('generate')
 
-		const { filePath, transcription } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`);
+		const { filePath, customData } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`);
 
 		console.timeEnd('generate')
 
-		const u = await upload(filePath, fileName, item.audio?.upload_id, transcription);
+		const u = await upload(filePath, fileName, item.audio?.upload_id, customData);
 		await client.items.update(id, { audio: { upload_id: u.id } });
 		await client.items.publish(id);
 
@@ -59,7 +58,7 @@ async function createAudioFileFromTextOpenAI(text: string, filePath: string): Pr
 
 	const mp3 = await openai.audio.speech.create({
 		model: "tts-1",
-		voice: "alloy",
+		voice: voices[Math.floor(Math.random() * voices.length)],
 		input: text,
 	});
 
@@ -72,7 +71,7 @@ async function createAudioFileFromTextOpenAI(text: string, filePath: string): Pr
 		timestamp_granularities: ["word"],
 	});
 	//@ts-ignore
-	return { filePath, transcription: { words: JSON.stringify(transcription.words) } };
+	return { filePath, customData: { words: JSON.stringify(transcription.words) } };
 }
 
 
@@ -100,58 +99,3 @@ async function upload(localPath: string, filename: string, upload_id?: string, c
 	console.timeEnd('upload')
 	return upload;
 }
-
-function b64toBlob(data: string): Blob {
-
-	var byteString = atob(data);
-	var ab = new ArrayBuffer(byteString.length);
-	var ia = new Uint8Array(ab);
-
-	for (var i = 0; i < byteString.length; i++) {
-		ia[i] = byteString.charCodeAt(i);
-	}
-	return new Blob([ab], { type: 'audio/mpeg' });
-}
-
-async function createAudioFileFromTextElvenLabs(text: string, filePath: string): Promise<any> {
-	return new Promise<any>(async (resolve, reject) => {
-		try {
-
-			const voice_id = "pNInz6obpgDQGcFmaJgB"
-			const body = {
-				text,
-				voice: "pNInz6obpgDQGcFmaJgB",
-				model_id: "eleven_multilingual_v2",
-				voice_settings: {
-					similarity_boost: 0.5,
-					stability: 0.5,
-					use_speaker_boost: true,
-					style: 1
-				}
-			}
-
-			const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voice_id}/with-timestamps`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					"xi-api-key": process.env.ELEVENLABS_API_KEY,
-				},
-				body: JSON.stringify(body),
-			})
-
-			const json = await response.json()
-			const blob = b64toBlob(json.audio_base64)
-			const alignment = json.alignment;
-
-			let buffer = await blob.arrayBuffer();
-			buffer = Buffer.from(buffer)
-			const fileStream = createWriteStream(filePath)
-			fileStream.write(buffer);
-			resolve({ filePath, transcription: alignment })
-		} catch (error) {
-			console.log(error)
-			reject(error);
-		}
-	});
-};
-
