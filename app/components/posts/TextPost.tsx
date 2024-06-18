@@ -40,7 +40,7 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
 
   return (
     <section
-      id={'post-' + id}
+      id={id}
       key={id}
       ref={ref}
       className={cn(s.text, open && s.open)}

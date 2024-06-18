@@ -5,7 +5,8 @@ import cn from 'classnames'
 import { useStore } from '@lib/store'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import Settings from './Settings'
 
 export type Props = {
 
@@ -15,6 +16,7 @@ export default function Navbar({ }: Props) {
 
   const pathname = usePathname()
   const [setExpanded, expanded] = useStore(state => [state.setExpanded, state.expanded])
+  const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
     document.querySelector('main').classList.toggle('compressed', !expanded)
@@ -33,13 +35,20 @@ export default function Navbar({ }: Props) {
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <nav className={s.about}>
-        <figure>
-          <img aria-label="Enable accessibility" role="button" className={s.settings} src="/images/crip-symbol.svg" />
+        <figure className={cn(showSettings && s.active)}>
+          <img
+            src="/images/crip-symbol.svg"
+            className={s.settings}
+            onClick={() => setShowSettings(!showSettings)}
+            aria-label="Enable accessibility"
+            role="button"
+          />
         </figure>
         <Link href="/about" prefetch={true}>
           <button role="link" className={s.button}>About</button>
         </Link>
       </nav>
+      <Settings show={showSettings} />
     </>
   );
 }

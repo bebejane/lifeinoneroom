@@ -1,0 +1,15 @@
+.settings {
+  position: fixed;
+  top: 4rem;
+  left: 0;
+  padding: var(--outer-margin);
+  margin: var(--outer-margin);
+  background-color: var(--white);
+  border: 2px solid var(--black);
+  z-index: var(--z-settings);
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
