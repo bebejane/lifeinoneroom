@@ -4,6 +4,7 @@ import s from './Settings.module.scss'
 import cn from 'classnames'
 import { useStore } from '@lib/store'
 import { useRouter } from 'next/navigation'
+import ThemeToggle from '@components/theme/ThemeToggle'
 
 export type Props = {
   show: boolean
@@ -19,7 +20,8 @@ export default function Settings({ show }: Props) {
       <h3>Settings</h3>
       <p>
         <input id="setting1" type="checkbox" />
-        <label htmlFor="expanded">Setting 1</label>
+        <label htmlFor="expanded">Setting 1</label><br />
+        <ThemeToggle />
       </p>
     </div>
   );

@@ -4,12 +4,19 @@
   left: 0;
   padding: var(--outer-margin);
   margin: var(--outer-margin);
-  background-color: var(--white);
-  border: 2px solid var(--black);
+  background-color: var(--background);
+  border: 2px solid var(--foreground);
   z-index: var(--z-settings);
   display: none;
 
   &.show {
     display: block;
+  }
+
+  p {
+    label {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
   }
 }

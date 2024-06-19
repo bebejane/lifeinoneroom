@@ -3,6 +3,9 @@ import { apiQuery } from 'next-dato-utils/api';
 import { GlobalDocument } from '@graphql';
 import { Metadata } from 'next';
 import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
+import { ThemeContextProvider } from '@components/theme/ThemeContext'
+import ThemeProvider from '@components/theme/ThemeProvider'
+
 import Navbar from './components/Navbar';
 
 export type LayoutProps = {
@@ -15,13 +18,15 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
   return (
     <>
       <html lang="en">
-        <body id="root" >
-          <Navbar />
-          {modal}
-          <main>
-            {children}
-          </main>
-        </body>
+        <ThemeContextProvider>
+          <ThemeProvider>
+            <Navbar />
+            {modal}
+            <main>
+              {children}
+            </main>
+          </ThemeProvider>
+        </ThemeContextProvider>
       </html >
     </>
   );

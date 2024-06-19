@@ -2,6 +2,7 @@
 	--black: #161616;
 	--white: #fcfcfc;
 	--red: #bf0000;
+
 	--outer-margin: 1.2em;
 	--navbar-height: calc(1em + calc(2 * var(--outer-margin)));
 	--background: var(--white);
@@ -35,6 +36,13 @@ body {
 	font-feature-settings: "liga", "kern";
 	margin: 0;
 	padding: 0;
+
+
+	&[data-theme="dark"] {
+		--background: var(--black);
+		--foreground: var(--white);
+	}
+
 }
 
 main {
