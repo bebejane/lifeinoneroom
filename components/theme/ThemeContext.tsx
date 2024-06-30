@@ -4,8 +4,8 @@
 import { createContext, useEffect, useState } from "react";
 
 export type Theme = {
-	theme: string
-	toggle: () => void
+	theme: 'light' | 'dark'
+	toggle: () => void | null
 }
 
 export const ThemeContext = createContext({ theme: 'light', toggle: null })

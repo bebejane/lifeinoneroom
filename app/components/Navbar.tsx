@@ -15,7 +15,7 @@ export type Props = {
 export default function Navbar({ }: Props) {
 
   const pathname = usePathname()
-  const [setExpanded, expanded] = useStore(state => [state.setExpanded, state.expanded])
+  const [setExpanded, expanded, theme] = useStore(state => [state.setExpanded, state.expanded, state.theme])
   const [showSettings, setShowSettings] = useState(false)
 
   useEffect(() => {
@@ -34,8 +34,8 @@ export default function Navbar({ }: Props) {
       <button className={cn(s.button, s.toggle)} onClick={handleClick}>
         {expanded ? 'Compress' : 'Expand'}
       </button>
-      <nav className={s.about}>
-        <figure className={cn(showSettings && s.active)}>
+      <nav className={cn(s.navbar, s[theme])}>
+        <button className={cn(s.accessibility, showSettings && s.active)}>
           <img
             src="/images/crip-symbol.svg"
             className={s.settings}
@@ -43,7 +43,7 @@ export default function Navbar({ }: Props) {
             aria-label="Enable accessibility"
             role="button"
           />
-        </figure>
+        </button>
         <Link href="/about" prefetch={true}>
           <button role="link" className={s.button}>About</button>
         </Link>

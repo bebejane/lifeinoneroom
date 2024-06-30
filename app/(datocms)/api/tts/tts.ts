@@ -64,14 +64,16 @@ async function createAudioFileFromTextOpenAI(text: string, filePath: string): Pr
 
 	const buffer = Buffer.from(await mp3.arrayBuffer());
 	await fs.promises.writeFile(filePath, buffer);
+	/*
 	const transcription = await openai.audio.transcriptions.create({
 		file: fs.createReadStream(filePath),
 		model: "whisper-1",
 		response_format: "verbose_json",
 		timestamp_granularities: ["word"],
 	});
+	*/
 	//@ts-ignore
-	return { filePath, customData: { words: JSON.stringify(transcription.words) } };
+	return { filePath, customData: {} };
 }
 
 

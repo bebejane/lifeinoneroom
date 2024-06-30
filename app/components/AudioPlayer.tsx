@@ -13,10 +13,9 @@ type Props = {
 export default function AudioPlayer({ audio, open }: Props) {
 
 
-  const [expanded] = useStore((state) => [state.expanded])
+  const { expanded, theme } = useStore((state) => ({ expanded: state.expanded, theme: state.theme }))
   const ref = useRef<HTMLAudioElement>(null)
   const [playing, setPlaying] = useState(false)
-
 
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -56,7 +55,7 @@ export default function AudioPlayer({ audio, open }: Props) {
     <>
       <figure
         aria-label="Play"
-        className={cn(s.icon, playing && s.playing, !expanded && !open && s.compressed)}
+        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed)}
         onClick={handleClick}
       >
         <img

@@ -14,7 +14,6 @@
 	--z-settings: 1200;
 	--z-modal: 2000;
 
-
 	@include mq($from: tablet) {}
 
 	@include mq($until: tablet) {}

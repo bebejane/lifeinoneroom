@@ -5,8 +5,10 @@ export interface StoreState {
   desktop: boolean,
   showAbout: boolean,
   expanded: boolean,
+  theme: 'light' | 'dark',
   open: string[]
   playing: string,
+  setTheme: (theme: 'light' | 'dark') => void,
   setOpen: (open: string[]) => void,
   setPlaying: (playing: string) => void,
   setExpanded: (expanded: boolean) => void,
@@ -18,6 +20,7 @@ const useStore = create<StoreState>((set) => ({
   desktop: false,
   showAbout: false,
   expanded: true,
+  theme: 'light',
   playing: null,
   open: [],
   setOpen: (open: string[]) => {
@@ -28,6 +31,9 @@ const useStore = create<StoreState>((set) => ({
   },
   setExpanded: (expanded: boolean) => {
     set((state) => ({ expanded }))
+  },
+  setTheme: (theme: 'light' | 'dark') => {
+    set((state) => ({ theme }))
   },
   setShowAbout: (showAbout: boolean) => {
     set((state) => ({ showAbout }))

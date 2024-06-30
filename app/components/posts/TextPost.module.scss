@@ -1,7 +1,7 @@
 .text {
   --height: 4rem;
   height: var(--height);
-  background-color: #f0f0f0;
+  background-color: var(--background);
   padding-top: 1.5em;
   overflow: hidden;
 

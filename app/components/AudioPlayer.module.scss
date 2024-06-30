@@ -32,4 +32,8 @@
   &.compressed {
     top: 0.5rem;
   }
+
+  &.dark {
+    filter: invert(1);
+  }
 }
