@@ -30,9 +30,10 @@ export const generate = async (item: any, item_type: string) => {
 	if (!textInput)
 		throw new Error('No text found');
 
-	console.log(item.audio?.custom_data?.text)
+	const audio = await client.uploads.find(item.audio?.upload_id);
+	const currentText = audio?.default_field_metadata.en.custom_data?.text
 
-	if (item.audio?.custom_data?.text && textInput === item.audio?.custom_data?.text)
+	if (currentText && textInput === currentText)
 		return console.log('Already generated');
 
 	const fileName = `${id}.mp3`;
