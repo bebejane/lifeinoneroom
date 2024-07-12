@@ -26,6 +26,15 @@ export const generate = async (item: any, item_type: string) => {
 	const { id } = item;
 	const { field, type } = postTypeMap[item_type];
 	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field]) : null;
+
+	if (!textInput)
+		throw new Error('No text found');
+
+	console.log(item.audio?.custom_data?.text)
+
+	if (item.audio?.custom_data?.text && textInput === item.audio?.custom_data?.text)
+		return console.log('Already generated');
+
 	const fileName = `${id}.mp3`;
 
 	if (!textInput) throw new Error('No text found');
@@ -49,8 +58,7 @@ export const generate = async (item: any, item_type: string) => {
 		}
 
 	} catch (e) {
-		console.error(e);
-		throw new Error('Failed to generate audio');
+		throw new Error(`Failed to generate audio. ${e.message}`);
 	}
 }
 
@@ -73,7 +81,7 @@ async function createAudioFileFromTextOpenAI(text: string, filePath: string): Pr
 	});
 	*/
 	//@ts-ignore
-	return { filePath, customData: {} };
+	return { filePath, customData: { text } };
 }
 
 
