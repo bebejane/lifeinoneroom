@@ -30,8 +30,8 @@ export const generate = async (item: any, item_type: string) => {
 	if (!textInput)
 		throw new Error('No text found');
 
-	const audio = await client.uploads.find(item.audio?.upload_id);
-	const currentText = audio?.default_field_metadata.en.custom_data?.text
+	const audio = item?.audio?.upload_id ? await client.uploads.find(item.audio.upload_id) : null
+	const currentText = audio?.default_field_metadata.en.custom_data?.text ?? null;
 
 	if (currentText && textInput === currentText)
 		return console.log('Already generated');
@@ -49,6 +49,7 @@ export const generate = async (item: any, item_type: string) => {
 		console.timeEnd('generate')
 
 		const u = await upload(filePath, fileName, item.audio?.upload_id, customData);
+
 		await client.items.update(id, { audio: { upload_id: u.id } });
 		await client.items.publish(id);
 

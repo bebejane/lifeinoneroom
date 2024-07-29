@@ -11,6 +11,8 @@ export async function POST(request: Request) {
   const { event_type, related_entities, entity } = res
   const api_key = related_entities?.find(({ id }) => id === entity.relationships?.item_type?.data?.id)?.attributes?.api_key
 
+
+
   if (event_type === 'publish') {
     try {
       await generate({ ...entity.attributes, id: entity.id }, api_key)
@@ -18,7 +20,7 @@ export async function POST(request: Request) {
       revalidatePath(`/posts/${entity.attributes.slug}`)
       revalidateTag(entity.id)
     } catch (e) {
-      return Response.json({ success: false, error: e.message })
+      return Response.json({ success: false, error: e.message }, { status: 500 })
     }
   }
 
