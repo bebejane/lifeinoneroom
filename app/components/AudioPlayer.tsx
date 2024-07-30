@@ -58,10 +58,11 @@ export default function AudioPlayer({ audio, open }: Props) {
         className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed)}
         onClick={handleClick}
       >
-        <img
-          src="/images/sound-symbol.svg"
-          alt="Audio player"
-        />
+        {playing ?
+          <img src="/images/pause.svg" alt="Pause" />
+          :
+          <img src="/images/sound-symbol.svg" alt="Audio player" />
+        }
       </figure>
       <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
         <source src={audio.url} type="audio/mpeg" />
