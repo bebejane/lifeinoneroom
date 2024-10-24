@@ -48,7 +48,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       line: { flexBasis: `${lineHeight}` }
     })
   }
-  const sectionStyle = theme !== 'dark' && settings.colors ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
+  const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
 
   return (
     <section
