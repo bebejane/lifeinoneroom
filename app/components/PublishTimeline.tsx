@@ -14,7 +14,7 @@ export type Props = {
 
 export default function PublishTimeline({ posts }: Props) {
 
-  const [expanded] = useStore(state => [state.expanded])
+  const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const { width, height } = useWindowSize()
   const [timeline, setTimeline] = useState<{ id: string, y: number, date: string, textColor?: string, backgroundColor?: string }[] | null>(null)
   const [active, setActive] = useState<string | null>(null)
@@ -64,8 +64,8 @@ export default function PublishTimeline({ posts }: Props) {
 
   return (
     <nav id="timeline" className={s.timeline} ref={ref}>
-      {timeline?.map(({ id, y, date, textColor, backgroundColor }) => (
-        <a key={id} href={`#${id}`} style={{ top: `${y}px`, color: textColor }} >
+      {timeline?.map(({ id, y, date, textColor }) => (
+        <a key={id} href={`#${id}`} style={{ top: `${y}px`, color: settings.colors ? textColor : undefined }} >
           <span className={cn(id === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
           </span> ·

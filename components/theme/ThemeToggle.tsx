@@ -14,11 +14,9 @@ const ThemeToggle = () => {
   }, [setTheme, theme])
 
   return (
-    <div>
-      <Checkbox defaultSelected={theme === 'light'} id="toggle-theme" onChange={toggle}>
-        Light theme
-      </Checkbox>
-    </div>
+    <Checkbox defaultSelected={theme === 'light'} id="toggle-theme" onChange={toggle}>
+      Light theme
+    </Checkbox>
   )
 }
 
