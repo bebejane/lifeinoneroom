@@ -16,7 +16,7 @@ export default function PublishTimeline({ posts }: Props) {
 
   const [expanded] = useStore(state => [state.expanded])
   const { width, height } = useWindowSize()
-  const [timeline, setTimeline] = useState<{ id: string, y: number, date: string }[] | null>(null)
+  const [timeline, setTimeline] = useState<{ id: string, y: number, date: string, textColor?: string, backgroundColor?: string }[] | null>(null)
   const [active, setActive] = useState<string | null>(null)
   const { scrolledPosition, isScrolling } = useScrollInfo()
   const ref = useRef<HTMLDivElement>(null)
@@ -30,10 +30,12 @@ export default function PublishTimeline({ posts }: Props) {
     const labelHeight = ref.current?.querySelector('a')?.clientHeight ?? 0
     const h = (ref.current?.offsetHeight ?? 0) - labelHeight
 
-    const timeline = posts.map(({ id, _firstPublishedAt }) => ({
-      id,
-      y: ((new Date(_firstPublishedAt).getTime() - minDate) / range) * h,
-      date: _firstPublishedAt
+    const timeline = posts.map((item) => ({
+      id: item.id,
+      y: ((new Date(item._firstPublishedAt).getTime() - minDate) / range) * h,
+      date: item._firstPublishedAt,
+      textColor: item.__typename === 'TextRecord' ? item.textColor?.hex : undefined,
+      backgroundColor: item.__typename === 'TextRecord' ? item.backgroundColor?.hex : undefined
     }))
 
     setTimeline(timeline)
@@ -62,8 +64,8 @@ export default function PublishTimeline({ posts }: Props) {
 
   return (
     <nav id="timeline" className={s.timeline} ref={ref}>
-      {timeline?.map(({ id, y, date }) => (
-        <a key={id} href={`#${id}`} style={{ top: `${y}px` }}>
+      {timeline?.map(({ id, y, date, textColor, backgroundColor }) => (
+        <a key={id} href={`#${id}`} style={{ top: `${y}px`, color: textColor }} >
           <span className={cn(id === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
           </span> ·
