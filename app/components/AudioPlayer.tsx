@@ -4,16 +4,11 @@ import s from './AudioPlayer.module.scss'
 import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useStore } from '@lib/store'
-<<<<<<< HEAD
-import { FaPlay, FaPause } from "react-icons/fa";
 import { IoVolumeHighSharp } from "react-icons/io5";
 import { IoVolumeMuteSharp } from "react-icons/io5";
 
 
 
-=======
-import { IoVolumeMediumSharp, IoPause } from "react-icons/io5";
->>>>>>> 4803495d9724ecc4a9f7a8bc6a129e3483002ec0
 
 type Props = {
   audio: FileField
