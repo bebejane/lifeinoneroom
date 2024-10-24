@@ -13,7 +13,7 @@ export type Props = {
 
 export default function About({ modal, about }: Props) {
 
-  const [setShowAbout, showAbout, setExpanded, expanded] = useStore(state => [state.setShowAbout, state.showAbout, state.setExpanded, state.expanded])
+  const [setShowAbout] = useStore(state => [state.setShowAbout])
   const router = useRouter()
 
   const handleClose = () => {
@@ -25,7 +25,7 @@ export default function About({ modal, about }: Props) {
     <article className={s.about}>
       <Content content={about.text} />
       {modal &&
-        <button className={cn(s.close)} onClick={handleClose}>Close</button>
+        <button className={s.close} onClick={handleClose}>Close</button>
       }
     </article>
   );

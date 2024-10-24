@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { shallow } from 'zustand/shallow';
 
+const defaultSettings = {
+  readingline: true,
+  dyslexic: true,
+  colors: true
+}
+
 export interface StoreState {
   desktop: boolean,
   showAbout: boolean,
@@ -25,12 +31,9 @@ const useStore = create<StoreState>((set) => ({
   theme: 'light',
   playing: null,
   open: [],
-  settings: {
-    readingline: true,
-    dyslexic: true,
-    colors: true
-  },
+  settings: typeof window === 'undefined' ? defaultSettings : localStorage?.getItem('settings') ? JSON.parse(localStorage?.getItem('settings')) : defaultSettings,
   setSettings: (settings) => {
+    localStorage.setItem('settings', JSON.stringify(settings))
     set((state) => ({ settings }))
   },
   setOpen: (open: string[]) => {
