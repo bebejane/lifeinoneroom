@@ -5,6 +5,10 @@ import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useStore } from '@lib/store'
 import { FaPlay, FaPause } from "react-icons/fa";
+import { IoVolumeHighSharp } from "react-icons/io5";
+import { IoVolumeMuteSharp } from "react-icons/io5";
+
+
 
 
 type Props = {
@@ -61,9 +65,9 @@ export default function AudioPlayer({ audio, open }: Props) {
         onClick={handleClick}
       >
         {playing ?
-          <FaPause />
+          <IoVolumeMuteSharp />
           :
-          <FaPlay />
+          <IoVolumeHighSharp />
         }
       </figure>
       <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
