@@ -16,7 +16,7 @@ export type LayoutProps = {
 export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
-  const [expanded] = useStore(state => [state.expanded])
+  const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [open, setOpen] = useState(true)
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
@@ -35,6 +35,8 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
   }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!settings.readingline) return
+
     const { clientY } = e
     const { y, height } = ref.current.getBoundingClientRect()
     const yPercent = (clientY - y) / height * 100

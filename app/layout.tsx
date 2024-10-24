@@ -18,15 +18,17 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
   return (
     <>
       <html lang="en">
-        <ThemeContextProvider>
-          <ThemeProvider>
-            <Navbar />
-            {modal}
-            <main>
-              {children}
-            </main>
-          </ThemeProvider>
-        </ThemeContextProvider>
+        <body className={"dyslexic"}>
+          <ThemeContextProvider>
+            <ThemeProvider>
+              <Navbar />
+              {modal}
+              <main>
+                {children}
+              </main>
+            </ThemeProvider>
+          </ThemeContextProvider>
+        </body>
       </html >
     </>
   );

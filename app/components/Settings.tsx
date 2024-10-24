@@ -40,7 +40,8 @@ export default function Settings({ show }: Props) {
   }, [setSettings])
 
   useEffect(() => {
-    console.log(settings)
+    const body = document.body
+    body.classList.toggle('dyslexic', settings.dyslexic)
   }, [settings])
 
   const updateSettings = (key: string, value) => {
@@ -54,7 +55,7 @@ export default function Settings({ show }: Props) {
         <Checkbox defaultSelected={true} id="readingline" onChange={(isSelected) => updateSettings('readingline', isSelected)}>
           Reading line
         </Checkbox>
-        <Checkbox defaultSelected={true} id="typeface" onChange={(isSelected) => updateSettings('typeface', isSelected)}>
+        <Checkbox defaultSelected={true} id="dyslexic" onChange={(isSelected) => updateSettings('dyslexic', isSelected)}>
           Dyslexic typeface
         </Checkbox>
       </div>

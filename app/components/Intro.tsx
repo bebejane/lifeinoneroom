@@ -9,7 +9,7 @@ export default function Intro() {
   const [hide, setHide] = useState(false)
 
   useEffect(() => {
-    const to = setTimeout(() => setHide(true), 2000)
+    const to = setTimeout(() => setHide(true), 1000)
     return () => clearTimeout(to)
   }, [])
 
