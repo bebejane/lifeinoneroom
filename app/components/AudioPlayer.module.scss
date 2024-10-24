@@ -23,10 +23,8 @@
     margin-left: 0;
     position: absolute;
     left: 20%;
-    top: calc(3.3 * var(--outer-margin));
+    top: calc(3.5 * var(--outer-margin));
   }
-
-
 
   &.show {
     display: flex;
