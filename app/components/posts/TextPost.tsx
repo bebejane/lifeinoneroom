@@ -18,7 +18,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
-  const [lineStyles, setLineStyles] = useState<React.CSSProperties | null>(null)
+  const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -37,7 +37,13 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
     const { clientY } = e
     const { y, height } = ref.current.getBoundingClientRect()
     const yPercent = (clientY - y) / height * 100
-    setLineStyles({ height: (100 - yPercent) + '%' })
+    const lineHeight = '3rem'
+
+    setLineStyles({
+      top: { flexBasis: `calc(${yPercent}% - ${lineHeight})` },
+      bottom: { flexBasis: `calc(${100 - yPercent}% - ${lineHeight})` },
+      line: { flexBasis: `${lineHeight}` }
+    })
   }
 
   return (
@@ -55,8 +61,10 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
         <>
           <h3 className={s.title}>{title}</h3>
           <Content content={text} />
-          <div className={cn(s.line, lineStyles && s.show)}>
-            <div style={lineStyles} />
+          <div className={cn(s.readingline, lineStyles && s.show)}>
+            <div className={s.top} style={lineStyles?.top} />
+            <div className={s.line} style={lineStyles?.line} />
+            <div className={s.bottom} style={lineStyles?.bottom} />
           </div>
         </>
         :
