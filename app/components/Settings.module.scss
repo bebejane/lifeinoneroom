@@ -2,11 +2,11 @@
   position: fixed;
   top: 4rem;
   left: 0;
-  padding: var(--outer-margin);
+  padding: calc(1.25 * var(--outer-margin));
   margin: var(--outer-margin);
   background-color: var(--background);
-  border: 2px solid var(--foreground);
   z-index: var(--z-settings);
+  border-radius: 2rem;
   display: none;
 
   &.show {
