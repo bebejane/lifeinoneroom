@@ -1,17 +1,16 @@
 .text {
-  --margin: 28%;
+  --margin: 26%;
   --height: 4rem;
   height: var(--height);
   background-color: var(--background);
-  padding-top: 4em;
+  padding-top: 1.5em;
   overflow: hidden;
-  border-bottom: 1px solid #bebebe;
+  //border-bottom: 1px solid #bebebe;
 
   p {
     padding-left: var(--margin);
     padding-right: var(--margin);
     margin-bottom: 0;
-    font-size: 0.9rem;
   }
 
   h2 {
@@ -28,6 +27,7 @@
 
   &.open {
     --height: auto;
+    padding-top: 4em;
     padding-bottom: 3rem;
 
     audio {

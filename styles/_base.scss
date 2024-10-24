@@ -14,6 +14,8 @@
 	--z-settings: 1200;
 	--z-modal: 2000;
 
+	--button-height: 3rem;
+
 	@include mq($from: tablet) {
 	}
 
@@ -49,10 +51,16 @@ main {
 
 	&.compressed {
 		margin-top: 5.5rem;
+	}
 
-		section:first-of-type figure:last-of-type {
-			margin-top: 0;
+	section:first-of-type {
+		h3 {
+			margin-top: 3rem;
 		}
+	}
+
+	section:first-of-type figure:last-of-type {
+		margin-top: 0;
 	}
 
 	section:first-of-type figure:last-of-type {
