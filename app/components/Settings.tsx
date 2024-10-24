@@ -41,7 +41,7 @@ export default function Settings({ show }: Props) {
 
   useEffect(() => {
     const body = document.body
-    body.style.fontFamily = settings.typeface ? 'var(--body-font)' : 'var(--body-font-default)'
+    body.classList.toggle('dyslexic', settings.dyslexic)
   }, [settings])
 
   const updateSettings = (key: string, value) => {
@@ -55,7 +55,7 @@ export default function Settings({ show }: Props) {
         <Checkbox defaultSelected={true} id="readingline" onChange={(isSelected) => updateSettings('readingline', isSelected)}>
           Reading line
         </Checkbox>
-        <Checkbox defaultSelected={true} id="typeface" onChange={(isSelected) => updateSettings('typeface', isSelected)}>
+        <Checkbox defaultSelected={true} id="dyslexic" onChange={(isSelected) => updateSettings('dyslexic', isSelected)}>
           Dyslexic typeface
         </Checkbox>
       </div>

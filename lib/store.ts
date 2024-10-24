@@ -27,7 +27,7 @@ const useStore = create<StoreState>((set) => ({
   open: [],
   settings: {
     readingline: true,
-    typeface: true
+    dyslexic: true
   },
   setSettings: (settings) => {
     set((state) => ({ settings }))
