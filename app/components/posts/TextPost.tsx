@@ -53,6 +53,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
     >
       {open ?
         <>
+          <h3 className={s.title}>{title}</h3>
           <Content content={text} />
           <div className={cn(s.line, lineStyles && s.show)}>
             <div style={lineStyles} />
