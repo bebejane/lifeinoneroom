@@ -17,6 +17,9 @@
     text-decoration: none !important;
 
     span {
+      @include mq($until: desktop) {
+        display: none;
+      }
       opacity: 0;
 
       &.active {

@@ -61,6 +61,8 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       {open ?
         <>
           <h3 className={s.title}>{title}</h3>
+          <AudioPlayer audio={audio} open={open} show={lineStyles && open} />
+
           <Content content={text} />
           <div className={cn(s.readingline, lineStyles && s.show)}>
             <div className={s.top} style={lineStyles?.top} />
@@ -71,7 +73,6 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
         :
         <h2>{title}</h2>
       }
-      <AudioPlayer audio={audio} open={open} show={lineStyles && open} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

@@ -1,5 +1,8 @@
 .text {
-  --margin: 26%;
+  --margin: var(--outer-margin);
+  @include mq($from: desktop) {
+    --margin: 26%;
+  }
   --height: 4rem;
   height: var(--height);
   background-color: var(--background);
@@ -10,15 +13,20 @@
   p {
     padding-left: var(--margin);
     padding-right: var(--margin);
+    @include mq($until: desktop) {
+      margin-right: calc(2 * var(--margin));
+    }
     margin-bottom: 0;
   }
 
   h2 {
     width: 100%;
     display: flex;
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: var(--outer-margin);
+    @include mq($from: desktop) {
+      justify-content: center;
+      margin-left: 0;
+    }
   }
 
   h3 {
@@ -45,6 +53,9 @@
   }
 
   .readingline {
+    @include mq($until: desktop) {
+      display: none;
+    }
     position: absolute;
     display: flex;
     flex-direction: column;
