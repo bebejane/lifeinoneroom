@@ -3,7 +3,7 @@
 	--white: #fcfcfc;
 	--red: #bf0000;
 
-	--outer-margin: 1.2em;
+	--outer-margin: 1.2rem;
 	--navbar-height: calc(1em + calc(2 * var(--outer-margin)));
 	--background: var(--white);
 	--foreground: var(--black);
@@ -17,9 +17,11 @@
 
 	--button-height: 3rem;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -42,10 +44,6 @@ body {
 	&[data-theme="dark"] {
 		--background: var(--black);
 		--foreground: var(--white);
-	}
-
-	&.dyslexic {
-		font-family: var(--body-font);
 	}
 }
 
@@ -103,9 +101,11 @@ a {
 
 	color: inherit;
 
-	&:hover {}
+	&:hover {
+	}
 
-	&:visited {}
+	&:visited {
+	}
 }
 
 article p a {
@@ -127,13 +127,16 @@ button {
 	color: var(--foreground);
 	border: 0;
 
-	@include mq($from: tablet) {}
-
-	&.back {
-		@include mq($from: tablet) {}
+	@include mq($from: tablet) {
 	}
 
-	&:hover {}
+	&.back {
+		@include mq($from: tablet) {
+		}
+	}
+
+	&:hover {
+	}
 }
 
 figcaption {
@@ -142,12 +145,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {
