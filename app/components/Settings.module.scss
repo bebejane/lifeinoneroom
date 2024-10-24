@@ -8,6 +8,7 @@
   z-index: var(--z-settings);
   border-radius: 2rem;
   display: none;
+  filter: var(--dropshadow);
 
   &.show {
     display: block;

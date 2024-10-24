@@ -40,7 +40,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
     const { clientY } = e
     const { y, height } = ref.current.getBoundingClientRect()
     const yPercent = (clientY - y) / height * 100
-    const lineHeight = '6rem'
+    const lineHeight = '8rem'
 
     setLineStyles({
       top: { flexBasis: `calc(${yPercent}% - ${lineHeight})` },

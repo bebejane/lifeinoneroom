@@ -8,6 +8,7 @@
   padding-bottom: 0.5em;
   font-size: 1rem;
   height: var(--button-height);
+  filter: var(--dropshadow);
 
   @include mq($from: desktop) {
     &:hover {
@@ -46,6 +47,7 @@
     height: var(--button-height);
     border-radius: 50%;
     background-color: var(--white);
+    filter: var(--dropshadow);
 
     &:hover,
     &.active {

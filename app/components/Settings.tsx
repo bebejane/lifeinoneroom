@@ -26,7 +26,6 @@ export default function Settings({ show }: Props) {
   return (
     <div className={cn(s.settings, show && s.show)} ref={ref}>
       <div>
-        <ThemeToggle />
         <Checkbox defaultSelected={true} id="readingline" onChange={(isSelected) => updateSettings('readingline', isSelected)}>
           Reading line
         </Checkbox>
@@ -36,6 +35,8 @@ export default function Settings({ show }: Props) {
         <Checkbox defaultSelected={true} id="color" onChange={(isSelected) => updateSettings('colors', isSelected)}>
           Colors
         </Checkbox>
+        <ThemeToggle />
+
       </div>
     </div>
   );
