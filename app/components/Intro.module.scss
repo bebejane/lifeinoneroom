@@ -1,0 +1,43 @@
+.intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  z-index: var(--z-intro);
+  font-size: 2rem;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  span {
+    position: absolute;
+    margin: var(--outer-margin);
+  }
+
+  span:nth-child(1) {
+    top: 0;
+    left: 0;
+  }
+
+  span:nth-child(2) {
+    top: 0;
+    right: 0;
+  }
+
+  span:nth-child(3) {
+    bottom: 0;
+    left: 0;
+  }
+
+  span:nth-child(4) {
+    bottom: 0;
+    right: 0;
+  }
+}

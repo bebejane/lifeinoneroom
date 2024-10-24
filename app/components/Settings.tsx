@@ -3,8 +3,9 @@
 import s from './Settings.module.scss'
 import cn from 'classnames'
 import { useStore } from '@lib/store'
-import { useRouter } from 'next/navigation'
 import ThemeToggle from '@components/theme/ThemeToggle'
+import { useEffect, useRef } from 'react'
+import Checkbox from './Checkbox';
 
 export type Props = {
   show: boolean
@@ -12,17 +13,51 @@ export type Props = {
 
 export default function Settings({ show }: Props) {
 
-  const [setShowAbout, showAbout, setExpanded, expanded] = useStore(state => [state.setShowAbout, state.showAbout, state.setExpanded, state.expanded])
-  const router = useRouter()
+  const ref = useRef<HTMLDivElement>(null)
+  const [settings, setSettings] = useStore(state => [state.settings, state.setSettings])
+
+  useEffect(() => {
+
+    const container = ref.current
+
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLInputElement
+      const id = target.id
+      console.log(id, target.checked)
+      setSettings((settings: any) => ({ ...settings, [id]: target.checked }))
+    }
+
+    container.querySelectorAll('input[type=checkbox]').forEach((checkbox) => {
+      console.log(checkbox)
+      checkbox.addEventListener('click', handleClick)
+    })
+
+    return () => {
+      container.querySelectorAll('input[type=checkbox]').forEach((checkbox) => {
+        checkbox.removeEventListener('click', handleClick)
+      })
+    }
+  }, [setSettings])
+
+  useEffect(() => {
+    console.log(settings)
+  }, [settings])
+
+  const updateSettings = (key: string, value) => {
+    setSettings({ ...settings, [key]: value })
+  }
 
   return (
-    <div className={cn(s.settings, show && s.show)}>
-      <h3>Settings</h3>
-      <p>
-        <input id="setting1" type="checkbox" />
-        <label htmlFor="expanded">Setting 1</label><br />
+    <div className={cn(s.settings, show && s.show)} ref={ref}>
+      <div>
         <ThemeToggle />
-      </p>
+        <Checkbox defaultSelected={true} id="readingline" onChange={(isSelected) => updateSettings('readingline', isSelected)}>
+          Reading line
+        </Checkbox>
+        <Checkbox defaultSelected={true} id="typeface" onChange={(isSelected) => updateSettings('typeface', isSelected)}>
+          Dyslexic typeface
+        </Checkbox>
+      </div>
     </div>
   );
 }

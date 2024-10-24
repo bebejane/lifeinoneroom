@@ -8,6 +8,8 @@ export interface StoreState {
   theme: 'light' | 'dark',
   open: string[]
   playing: string,
+  settings: any
+  setSettings: (settings: any) => void
   setTheme: (theme: 'light' | 'dark') => void,
   setOpen: (open: string[]) => void,
   setPlaying: (playing: string) => void,
@@ -23,6 +25,13 @@ const useStore = create<StoreState>((set) => ({
   theme: 'light',
   playing: null,
   open: [],
+  settings: {
+    readingline: true,
+    typeface: true
+  },
+  setSettings: (settings) => {
+    set((state) => ({ settings }))
+  },
   setOpen: (open: string[]) => {
     set((state) => ({ open }))
   },
