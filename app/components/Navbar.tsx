@@ -7,8 +7,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { IoAccessibility } from "react-icons/io5";
-import { Theme, ThemeContext } from '@components/theme/ThemeContext';
-
 import Settings from './Settings'
 
 export type Props = {
@@ -31,6 +29,8 @@ export default function Navbar({ }: Props) {
   const handleClick = () => {
     setExpanded(!expanded)
   }
+
+
 
   return (
     <>

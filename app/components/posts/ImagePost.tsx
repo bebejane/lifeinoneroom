@@ -50,7 +50,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
           />
         </figure>
       }
-      <AudioPlayer audio={audio} open={open} show={hover && open} />
+      <AudioPlayer audio={audio} open={open} show={hover && open} fullMargin={true} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

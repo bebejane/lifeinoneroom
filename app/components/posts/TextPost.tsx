@@ -64,13 +64,15 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       {open ?
         <>
           <h3 className={s.title}>{title}</h3>
-          <AudioPlayer audio={audio} open={open} show={lineStyles && open} />
+          <AudioPlayer audio={audio} open={open} show={lineStyles && open} fullMargin={true} />
           <Content content={text} />
-          <div className={cn(s.readingline, lineStyles && s.show)}>
-            <div className={s.top} style={lineStyles?.top} />
-            <div className={s.line} style={lineStyles?.line} />
-            <div className={s.bottom} style={lineStyles?.bottom} />
-          </div>
+          {lineStyles &&
+            <div className={cn(s.readingline, lineStyles && s.show)}>
+              <div className={s.top} style={lineStyles?.top} />
+              <div className={s.line} style={lineStyles?.line} />
+              <div className={s.bottom} style={lineStyles?.bottom} />
+            </div>
+          }
         </>
         :
         <h2>{title}</h2>
