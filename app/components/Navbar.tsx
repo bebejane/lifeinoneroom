@@ -6,6 +6,9 @@ import { useStore } from '@lib/store'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { IoAccessibility } from "react-icons/io5";
+import { Theme, ThemeContext } from '@components/theme/ThemeContext';
+
 import Settings from './Settings'
 
 export type Props = {
@@ -35,11 +38,9 @@ export default function Navbar({ }: Props) {
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <nav className={cn(s.navbar, s[theme])}>
-        <button className={cn(s.accessibility, showSettings && s.active)}>
-          <img
-            src="/images/crip-symbol.svg"
+        <button className={cn(s.accessibility, showSettings && s.active, s[theme])} onClick={() => setShowSettings(!showSettings)}>
+          <IoAccessibility
             className={s.settings}
-            onClick={() => setShowSettings(!showSettings)}
             aria-label="Enable accessibility"
             role="button"
           />

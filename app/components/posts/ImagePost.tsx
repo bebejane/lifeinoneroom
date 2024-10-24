@@ -16,6 +16,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
 
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
+  const [hover, setHover] = useState(false)
 
   useEffect(() => {
     setOpen(expanded)
@@ -29,12 +30,18 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
     }, 100)
   }
 
+  const handleMouse = (e: React.MouseEvent) => {
+
+  }
+
   return (
     <section
       id={id}
       key={id}
       className={cn(s.post, open && s.open)}
       style={{ backgroundColor: background?.hex }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       onClick={handleClick}
     >
       {image.responsiveImage &&
@@ -46,7 +53,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
           />
         </figure>
       }
-      <AudioPlayer audio={audio} open={open} />
+      {hover && <AudioPlayer audio={audio} open={open} />}
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

@@ -35,31 +35,36 @@
 
   .accessibility {
     all: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-top: var(--outer-margin);
     margin-left: var(--outer-margin);
     margin-right: calc(-0.5 * var(--outer-margin));
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-
-    display: block;
-
-    img {
-      border-radius: 50%;
-      display: inline;
-      width: 3rem;
-      height: 3rem;
-      //border: 2px solid var(--foreground);
-      background-color: var(--background);
-    }
+    background-color: var(--white);
 
     &:hover,
     &.active {
       background-color: var(--black);
       cursor: pointer;
 
-      img {
-        filter: invert(100%);
+      svg {
+        path {
+          fill: var(--white)
+        }
+      }
+
+      &.dark {
+        background-color: var(--white);
+
+        svg {
+          path {
+            fill: var(--black)
+          }
+        }
       }
     }
   }
