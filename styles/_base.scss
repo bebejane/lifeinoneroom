@@ -1,5 +1,5 @@
 :root {
-	--black: #161616;
+	--black: #313131;
 	--white: #fcfcfc;
 	--red: #bf0000;
 
@@ -14,9 +14,11 @@
 	--z-settings: 1200;
 	--z-modal: 2000;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -36,12 +38,10 @@ body {
 	margin: 0;
 	padding: 0;
 
-
 	&[data-theme="dark"] {
 		--background: var(--black);
 		--foreground: var(--white);
 	}
-
 }
 
 main {
@@ -84,12 +84,17 @@ main {
 }
 
 a {
-	text-decoration: none;
-	color: var(--foreground);
+	text-decoration: underline;
+	text-decoration-thickness: 0.12em;
+	text-underline-offset: 0.15em;
 
-	&:hover {}
+	color: inherit;
 
-	&:visited {}
+	&:hover {
+	}
+
+	&:visited {
+	}
 }
 
 article p a {
@@ -111,13 +116,16 @@ button {
 	color: var(--foreground);
 	border: 0;
 
-	@include mq($from: tablet) {}
-
-	&.back {
-		@include mq($from: tablet) {}
+	@include mq($from: tablet) {
 	}
 
-	&:hover {}
+	&.back {
+		@include mq($from: tablet) {
+		}
+	}
+
+	&:hover {
+	}
 }
 
 figcaption {
@@ -126,12 +134,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {

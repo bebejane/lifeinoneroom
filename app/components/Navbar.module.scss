@@ -1,5 +1,5 @@
 .button {
-  border: 2px solid var(--foreground);
+  //border: 2px solid var(--foreground);
   background-color: var(--background);
   margin: var(--outer-margin);
   border-radius: 2rem;
@@ -49,7 +49,7 @@
       display: inline;
       width: 3rem;
       height: 3rem;
-      border: 2px solid var(--foreground);
+      //border: 2px solid var(--foreground);
       background-color: var(--background);
     }
 
@@ -63,5 +63,4 @@
       }
     }
   }
-
 }
