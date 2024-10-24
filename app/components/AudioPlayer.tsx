@@ -4,6 +4,8 @@ import s from './AudioPlayer.module.scss'
 import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useStore } from '@lib/store'
+import { FaPlay, FaPause } from "react-icons/fa";
+
 
 type Props = {
   audio: FileField
@@ -59,9 +61,9 @@ export default function AudioPlayer({ audio, open }: Props) {
         onClick={handleClick}
       >
         {playing ?
-          <img src="/images/pause.svg" alt="Pause" />
+          <FaPause />
           :
-          <img src="/images/sound-symbol.svg" alt="Audio player" />
+          <FaPlay />
         }
       </figure>
       <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
