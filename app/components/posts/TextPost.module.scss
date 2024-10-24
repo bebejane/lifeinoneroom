@@ -3,7 +3,7 @@
   @include mq($from: desktop) {
     --margin: 26%;
   }
-  --height: 4rem;
+  --height: 5rem;
   height: var(--height);
   background-color: var(--background);
   //padding-top: 2.2em;

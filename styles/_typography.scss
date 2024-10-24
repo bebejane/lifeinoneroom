@@ -4,7 +4,7 @@ body {
   font-weight: normal;
 
   @include mq($from: tablet) {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   @include mq($from: wide) {
