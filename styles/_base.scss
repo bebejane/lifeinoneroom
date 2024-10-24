@@ -13,14 +13,13 @@
 	--z-timeline: 1100;
 	--z-settings: 1200;
 	--z-modal: 2000;
+	--z-intro: 3000;
 
 	--button-height: 3rem;
 
-	@include mq($from: tablet) {
-	}
+	@include mq($from: tablet) {}
 
-	@include mq($until: tablet) {
-	}
+	@include mq($until: tablet) {}
 }
 
 html {
@@ -52,11 +51,13 @@ main {
 	&.compressed {
 		margin-top: 5.5rem;
 	}
+
 	section:first-of-type {
 		h3 {
 			margin-top: 3rem;
 		}
 	}
+
 	@include mq($from: desktop) {
 		section:first-of-type figure:last-of-type {
 			margin-top: 0;
@@ -98,11 +99,9 @@ a {
 
 	color: inherit;
 
-	&:hover {
-	}
+	&:hover {}
 
-	&:visited {
-	}
+	&:visited {}
 }
 
 article p a {
@@ -124,16 +123,13 @@ button {
 	color: var(--foreground);
 	border: 0;
 
-	@include mq($from: tablet) {
-	}
+	@include mq($from: tablet) {}
 
 	&.back {
-		@include mq($from: tablet) {
-		}
+		@include mq($from: tablet) {}
 	}
 
-	&:hover {
-	}
+	&:hover {}
 }
 
 figcaption {
@@ -142,14 +138,12 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {
-}
+hr {}
 
 input,
 textarea,
 select {
-	&:focus {
-	}
+	&:focus {}
 }
 
 select {

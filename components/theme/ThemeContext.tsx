@@ -24,7 +24,7 @@ export const ThemeContextProvider = ({ children }) => {
 	useEffect(() => {
 		localStorage.setItem("theme", theme);
 	}, [theme]);
-	console.log(theme)
+
 	return (
 		<ThemeContext.Provider value={{ theme, toggle }}>
 			{children}

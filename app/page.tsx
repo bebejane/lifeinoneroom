@@ -3,6 +3,7 @@ import ImagePost from './components/posts/ImagePost';
 import TextPost from './components/posts/TextPost';
 import PublishTimeline from './components/PublishTimeline';
 import { getAllPosts } from '@lib/posts';
+import Intro from './components/Intro';
 
 export default async function Home() {
 
@@ -10,6 +11,7 @@ export default async function Home() {
 
   return (
     <>
+      <Intro />
       {allPosts.map(post => (
         post.__typename === 'ImageRecord' ?
           <ImagePost key={post.id} data={post as ImageRecord} />
