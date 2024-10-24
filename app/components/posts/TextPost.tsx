@@ -48,6 +48,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       line: { flexBasis: `${lineHeight}` }
     })
   }
+  const sectionStyle = theme !== 'dark' && settings.colors ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
 
   return (
     <section
@@ -58,13 +59,12 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       onClick={handleClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setLineStyles(null)}
-      style={theme !== 'dark' ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined}
+      style={sectionStyle}
     >
       {open ?
         <>
           <h3 className={s.title}>{title}</h3>
           <AudioPlayer audio={audio} open={open} show={lineStyles && open} />
-
           <Content content={text} />
           <div className={cn(s.readingline, lineStyles && s.show)}>
             <div className={s.top} style={lineStyles?.top} />
