@@ -11,9 +11,10 @@ type Props = {
   audio: FileField
   open: boolean
   show: boolean
+  fullMargin: boolean
 }
 
-export default function AudioPlayer({ audio, open, show }: Props) {
+export default function AudioPlayer({ audio, open, show, fullMargin }: Props) {
 
 
   const { expanded, theme } = useStore((state) => ({ expanded: state.expanded, theme: state.theme }))
@@ -58,7 +59,7 @@ export default function AudioPlayer({ audio, open, show }: Props) {
     <>
       <figure
         aria-label="Play"
-        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed, (show || playing) && s.show)}
+        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed, (show || playing) && s.show, fullMargin && s.fullmargin)}
         onClick={handleClick}
       >
         {playing ?

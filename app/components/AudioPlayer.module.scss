@@ -26,6 +26,12 @@
     top: calc(3.5 * var(--outer-margin));
   }
 
+  &.fullmargin {
+    margin-left: var(--outer-margin);
+    margin-top: -2rem;
+    left: 0%;
+  }
+
   &.show {
     display: flex;
   }
