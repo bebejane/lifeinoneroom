@@ -6,13 +6,7 @@
   display: flex;
   align-items: center;
   gap: 0.571rem;
-  font-size: 1.143rem;
   forced-color-adjust: none;
-  margin-bottom: 1rem;
-
-  &:nth-last-of-type() {
-    margin-bottom: 0rem;
-  }
 
   .checkbox {
     width: 1.143rem;

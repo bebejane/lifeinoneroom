@@ -2,7 +2,7 @@
   position: fixed;
   top: 4rem;
   left: 0;
-  padding: calc(1.25 * var(--outer-margin));
+  padding: calc(1.5 * var(--outer-margin));
   margin: var(--outer-margin);
   background-color: var(--background);
   z-index: var(--z-settings);
@@ -16,7 +16,13 @@
   p {
     label {
       width: 100%;
-      margin-bottom: 0.5rem;
+    }
+  }
+
+  label {
+    margin-bottom: 1rem;
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 }
