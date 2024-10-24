@@ -3,17 +3,19 @@
 import s from './TextPost.module.scss'
 import cn from 'classnames'
 import Content from '@components/Content';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
 import PublishDate from '../PublishDate';
 import AudioPlayer from '../AudioPlayer';
+import { Theme, ThemeContext } from '@components/theme/ThemeContext';
 
 export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, title, text, audio, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
 
+  const { theme } = useContext(ThemeContext) as Theme
   const [expanded] = useStore(state => [state.expanded])
   const [open, setOpen] = useState(true)
   const [lineStyles, setLineStyles] = useState<React.CSSProperties | null>(null)
@@ -47,6 +49,7 @@ export default function TextPost({ data: { id, title, text, audio, _firstPublish
       onClick={handleClick}
       onMouseMove={handleMouseMove}
       onMouseLeave={() => setLineStyles(null)}
+      style={theme !== 'dark' ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined}
     >
       {open ?
         <>

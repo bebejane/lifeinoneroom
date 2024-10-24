@@ -12,8 +12,6 @@ const ThemeProvider = ({ children }) => {
     setMounted(true)
   }, []);
 
-  console.log(theme)
-
   if (mounted) {
     return <body data-theme={theme}>{children}</body>
   }

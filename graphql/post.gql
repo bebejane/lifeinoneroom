@@ -50,6 +50,12 @@ fragment TextPostFragment on TextRecord {
 		links
 		value
 	}
+	textColor {
+		hex
+	}
+	backgroundColor {
+		hex
+	}
 	audio {
 		...AudioFragment
 	}
