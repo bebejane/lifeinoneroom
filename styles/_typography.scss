@@ -28,17 +28,14 @@ h1 {
   font-weight: bold;
   padding-bottom: var(--space);
   line-height: 1.25;
-  font-family: $headline-font;
 }
 
 h2 {
   font-size: 1rem;
-  font-family: $headline-font;
 }
 
 h3 {
   font-size: 1rem;
-  font-family: $headline-font;
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -61,13 +58,12 @@ p.intro,
   font-size: 0.75rem;
 
   strong {
-    font-family: $headline-font;
     font-weight: bold !important;
     font-size: 0.65rem;
     padding-right: 0.5em;
   }
 
-  > p {
+  >p {
     padding: 0;
   }
 }
@@ -77,8 +73,7 @@ p.intro,
 footer,
 footer nav,
 figcaption,
-.caption label {
-}
+.caption label {}
 
 strong,
 b {
@@ -118,17 +113,16 @@ article {
     padding-left: 0;
   }
 
-  p + h3,
-  ul + h3,
-  ul + h2,
-  p + h2 {
+  p+h3,
+  ul+h3,
+  ul+h2,
+  p+h2 {
     padding-top: 1rem;
   }
 
   p strong,
   p b {
     font-weight: normal !important;
-    font-family: $headline-font;
   }
 
   p.center {
@@ -137,7 +131,7 @@ article {
 }
 
 button {
-  font-family: $headline-font;
+  font-family: unset;
 }
 
 em,

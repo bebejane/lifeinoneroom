@@ -4,8 +4,7 @@ const nextConfig = {
 		includePaths: ["./components", "./pages"],
 		prependData: `
     	@use "sass:math";
-    	@import "./styles/mediaqueries"; 
-    	@import "./styles/fonts";
+    	@import "./styles/mediaqueries";
   	`,
 	},
 	typescript: {

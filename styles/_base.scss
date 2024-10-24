@@ -33,7 +33,7 @@ body {
 	line-height: 1em;
 	color: var(--foreground);
 	background-color: var(--background);
-	font-family: $body-font;
+	font-family: var(--body-font);
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
 	margin: 0;

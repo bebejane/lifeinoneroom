@@ -40,7 +40,8 @@ export default function Settings({ show }: Props) {
   }, [setSettings])
 
   useEffect(() => {
-    console.log(settings)
+    const body = document.body
+    body.style.fontFamily = settings.typeface ? 'var(--body-font)' : 'var(--body-font-default)'
   }, [settings])
 
   const updateSettings = (key: string, value) => {
