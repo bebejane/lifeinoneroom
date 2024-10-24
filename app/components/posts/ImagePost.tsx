@@ -30,9 +30,6 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
     }, 100)
   }
 
-  const handleMouse = (e: React.MouseEvent) => {
-
-  }
 
   return (
     <section
@@ -53,7 +50,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
           />
         </figure>
       }
-      {hover && <AudioPlayer audio={audio} open={open} />}
+      <AudioPlayer audio={audio} open={open} show={hover && open} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

@@ -71,8 +71,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
         :
         <h2>{title}</h2>
       }
-      {lineStyles && <AudioPlayer audio={audio} open={open} />}
-
+      <AudioPlayer audio={audio} open={open} show={lineStyles && open} />
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

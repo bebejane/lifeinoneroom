@@ -13,9 +13,10 @@ import { IoVolumeMuteSharp } from "react-icons/io5";
 type Props = {
   audio: FileField
   open: boolean
+  show: boolean
 }
 
-export default function AudioPlayer({ audio, open }: Props) {
+export default function AudioPlayer({ audio, open, show }: Props) {
 
 
   const { expanded, theme } = useStore((state) => ({ expanded: state.expanded, theme: state.theme }))
@@ -60,7 +61,7 @@ export default function AudioPlayer({ audio, open }: Props) {
     <>
       <figure
         aria-label="Play"
-        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed)}
+        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed, show && s.show)}
         onClick={handleClick}
       >
         {playing ?
