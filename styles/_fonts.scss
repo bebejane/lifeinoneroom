@@ -1,6 +1,9 @@
 $body-font: "Open", Arial, Helvetica, Sans-Serif;
 $headline-font: "Open", Arial, Helvetica, Sans-Serif;
 
+$body-font-default: Helvetica, Sans-Serif;
+$headline-font-default: Helvetica, Sans-Serif;
+
 @font-face {
   font-family: "Open";
   src: url("../public/fonts/OpenDyslexic-Regular.woff2") format("woff2");
