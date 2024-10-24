@@ -23,6 +23,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
 
   useEffect(() => {
     setOpen(expanded)
+    !expanded && setLineStyles(null)
   }, [expanded])
 
   const handleClick = () => {
@@ -70,7 +71,8 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
         :
         <h2>{title}</h2>
       }
-      <AudioPlayer audio={audio} open={open} />
+      {lineStyles && <AudioPlayer audio={audio} open={open} />}
+
       <PublishDate date={_firstPublishedAt} />
     </section>
   );

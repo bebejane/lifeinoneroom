@@ -4,8 +4,7 @@ import s from './AudioPlayer.module.scss'
 import cn from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { useStore } from '@lib/store'
-import { FaPlay, FaPause } from "react-icons/fa";
-
+import { IoVolumeMediumSharp, IoPause } from "react-icons/io5";
 
 type Props = {
   audio: FileField
@@ -61,9 +60,9 @@ export default function AudioPlayer({ audio, open }: Props) {
         onClick={handleClick}
       >
         {playing ?
-          <FaPause />
+          <IoPause />
           :
-          <FaPlay />
+          <IoVolumeMediumSharp />
         }
       </figure>
       <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
