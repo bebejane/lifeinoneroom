@@ -3,24 +3,24 @@
 import s from './TextPost.module.scss'
 import cn from 'classnames'
 import Content from '@components/Content';
-import { use, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
 import PublishDate from '../PublishDate';
 import AudioPlayer from '../AudioPlayer';
 import { Theme, ThemeContext } from '@components/theme/ThemeContext';
-import { useScrollInfo } from 'next-dato-utils/hooks';
 
 export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, narrow, _firstPublishedAt } }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [open, setOpen] = useState(true)
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
+  const readingLineRef = useRef<HTMLDivElement>(null)
   const clientY = useRef<number>(0)
 
   const handleClick = () => {
@@ -44,6 +44,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       bottom: { flexBasis: `calc(${100 - yPercent}% - ${lineHeight})` },
       line: { flexBasis: `${lineHeight}` }
     })
+
   }, [settings.readingline])
 
   const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
@@ -59,15 +60,23 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
     return () => document.removeEventListener('scroll', handleScroll)
   }, [handleMouseMove])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting))
+        setLineStyles(null)
+    })
+    observer.observe(ref.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
       id={id}
       key={id}
       ref={ref}
-      className={cn(s.text, open && s.open)}
+      className={cn(s.text, open && s.open, narrow && s.narrow)}
       onClick={handleClick}
       onMouseMove={handleMouseMove}
-      onScroll={handleMouseMove}
       onMouseLeave={() => setLineStyles(null)}
       style={sectionStyle}
     >
@@ -77,7 +86,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
           <AudioPlayer audio={audio} open={open} show={lineStyles && open} fullMargin={false} />
           <Content content={text} />
           {lineStyles &&
-            <div className={cn(s.readingline, lineStyles && s.show)}>
+            <div ref={readingLineRef} className={cn(s.readingline, s.show)}>
               <div className={s.top} style={lineStyles?.top} />
               <div className={s.line} style={lineStyles?.line} />
               <div className={s.bottom} style={lineStyles?.bottom} />
