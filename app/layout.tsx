@@ -7,6 +7,7 @@ import { ThemeContextProvider } from '@components/theme/ThemeContext'
 import ThemeProvider from '@components/theme/ThemeProvider'
 
 import Navbar from './components/Navbar';
+import Readingline from './components/Readingline';
 
 export type LayoutProps = {
   children: React.ReactNode
@@ -26,6 +27,7 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
               <main>
                 {children}
               </main>
+              <Readingline />
             </ThemeProvider>
           </ThemeContextProvider>
         </body>

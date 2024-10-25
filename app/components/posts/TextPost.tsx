@@ -3,7 +3,7 @@
 import s from './TextPost.module.scss'
 import cn from 'classnames'
 import Content from '@components/Content';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
 import PublishDate from '../PublishDate';
 import AudioPlayer from '../AudioPlayer';
@@ -20,8 +20,6 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
   const [open, setOpen] = useState(true)
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
-  const readingLineRef = useRef<HTMLDivElement>(null)
-  const clientY = useRef<number>(0)
 
   const handleClick = () => {
     !expanded && setOpen(!open)
@@ -29,24 +27,6 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
   }
-
-  const handleMouseMove = useCallback((e?: React.MouseEvent<HTMLDivElement>) => {
-
-    if (!settings.readingline) return
-
-    clientY.current = e?.clientY ?? clientY.current
-    const { y, height } = ref.current.getBoundingClientRect()
-    const yPercent = (clientY.current - y) / height * 100
-    const lineHeight = '8rem'
-
-    setLineStyles({
-      top: { flexBasis: `calc(${yPercent}% - ${lineHeight})` },
-      bottom: { flexBasis: `calc(${100 - yPercent}% - ${lineHeight})` },
-      line: { flexBasis: `${lineHeight}` }
-    })
-
-  }, [settings.readingline])
-
   const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
 
   useEffect(() => {
@@ -54,47 +34,24 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
     !expanded && setLineStyles(null)
   }, [expanded])
 
-  useEffect(() => {
-    const handleScroll = () => handleMouseMove()
-    document.addEventListener('scroll', handleScroll)
-    return () => document.removeEventListener('scroll', handleScroll)
-  }, [handleMouseMove])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries.some((entry) => entry.isIntersecting))
-        setLineStyles(null)
-    })
-    observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <section
       id={id}
       key={id}
       ref={ref}
+      data-post-type="text"
       className={cn(s.text, open && s.open, narrow && s.narrow)}
       onClick={handleClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setLineStyles(null)}
       style={sectionStyle}
     >
-      {open ?
+      {!open ?
+        <h2>{title}</h2>
+        :
         <>
           <h3 className={s.title}>{title}</h3>
-          <AudioPlayer audio={audio} open={open} show={lineStyles && open} fullMargin={false} />
+          <AudioPlayer audio={audio} open={open} show={open} fullMargin={false} />
           <Content content={text} />
-          {lineStyles &&
-            <div ref={readingLineRef} className={cn(s.readingline, s.show)}>
-              <div className={s.top} style={lineStyles?.top} />
-              <div className={s.line} style={lineStyles?.line} />
-              <div className={s.bottom} style={lineStyles?.bottom} />
-            </div>
-          }
         </>
-        :
-        <h2>{title}</h2>
       }
       <PublishDate date={_firstPublishedAt} />
     </section>
