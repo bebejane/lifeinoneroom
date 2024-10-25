@@ -8,9 +8,8 @@
   --height: 5rem;
   height: var(--height);
   background-color: var(--background);
-  //padding-top: 2.2em;
   overflow: hidden;
-  //border-bottom: 1px solid #bebebe;
+  z-index: 10;
 
   p {
     padding-left: var(--margin);
@@ -44,6 +43,7 @@
     --height: auto;
     padding-top: 5.5em;
     padding-bottom: 3rem;
+    z-index: var(--z-text-post);
 
     audio {
       display: block;
