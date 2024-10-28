@@ -2,6 +2,7 @@
   --height: 4rem;
   height: var(--height);
   position: relative;
+  z-index: var(--z-image-post);
 
   .image {
     height: var(--height);

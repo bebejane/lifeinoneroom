@@ -13,7 +13,7 @@ export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, narrow, _firstPublishedAt } }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
@@ -21,61 +21,37 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
 
+  const handleClick = () => {
+    !expanded && setOpen(!open)
+    !expanded && !open && setTimeout(() => {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
+  const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
+
   useEffect(() => {
     setOpen(expanded)
     !expanded && setLineStyles(null)
   }, [expanded])
-
-  const handleClick = () => {
-    !expanded && setOpen(!open)
-    const shouldScroll = !expanded && !open
-    shouldScroll && setTimeout(() => {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 100)
-  }
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!settings.readingline) return
-
-    const { clientY } = e
-    const { y, height } = ref.current.getBoundingClientRect()
-    const yPercent = (clientY - y) / height * 100
-    const lineHeight = '8rem'
-
-    setLineStyles({
-      top: { flexBasis: `calc(${yPercent}% - ${lineHeight})` },
-      bottom: { flexBasis: `calc(${100 - yPercent}% - ${lineHeight})` },
-      line: { flexBasis: `${lineHeight}` }
-    })
-  }
-  const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
 
   return (
     <section
       id={id}
       key={id}
       ref={ref}
-      className={cn(s.text, open && s.open)}
+      data-post-type="text"
+      className={cn(s.text, open && s.open, narrow && s.narrow)}
       onClick={handleClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => setLineStyles(null)}
       style={sectionStyle}
     >
-      {open ?
+      {!open ?
+        <h2>{title}</h2>
+        :
         <>
           <h3 className={s.title}>{title}</h3>
-          <AudioPlayer audio={audio} open={open} show={lineStyles && open} fullMargin={true} />
+          <AudioPlayer audio={audio} open={open} show={open} fullMargin={false} />
           <Content content={text} />
-          {lineStyles &&
-            <div className={cn(s.readingline, lineStyles && s.show)}>
-              <div className={s.top} style={lineStyles?.top} />
-              <div className={s.line} style={lineStyles?.line} />
-              <div className={s.bottom} style={lineStyles?.bottom} />
-            </div>
-          }
         </>
-        :
-        <h2>{title}</h2>
       }
       <PublishDate date={_firstPublishedAt} />
     </section>

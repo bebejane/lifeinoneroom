@@ -24,6 +24,7 @@ query Post($slug: String) {
 
 fragment ImagePostFragment on ImageRecord {
 	__typename
+	_firstPublishedAt
 	id
 	image {
 		...ImageFragment
@@ -38,11 +39,12 @@ fragment ImagePostFragment on ImageRecord {
 	colorBackground {
 		hex
 	}
-	_firstPublishedAt
+	slug
 }
 
 fragment TextPostFragment on TextRecord {
 	__typename
+	_firstPublishedAt
 	id
 	title
 	text {
@@ -59,5 +61,6 @@ fragment TextPostFragment on TextRecord {
 	audio {
 		...AudioFragment
 	}
-	_firstPublishedAt
+	narrow
+	slug
 }

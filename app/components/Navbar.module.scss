@@ -60,13 +60,14 @@
         }
       }
 
-      &.dark {
-        background-color: var(--white);
+    }
 
-        svg {
-          path {
-            fill: var(--black);
-          }
+    &.dark {
+      background-color: var(--white);
+
+      svg {
+        path {
+          fill: var(--black);
         }
       }
     }

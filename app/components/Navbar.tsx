@@ -9,11 +9,7 @@ import { useEffect, useState } from 'react'
 import { IoAccessibility } from "react-icons/io5";
 import Settings from './Settings'
 
-export type Props = {
-
-}
-
-export default function Navbar({ }: Props) {
+export default function Navbar() {
 
   const pathname = usePathname()
   const [setExpanded, expanded, theme] = useStore(state => [state.setExpanded, state.expanded, state.theme])
@@ -26,11 +22,7 @@ export default function Navbar({ }: Props) {
   if (pathname === '/about')
     return null
 
-  const handleClick = () => {
-    setExpanded(!expanded)
-  }
-
-
+  const handleClick = () => setExpanded(!expanded)
 
   return (
     <>
