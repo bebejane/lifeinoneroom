@@ -21,9 +21,11 @@
 	--z-modal: 2000;
 	--z-intro: 3000;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -103,9 +105,11 @@ a {
 
 	color: inherit;
 
-	&:hover {}
+	&:hover {
+	}
 
-	&:visited {}
+	&:visited {
+	}
 }
 
 article p a {
@@ -126,10 +130,18 @@ article p a {
 button {
 	color: var(--foreground);
 	border: 0;
+	background-color: var(--background);
+	border-radius: 2rem;
+	padding: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	font-size: 1rem;
+	height: var(--button-height);
+	@include mq($from: tablet) {
+	}
 
-	@include mq($from: tablet) {}
-
-	&:hover {}
+	&:hover {
+	}
 
 	&[data-selected="true"] {
 		background-color: var(--black);
@@ -143,12 +155,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {

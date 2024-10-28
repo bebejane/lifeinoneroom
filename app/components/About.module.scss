@@ -6,6 +6,10 @@
     top: 0;
     left: 0;
     margin: var(--outer-margin);
+
+    button {
+      margin-right: 1rem;
+    }
   }
 
   .close {
