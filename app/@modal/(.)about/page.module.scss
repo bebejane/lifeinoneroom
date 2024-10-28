@@ -14,12 +14,14 @@
   padding: calc(4 * var(--outer-margin));
   padding-top: calc(4.5 * var(--outer-margin));
   backdrop-filter: blur(10px);
+  filter: var(--dropshadow);
 
   article {
     flex: 1 1;
     width: 100%;
     background-color: var(--white);
     padding: calc(2 * var(--outer-margin));
+    border-radius: 2rem;
   }
 }
 

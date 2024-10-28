@@ -1,4 +1,5 @@
 .text {
+  position: relative;
   --margin: var(--outer-margin);
 
   @include mq($from: desktop) {
@@ -54,7 +55,14 @@
     }
   }
 
-  &.narrow {}
+  &.narrow {
+    p {
+      @include mq($from: desktop) {
+        padding-left: calc(1.25 * var(--margin));
+        padding-right: calc(1.25 * var(--margin));
+      }
+    }
+  }
 
   .title {
     margin-left: var(--margin);

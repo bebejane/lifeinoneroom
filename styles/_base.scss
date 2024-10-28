@@ -21,9 +21,11 @@
 	--z-modal: 2000;
 	--z-intro: 3000;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -68,7 +70,7 @@ main {
 		}
 
 		section:first-of-type figure:last-of-type {
-			margin-top: 2rem;
+			margin-top: -0.5rem;
 		}
 	}
 }
@@ -103,9 +105,11 @@ a {
 
 	color: inherit;
 
-	&:hover {}
+	&:hover {
+	}
 
-	&:visited {}
+	&:visited {
+	}
 }
 
 article p a {
@@ -127,13 +131,16 @@ button {
 	color: var(--foreground);
 	border: 0;
 
-	@include mq($from: tablet) {}
-
-	&.back {
-		@include mq($from: tablet) {}
+	@include mq($from: tablet) {
 	}
 
-	&:hover {}
+	&.back {
+		@include mq($from: tablet) {
+		}
+	}
+
+	&:hover {
+	}
 }
 
 figcaption {
@@ -142,12 +149,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {
