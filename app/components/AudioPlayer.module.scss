@@ -17,6 +17,7 @@
   transition: all 0.1s ease-in-out;
   margin-top: -1rem;
   margin-bottom: 2rem;
+  filter: var(--dropshadow);
 
   @include mq($from: desktop) {
     margin-left: 0;
