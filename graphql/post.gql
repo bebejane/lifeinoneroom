@@ -61,6 +61,5 @@ fragment TextPostFragment on TextRecord {
 	audio {
 		...AudioFragment
 	}
-	narrow
 	slug
 }
