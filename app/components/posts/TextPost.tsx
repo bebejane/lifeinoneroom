@@ -13,7 +13,7 @@ export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, narrow, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
@@ -40,7 +40,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
       key={id}
       ref={ref}
       data-post-type="text"
-      className={cn(s.text, open && s.open, narrow && s.narrow)}
+      className={cn(s.text, open && s.open)}
       onClick={handleClick}
       style={sectionStyle}
     >
@@ -55,7 +55,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
           </div>
         </>
       }
-      <PublishDate date={_firstPublishedAt} />
+      <PublishDate date={_firstPublishedAt} align={open ? 'top' : 'center'} />
     </section>
   );
 }

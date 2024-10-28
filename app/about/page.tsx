@@ -13,14 +13,14 @@ type Props = {
 
 export default async function AboutPage({ modal = false }: Props) {
 
-  const { about, draftUrl } = await apiQuery<AboutQuery, AboutQueryVariables>(AboutDocument)
+  const { about, introduction, draftUrl } = await apiQuery<AboutQuery, AboutQueryVariables>(AboutDocument)
 
   if (!about) return notFound()
 
   return (
     <>
       <article className={s.about}>
-        <About about={about} modal={modal} />
+        <About about={about} modal={modal} introduction={introduction} />
       </article>
       <DraftMode url={draftUrl} tag={about.id} />
     </>

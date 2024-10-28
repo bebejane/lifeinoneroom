@@ -7,4 +7,11 @@ query About {
 			links
 		}
 	}
+	introduction {
+		text {
+			blocks
+			value
+			links
+		}
+	}
 }

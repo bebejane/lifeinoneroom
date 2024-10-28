@@ -1,6 +1,13 @@
 .about {
   color: var(--black);
 
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: var(--outer-margin);
+  }
+
   .close {
     position: fixed;
     top: var(--outer-margin);

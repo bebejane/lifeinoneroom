@@ -18,7 +18,11 @@ const routes: Routes = {
   },
   "about": {
     typeName: "AboutRecord",
-    path: async (item) => ['/about']
+    path: async (item) => ['/about', '/']
+  },
+  "introduction": {
+    typeName: "IntroductionRecord",
+    path: async (item) => ['/about', '/']
   },
 }
 
