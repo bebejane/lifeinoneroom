@@ -13,7 +13,6 @@ export type Props = {
 
 export default function Readingline({ }: Props) {
 
-  const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
@@ -21,7 +20,7 @@ export default function Readingline({ }: Props) {
 
   const handleMouseMove = useCallback((e?: MouseEvent) => {
 
-    if (!settings.readingline) return
+    if (!settings.readingline) return setLineStyles(null)
 
     clientY.current = e?.clientY ?? clientY.current
 
