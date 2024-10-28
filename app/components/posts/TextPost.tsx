@@ -50,7 +50,9 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
         <>
           <h3 className={s.title}>{title}</h3>
           <AudioPlayer audio={audio} open={open} show={open} fullMargin={false} />
-          <Content content={text} />
+          <div className={s.wrapper}>
+            <Content content={text} />
+          </div>
         </>
       }
       <PublishDate date={_firstPublishedAt} />
