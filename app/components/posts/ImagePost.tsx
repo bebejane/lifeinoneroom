@@ -30,7 +30,6 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
     }, 100)
   }
 
-
   return (
     <section
       id={id}
@@ -51,7 +50,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
         </figure>
       }
       <AudioPlayer audio={audio} open={open} show={hover && open} fullMargin={true} />
-      <PublishDate date={_firstPublishedAt} />
+      <PublishDate date={_firstPublishedAt} align={open ? 'top' : 'center'} />
     </section>
   );
 }
