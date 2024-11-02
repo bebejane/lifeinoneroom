@@ -2,6 +2,7 @@
 	--black: #313131;
 	--white: #fcfcfc;
 	--red: #bf0000;
+	--gray: #494949;
 
 	--outer-margin: 1.2rem;
 	--navbar-height: calc(1em + calc(2 * var(--outer-margin)));
@@ -38,7 +39,7 @@ body {
 	font-size: 100%;
 	line-height: 1em;
 	color: var(--foreground);
-	background-color: var(--foreground);
+	background-color: var(--gray);
 	font-family: var(--body-font-default);
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
