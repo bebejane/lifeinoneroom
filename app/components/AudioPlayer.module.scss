@@ -22,13 +22,14 @@
   @include mq($from: desktop) {
     margin-left: 0;
     position: absolute;
-    left: 20%;
-    top: calc(8.2 * var(--outer-margin));
+    left: 15%;
+    //top: calc(8.2 * var(--outer-margin));
+    top: 0.3rem;
   }
 
   &.fullmargin {
     margin-left: var(--outer-margin);
-    margin-top: -7rem;
+    margin-top: 3rem;
     left: 0%;
     margin-left: var(--outer-margin);
   }

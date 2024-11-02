@@ -8,7 +8,7 @@ body {
   }
 
   @include mq($from: wide) {
-    font-size: 24px;
+    //font-size: 24px;
   }
 
   &.dyslexic {
@@ -46,6 +46,7 @@ h3 {
   font-size: 1rem;
   margin-bottom: 0;
   padding-bottom: 0;
+  line-height: var(--line-height);
 }
 
 p {
