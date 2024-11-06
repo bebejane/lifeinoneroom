@@ -1,23 +1,5 @@
 .button {
-  //border: 2px solid var(--foreground);
-  background-color: var(--background);
   margin: var(--outer-margin);
-  border-radius: 2rem;
-  padding: 1em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  font-size: 1rem;
-  height: var(--button-height);
-  filter: var(--dropshadow);
-
-  @include mq($from: desktop) {
-    &:hover {
-      background-color: var(--foreground);
-      color: var(--background);
-      border-color: var(--foreground);
-      cursor: pointer;
-    }
-  }
 }
 
 .toggle {
@@ -36,7 +18,6 @@
   flex-direction: row;
 
   .accessibility {
-    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,30 +27,5 @@
     width: var(--button-height);
     height: var(--button-height);
     border-radius: 50%;
-    background-color: var(--white);
-    filter: var(--dropshadow);
-
-    &:hover,
-    &.active {
-      background-color: var(--black);
-      cursor: pointer;
-
-      svg {
-        path {
-          fill: var(--white);
-        }
-      }
-
-    }
-
-    &.dark {
-      background-color: var(--white);
-
-      svg {
-        path {
-          fill: var(--black);
-        }
-      }
-    }
   }
 }

@@ -3,8 +3,8 @@
 import s from './Settings.module.scss'
 import cn from 'classnames'
 import { useStore } from '@lib/store'
-import { useEffect, useRef } from 'react'
-import Checkbox from './Checkbox';
+import { useEffect, useRef, useState } from 'react'
+import Checkbox from '@components/Checkbox';
 import { Form } from 'react-aria-components';
 
 export type Props = {
@@ -32,12 +32,20 @@ const options = [{
 export default function Settings({ show }: Props) {
 
   const ref = useRef<HTMLDivElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
   const [settings, setSettings] = useStore(state => [state.settings, state.setSettings])
   const updateSettings = (key: string, value: string | boolean) => setSettings({ ...settings, [key]: value })
 
   useEffect(() => {
+    setIsMounted(true)
+    return () => setIsMounted(false)
+  }, [])
+
+  useEffect(() => {
     document.body.classList.toggle('dyslexic', settings.dyslexic)
   }, [settings.dyslexic])
+
+  if (!isMounted) return null
 
   return (
     <div className={cn(s.settings, show && s.show)} ref={ref} >
@@ -54,7 +62,6 @@ export default function Settings({ show }: Props) {
             </Checkbox>
           )
         })}
-
       </Form>
     </div>
   );

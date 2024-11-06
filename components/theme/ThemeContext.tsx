@@ -1,7 +1,6 @@
 "use client";
 
-
-import { createContext, useEffect, useState } from "react";
+import { createContext } from "react";
 import { useStore } from '@lib/store';
 
 export type Theme = {
@@ -11,12 +10,9 @@ export type Theme = {
 
 export const ThemeContext = createContext({ theme: 'light', toggle: null })
 
-const getFromLocalStorage = (): string => {
-	return typeof window !== "undefined" ? localStorage.getItem("theme") ?? 'dark' : "light";
-}
-
 export const ThemeContextProvider = ({ children }) => {
-	const [settings, setSettings] = useStore(state => [state.settings, state.setSettings])
+
+	const [settings, setSettings] = useStore((state) => [state.settings, state.setSettings]);
 
 	const toggle = () => {
 		setSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" });

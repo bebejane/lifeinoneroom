@@ -1,4 +1,4 @@
-import { useStore } from '../../lib/store';
+import { useStore } from '@lib/store';
 import s from './Checkbox.module.scss'
 import cn from 'classnames'
 
@@ -6,7 +6,7 @@ import { Checkbox, CheckboxProps } from 'react-aria-components';
 
 export default function MyCheckbox({ children, ...props }: CheckboxProps) {
 
-  const { expanded, settings } = useStore((state) => ({ expanded: state.expanded, theme: state.theme, settings: state.settings }))
+  const { settings } = useStore((state) => ({ settings: state.settings }))
 
   return (
     <Checkbox {...props} className={cn(s.container, settings.theme === 'dark' && s.dark)}>

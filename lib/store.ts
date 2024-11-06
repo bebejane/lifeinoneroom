@@ -1,5 +1,7 @@
 import { create } from "zustand";
 import { shallow } from 'zustand/shallow';
+import { persist, createJSONStorage } from 'zustand/middleware'
+import { useState, useEffect } from 'react'
 
 export type Settings = {
   readingline: boolean,
@@ -32,18 +34,16 @@ export interface StoreState {
   setDesktop: (desktop: boolean) => void
 }
 
-const useStore = create<StoreState>((set, get) => ({
+const useStore = create(persist<StoreState>((set, get) => ({
   desktop: false,
   showAbout: false,
   expanded: true,
   theme: 'dark',
   playing: null,
   open: [],
-  settings: typeof window === 'undefined' ? defaultSettings : localStorage?.getItem('settings') ? JSON.parse(localStorage?.getItem('settings')) : defaultSettings,
+  settings: defaultSettings,
   setSettings: (settings) => {
-    localStorage.setItem('settings', JSON.stringify(settings))
     set((state) => ({ settings }))
-    return settings
   },
   setOpen: (open: string[]) => {
     set((state) => ({ open }))
@@ -55,7 +55,6 @@ const useStore = create<StoreState>((set, get) => ({
     set((state) => ({ expanded }))
   },
   setTheme: (theme: 'light' | 'dark') => {
-    //get().setSettings({ ...get().settings, theme })
     set((state) => ({ theme }))
   },
   setShowAbout: (showAbout: boolean) => {
@@ -64,6 +63,10 @@ const useStore = create<StoreState>((set, get) => ({
   setDesktop: (desktop: boolean) => {
     set((state) => ({ desktop }))
   },
+}), {
+  name: 'lifeinoneroom',
+  storage: createJSONStorage(() => localStorage)
 }));
 
 export { shallow, useStore };
+export default useStore

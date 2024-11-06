@@ -30,7 +30,11 @@ export default function Navbar() {
         {expanded ? 'Compress' : 'Expand'}
       </button>
       <nav className={cn(s.navbar, s[theme])}>
-        <button className={cn(s.accessibility, showSettings && s.active, s[theme])} onClick={() => setShowSettings(!showSettings)}>
+        <button
+          data-selected={showSettings}
+          className={cn(s.accessibility, showSettings && s.active, s[theme])}
+          onClick={() => setShowSettings(!showSettings)}
+        >
           <IoAccessibility
             className={s.settings}
             aria-label="Enable accessibility"

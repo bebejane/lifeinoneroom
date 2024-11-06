@@ -22,11 +22,9 @@
 	--z-modal: 2000;
 	--z-intro: 3000;
 
-	@include mq($from: tablet) {
-	}
+	@include mq($from: tablet) {}
 
-	@include mq($until: tablet) {
-	}
+	@include mq($until: tablet) {}
 }
 
 html {
@@ -106,11 +104,9 @@ a {
 
 	color: inherit;
 
-	&:hover {
-	}
+	&:hover {}
 
-	&:visited {
-	}
+	&:visited {}
 }
 
 article p a {
@@ -129,8 +125,8 @@ article p a {
 }
 
 button {
-	color: var(--foreground);
 	border: 0;
+	color: var(--foreground);
 	background-color: var(--background);
 	border-radius: 2rem;
 	padding: 1em;
@@ -138,15 +134,26 @@ button {
 	padding-bottom: 0.5em;
 	font-size: 1rem;
 	height: var(--button-height);
-	@include mq($from: tablet) {
-	}
+	cursor: pointer;
+	filter: var(--dropshadow);
 
-	&:hover {
+	@include mq($from: desktop) {
+		&:hover {
+			background-color: var(--foreground);
+			color: var(--background);
+			border-color: var(--foreground);
+		}
 	}
 
 	&[data-selected="true"] {
-		background-color: var(--black);
-		color: var(--white);
+		background-color: var(--foreground);
+		color: var(--background);
+
+		svg {
+			path {
+				fill: var(--background);
+			}
+		}
 	}
 }
 
@@ -156,14 +163,12 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {
-}
+hr {}
 
 input,
 textarea,
 select {
-	&:focus {
-	}
+	&:focus {}
 }
 
 select {

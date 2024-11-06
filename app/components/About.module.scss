@@ -17,22 +17,6 @@
     top: var(--outer-margin);
     right: var(--outer-margin);
     z-index: 1;
-    //border: 2px solid var(--black);
-    background-color: var(--white);
-    border-radius: 2rem;
-    padding: 1em;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    font-size: 1rem;
-    height: var(--button-height);
 
-    @include mq($from: desktop) {
-      &:hover {
-        background-color: var(--black);
-        color: var(--white);
-        border-color: var(--white);
-        cursor: pointer;
-      }
-    }
   }
 }
