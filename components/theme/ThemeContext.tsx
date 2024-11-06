@@ -2,6 +2,7 @@
 
 
 import { createContext, useEffect, useState } from "react";
+import { useStore } from '@lib/store';
 
 export type Theme = {
 	theme: 'light' | 'dark'
@@ -11,22 +12,18 @@ export type Theme = {
 export const ThemeContext = createContext({ theme: 'light', toggle: null })
 
 const getFromLocalStorage = (): string => {
-	return typeof window !== "undefined" ? localStorage.getItem("theme") ?? 'light' : "light";
+	return typeof window !== "undefined" ? localStorage.getItem("theme") ?? 'dark' : "light";
 }
 
 export const ThemeContextProvider = ({ children }) => {
-	const [theme, setTheme] = useState(() => getFromLocalStorage());
+	const [settings, setSettings] = useStore(state => [state.settings, state.setSettings])
 
 	const toggle = () => {
-		setTheme(theme === "light" ? "dark" : "light");
+		setSettings({ ...settings, theme: settings.theme === "light" ? "dark" : "light" });
 	};
 
-	useEffect(() => {
-		localStorage.setItem("theme", theme);
-	}, [theme]);
-
 	return (
-		<ThemeContext.Provider value={{ theme, toggle }}>
+		<ThemeContext.Provider value={{ theme: settings.theme, toggle }}>
 			{children}
 		</ThemeContext.Provider>
 	)

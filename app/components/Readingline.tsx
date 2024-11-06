@@ -2,16 +2,10 @@
 
 import s from './Readingline.module.scss'
 import cn from 'classnames'
-import Content from '@components/Content';
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
-import { Theme, ThemeContext } from '@components/theme/ThemeContext';
 
-export type Props = {
-
-}
-
-export default function Readingline({ }: Props) {
+export default function Readingline() {
 
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
@@ -20,7 +14,8 @@ export default function Readingline({ }: Props) {
 
   const handleMouseMove = useCallback((e?: MouseEvent) => {
 
-    if (!settings.readingline) return setLineStyles(null)
+    if (!settings.readingline)
+      return setLineStyles(null)
 
     clientY.current = e?.clientY ?? clientY.current
 
@@ -35,6 +30,14 @@ export default function Readingline({ }: Props) {
     })
 
   }, [settings.readingline])
+
+
+  useEffect(() => {
+    if (!settings.readingline)
+      setLineStyles(null)
+    else
+      handleMouseMove()
+  }, [settings.readingline, handleMouseMove])
 
   useEffect(() => {
     const handleScroll = () => {

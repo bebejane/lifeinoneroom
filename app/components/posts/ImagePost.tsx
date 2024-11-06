@@ -14,9 +14,11 @@ export type Props = {
 
 export default function ImagePost({ data: { id, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: Props) {
 
-  const [expanded] = useStore(state => [state.expanded])
+  const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [open, setOpen] = useState(true)
   const [hover, setHover] = useState(false)
+
+  const sectionStyle = (settings.theme !== 'dark' && settings.colors) ? { backgroundColor: colorBackground?.hex } : undefined
 
   useEffect(() => {
     setOpen(expanded)
@@ -35,7 +37,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
       id={id}
       key={id}
       className={cn(s.post, open && s.open)}
-      style={{ backgroundColor: background?.hex }}
+      style={sectionStyle}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={handleClick}
