@@ -1,6 +1,7 @@
 .text {
   position: relative;
   --margin: var(--outer-margin);
+  border-bottom: 1px solid;
 
   @include mq($from: desktop) {
     --margin: 26%;

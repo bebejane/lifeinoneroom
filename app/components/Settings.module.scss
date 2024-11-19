@@ -10,6 +10,10 @@
   display: none;
   filter: var(--dropshadow);
 
+  @include mq($until: desktop) {
+    width: calc(100% - (2 * var(--outer-margin)));
+  }
+
   &.show {
     display: block;
   }

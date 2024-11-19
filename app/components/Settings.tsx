@@ -16,19 +16,19 @@ export type Props = {
 
 const options = [{
   id: 'readingline',
-  label: 'Reading line'
+  label: 'Horizon'
 },
 {
   id: 'dyslexic',
-  label: 'Dyslexic typeface'
+  label: 'Dyslexic'
 },
 {
   id: 'colors',
-  label: 'Colors'
+  label: 'Rainbow'
 },
 {
   id: 'theme',
-  label: 'Dark theme'
+  label: 'Night'
 }
 ]
 

@@ -3,6 +3,7 @@
   height: var(--height);
   position: relative;
   z-index: var(--z-image-post);
+  border-bottom: 1px solid;
 
   .image {
     height: var(--height);
