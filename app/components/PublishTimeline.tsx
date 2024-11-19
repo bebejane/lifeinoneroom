@@ -80,7 +80,7 @@ export default function PublishTimeline({ posts }: Props) {
           onClick={(e) => { e.stopPropagation(); setActive(slug); }}
           style={{
             top: `${y}px`,
-            color: settings.colors && theme !== 'dark' ? textColor : 'var(--white)',
+            color: (settings.colors && settings.theme !== 'dark') ? textColor : 'var(--white)',
             zIndex: i,
           }}>
           <span className={cn(slug === active && s.active)}>
