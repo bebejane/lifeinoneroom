@@ -4,21 +4,20 @@ import TextPost from './components/posts/TextPost';
 import PublishTimeline from './components/PublishTimeline';
 import { getAllPosts } from '@lib/posts';
 import Intro from './components/Intro';
-import generateRssFeed from '../lib/rss';
 
 export default async function Home() {
 
+  const startIndex = 3;
   const { allPosts, draftUrl } = await getAllPosts()
-  await generateRssFeed();
 
   return (
     <>
       <Intro />
-      {allPosts.map(post => (
+      {allPosts.map((post, idx) => (
         post.__typename === 'ImageRecord' ?
-          <ImagePost key={post.id} data={post as ImageRecord} />
+          <ImagePost key={post.id} data={post as ImageRecord} tabIndex={idx + 1 + startIndex} />
           : post.__typename === 'TextRecord' ?
-            <TextPost key={post.id} data={post as TextRecord} />
+            <TextPost key={post.id} data={post as TextRecord} tabIndex={idx + 1 + startIndex} />
             : null
       ))}
       <PublishTimeline posts={allPosts} />

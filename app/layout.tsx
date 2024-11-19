@@ -43,7 +43,7 @@ export async function generateMetadata() {
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL as string),
     title: {
-      template: `${globalSeo?.siteName} — %s`,
+      template: `${globalSeo?.siteName}`,
       default: globalSeo?.siteName,
     },
     description: globalSeo?.fallbackSeo?.description,
@@ -76,6 +76,12 @@ export async function generateMetadata() {
       ],
       locale: 'en_US',
       type: 'website',
+    },
+    alternates: {
+      canonical: process.env.NEXT_PUBLIC_SITE_URL,
+      types: {
+        'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed`,
+      },
     },
   } as Metadata
 }

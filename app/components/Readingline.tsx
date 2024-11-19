@@ -4,17 +4,20 @@ import s from './Readingline.module.scss'
 import cn from 'classnames'
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
+import { usePathname } from 'next/navigation';
 
 export default function Readingline() {
 
+  const pathname = usePathname()
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [lineStyles, setLineStyles] = useState<{ top: React.CSSProperties, bottom: React.CSSProperties, line: React.CSSProperties } | null>(null)
   const ref = useRef<HTMLDivElement>(null)
   const clientY = useRef<number>(0)
+  const isStartPage = pathname !== '/about'
 
   const handleMouseMove = useCallback((e?: MouseEvent) => {
 
-    if (!settings.readingline)
+    if (!settings.readingline || !isStartPage)
       return setLineStyles(null)
 
     clientY.current = e?.clientY ?? clientY.current
@@ -29,7 +32,7 @@ export default function Readingline() {
       line: { flexBasis: `${lineHeight}` }
     })
 
-  }, [settings.readingline])
+  }, [isStartPage, settings.readingline])
 
 
   useEffect(() => {

@@ -10,9 +10,10 @@ import AudioPlayer from '../AudioPlayer'
 
 export type Props = {
   data: ImageRecord
+  tabIndex: number
 }
 
-export default function ImagePost({ data: { id, slug, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: Props) {
+export default function ImagePost({ data: { id, slug, image, audio, textToVoice, background, colorBackground, _firstPublishedAt }, tabIndex }: Props) {
 
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [open, setOpen] = useState(true)
@@ -38,6 +39,7 @@ export default function ImagePost({ data: { id, slug, image, audio, textToVoice,
       key={id}
       className={cn(s.post, open && s.open)}
       style={sectionStyle}
+      tabIndex={tabIndex}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={handleClick}

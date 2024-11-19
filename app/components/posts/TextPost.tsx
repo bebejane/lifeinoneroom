@@ -11,9 +11,10 @@ import { Theme, ThemeContext } from '@components/theme/ThemeContext';
 
 export type LayoutProps = {
   data: TextRecord
+  tabIndex: number
 }
 
-export default function TextPost({ data: { id, slug, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, slug, title, text, audio, textColor, backgroundColor, _firstPublishedAt }, tabIndex }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
@@ -39,6 +40,7 @@ export default function TextPost({ data: { id, slug, title, text, audio, textCol
       id={slug}
       key={id}
       ref={ref}
+      tabIndex={tabIndex}
       data-post-type="text"
       className={cn(s.text, open && s.open)}
       onClick={handleClick}

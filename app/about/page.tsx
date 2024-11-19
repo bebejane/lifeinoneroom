@@ -19,9 +19,7 @@ export default async function AboutPage({ modal = false }: Props) {
 
   return (
     <>
-      <article className={s.about}>
-        <About about={about} modal={modal} introduction={introduction} />
-      </article>
+      <About about={about} modal={modal} introduction={introduction} />
       <DraftMode url={draftUrl} tag={about.id} />
     </>
   );
