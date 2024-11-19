@@ -74,15 +74,19 @@ export default function PublishTimeline({ posts }: Props) {
 
   return (
     <nav id="timeline" className={s.timeline} ref={ref}>
-      {timeline?.map(({ id, y, date, textColor }) => (
-        <a key={id} href={`#${id}`} style={{
-          top: `${y}px`,
-          color: settings.colors && theme !== 'dark' ? textColor : 'var(--white)'
-        }}>
-          <span className={cn(id === active && s.active)}>
+      {timeline?.map(({ id, y, slug, date, textColor }, i) => (
+        <div
+          key={id}
+          onClick={(e) => { e.stopPropagation(); setActive(slug); }}
+          style={{
+            top: `${y}px`,
+            color: settings.colors && theme !== 'dark' ? textColor : 'var(--white)',
+            zIndex: i,
+          }}>
+          <span className={cn(slug === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
-          </span> ■
-        </a>
+          </span> ·
+        </div>
       ))}
     </nav>
   );

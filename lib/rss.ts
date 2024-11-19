@@ -26,6 +26,7 @@ export default async function generateRssFeed() {
   // Add each individual post to the feed.
   allPosts.map((post) => {
     const title = post.__typename === "ImageRecord" ? post.textToVoice : post.title;
+    //@ts-ignore
     const description = post.__typename === "ImageRecord" ? post.textToVoice : render(post.text);
 
     feed.item({
