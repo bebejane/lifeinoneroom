@@ -11,17 +11,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(4 * var(--outer-margin));
-  padding-top: calc(4.5 * var(--outer-margin));
   backdrop-filter: blur(10px);
   filter: var(--dropshadow);
+  padding: var(--outer-margin);
+  padding-top: calc(5 * var(--outer-margin));
+
+  @include mq($from: desktop) {
+    padding: calc(4 * var(--outer-margin));
+    padding-top: calc(4.5 * var(--outer-margin));
+  }
 
   article {
     flex: 1 1;
     width: 100%;
     background-color: var(--white);
-    padding: calc(2 * var(--outer-margin));
     border-radius: 2rem;
+    padding-top: calc(1 * var(--outer-margin));
+
+    @include mq($from: desktop) {
+      padding: calc(2 * var(--outer-margin));
+    }
   }
 }
 

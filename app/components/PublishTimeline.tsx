@@ -71,7 +71,7 @@ export default function PublishTimeline({ posts }: Props) {
         }}>
           <span className={cn(id === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
-          </span> ·
+          </span>·
         </a>
       ))}
     </nav>
