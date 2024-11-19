@@ -24,7 +24,7 @@ export default function TextPost({ data: { id, slug, title, text, audio, textCol
   const handleClick = () => {
     !expanded && setOpen(!open)
     !expanded && !open && setTimeout(() => {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
   }
   const sectionStyle = (theme !== 'dark' && settings.colors) ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined
