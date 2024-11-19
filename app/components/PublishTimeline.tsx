@@ -66,6 +66,7 @@ export default function PublishTimeline({ posts }: Props) {
       window.history.replaceState(null, '', `/`)
     else {
       window.history.replaceState(null, '', `/posts/${active}`)
+      document.getElementById(active)?.scrollIntoView({ behavior: 'instant', block: 'start' })
     }
   }, [active])
 
@@ -76,11 +77,7 @@ export default function PublishTimeline({ posts }: Props) {
       {timeline?.map(({ id, y, slug, date, textColor }, i) => (
         <div
           key={id}
-          onClick={(e) => {
-            e.stopPropagation();
-            setActive(slug);
-            document.getElementById(slug)?.scrollIntoView({ behavior: 'instant', block: 'start' })
-          }}
+          onClick={(e) => { e.stopPropagation(); setActive(slug); }}
           style={{
             top: `${y}px`,
             color: (settings.colors && settings.theme !== 'dark') ? textColor : 'var(--white)',
@@ -88,7 +85,7 @@ export default function PublishTimeline({ posts }: Props) {
           }}>
           <span className={cn(slug === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
-          </span> ·
+          </span> ■
         </div>
       ))}
     </nav>
