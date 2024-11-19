@@ -2,6 +2,8 @@ import { getAllPosts } from "../../lib/posts";
 import { render } from 'datocms-structured-text-to-plain-text';
 import { Feed } from "feed";
 
+export const revalidate = 60 * 60 * 6;
+
 export async function GET(request: Request) {
   const { allPosts } = await getAllPosts()
 
@@ -15,7 +17,6 @@ export async function GET(request: Request) {
     favicon: `${process.env.NEXT_PUBLIC_SITE_URL}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}`,
   });
-
 
   allPosts.forEach((post) => {
     const id = post.id;
