@@ -16,7 +16,7 @@ export default function PublishTimeline({ posts }: Props) {
 
   const [expanded, settings, theme] = useStore(state => [state.expanded, state.settings, state.theme])
   const { width, height } = useWindowSize()
-  const [timeline, setTimeline] = useState<{ id: string, y: number, date: string, textColor?: string, backgroundColor?: string }[] | null>(null)
+  const [timeline, setTimeline] = useState<{ id: string, y: number, slug: string, date: string, textColor?: string, backgroundColor?: string }[] | null>(null)
   const [active, setActive] = useState<string | null>(null)
   const { scrolledPosition, isScrolling } = useScrollInfo()
   const ref = useRef<HTMLDivElement>(null)
@@ -34,6 +34,7 @@ export default function PublishTimeline({ posts }: Props) {
       id: item.id,
       y: ((new Date(item._firstPublishedAt).getTime() - minDate) / range) * h,
       date: item._firstPublishedAt,
+      slug: item.slug,
       textColor: item.__typename === 'TextRecord' ? item.textColor?.hex : undefined,
       backgroundColor: item.__typename === 'TextRecord' ? item.backgroundColor?.hex : undefined
     }))
@@ -60,16 +61,29 @@ export default function PublishTimeline({ posts }: Props) {
 
   }, [height, scrolledPosition, isScrolling])
 
+  useEffect(() => {
+    if (!active)
+      window.history.replaceState(null, '', `/`)
+    else {
+      window.history.replaceState(null, '', `/posts/${active}`)
+      document.getElementById(active)?.scrollIntoView({ behavior: 'instant', block: 'start' })
+    }
+  }, [active])
+
   if (!expanded) return null
 
   return (
     <nav id="timeline" className={s.timeline} ref={ref}>
-      {timeline?.map(({ id, y, date, textColor }) => (
-        <a key={id} href={`#${id}`} style={{
-          top: `${y}px`,
-          color: settings.colors && theme !== 'dark' ? textColor : 'var(--white)'
-        }}>
-          <span className={cn(id === active && s.active)}>
+      {timeline?.map(({ id, y, slug, date, textColor }, i) => (
+        <div
+          key={id}
+          onClick={(e) => { e.stopPropagation(); setActive(slug); }}
+          style={{
+            top: `${y}px`,
+            color: settings.colors && theme !== 'dark' ? textColor : 'var(--white)',
+            zIndex: i,
+          }}>
+          <span className={cn(slug === active && s.active)}>
             {format(new Date(date), 'MMM dd yyyy')}
           </span>·
         </a>

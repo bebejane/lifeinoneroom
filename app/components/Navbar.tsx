@@ -5,9 +5,10 @@ import cn from 'classnames'
 import { useStore } from '@lib/store'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { IoAccessibility } from "react-icons/io5";
 import Settings from './Settings'
+import { useScrollInfo } from 'next-dato-utils/hooks'
 
 export default function Navbar() {
 
@@ -19,10 +20,10 @@ export default function Navbar() {
     document.querySelector('main').classList.toggle('compressed', !expanded)
   }, [expanded])
 
-  if (pathname === '/about')
-    return null
-
   const handleClick = () => setExpanded(!expanded)
+  const handleSettingsClosed = useCallback(() => setShowSettings(false), [setShowSettings])
+
+  if (pathname === '/about') return null
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function Navbar() {
         <button
           data-selected={showSettings}
           className={cn(s.accessibility, showSettings && s.active, s[theme])}
-          onClick={() => setShowSettings(!showSettings)}
+          onClick={(e) => setShowSettings(!showSettings)}
         >
           <IoAccessibility
             className={s.settings}
@@ -45,7 +46,7 @@ export default function Navbar() {
           <button role="link" className={s.button}>About</button>
         </Link>
       </nav>
-      <Settings show={showSettings} />
+      <Settings show={showSettings} onClose={handleSettingsClosed} />
     </>
   );
 }

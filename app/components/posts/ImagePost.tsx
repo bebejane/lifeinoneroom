@@ -12,7 +12,7 @@ export type Props = {
   data: ImageRecord
 }
 
-export default function ImagePost({ data: { id, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: Props) {
+export default function ImagePost({ data: { id, slug, image, audio, textToVoice, background, colorBackground, _firstPublishedAt } }: Props) {
 
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
   const [open, setOpen] = useState(true)
@@ -34,7 +34,7 @@ export default function ImagePost({ data: { id, image, audio, textToVoice, backg
 
   return (
     <section
-      id={id}
+      id={slug}
       key={id}
       className={cn(s.post, open && s.open)}
       style={sectionStyle}

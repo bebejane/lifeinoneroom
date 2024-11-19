@@ -15,7 +15,7 @@
 		"barrel:watch": "chokidar './components/**/*.tsx' -c 'npm run --silent barrel'",
 		"postbuild": "next-sitemap",
 		"reset": "rm -rf .next node_modules pnpm-lock.yaml ; pnpm i",
-		"update-utils": "pnpm up github:bebejane/next-dato-util && git add . && git commit -m \"next-dato-utils up\" && git push"
+		"update-utils": "pnpm up github:bebejane/next-dato-utils && git add . && git commit -m \"next-dato-utils up\" && git push"
 	},
 	"dependencies": {
 		"@datocms/cma-client-browser": "^3.3.1",

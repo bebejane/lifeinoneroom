@@ -13,7 +13,7 @@ export type LayoutProps = {
   data: TextRecord
 }
 
-export default function TextPost({ data: { id, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
+export default function TextPost({ data: { id, slug, title, text, audio, textColor, backgroundColor, _firstPublishedAt } }: LayoutProps) {
 
   const { theme } = useContext(ThemeContext) as Theme
   const [expanded, settings] = useStore(state => [state.expanded, state.settings])
@@ -36,7 +36,7 @@ export default function TextPost({ data: { id, title, text, audio, textColor, ba
 
   return (
     <section
-      id={id}
+      id={slug}
       key={id}
       ref={ref}
       data-post-type="text"
