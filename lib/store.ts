@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import { shallow } from 'zustand/shallow';
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { useState, useEffect } from 'react'
 
 export type Settings = {
   readingline: boolean,

@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { IoAccessibility } from "react-icons/io5";
 import Settings from './Settings'
-import { useScrollInfo } from 'next-dato-utils/hooks'
 
 export default function Navbar() {
 
@@ -47,7 +46,6 @@ export default function Navbar() {
       <button className={cn(s.button, s.toggle)} onClick={handleClick} tabIndex={3}>
         {expanded ? 'Compress' : 'Expand'}
       </button>
-
       <Settings show={showSettings} onClose={handleSettingsClosed} />
     </>
   );
