@@ -27,25 +27,27 @@ export default function Navbar() {
 
   return (
     <>
-      <button className={cn(s.button, s.toggle)} onClick={handleClick}>
-        {expanded ? 'Compress' : 'Expand'}
-      </button>
       <nav className={cn(s.navbar, s[theme])}>
         <button
+          tabIndex={1}
           data-selected={showSettings}
           className={cn(s.accessibility, showSettings && s.active, s[theme])}
           onClick={(e) => setShowSettings(!showSettings)}
         >
           <IoAccessibility
             className={s.settings}
-            aria-label="Enable accessibility"
+            aria-label="Accessibility settings"
             role="button"
           />
         </button>
-        <Link href="/about" prefetch={true}>
-          <button role="link" className={s.button}>About</button>
+        <Link href="/about" prefetch={true} className={`button ${s.button}`} tabIndex={2}>
+          About
         </Link>
       </nav>
+      <button className={cn(s.button, s.toggle)} onClick={handleClick} tabIndex={3}>
+        {expanded ? 'Compress' : 'Expand'}
+      </button>
+
       <Settings show={showSettings} onClose={handleSettingsClosed} />
     </>
   );

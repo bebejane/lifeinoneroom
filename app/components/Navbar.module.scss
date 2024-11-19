@@ -1,5 +1,9 @@
 .button {
-  margin: var(--outer-margin);
+  margin: var(--outer-margin) !important;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .toggle {
