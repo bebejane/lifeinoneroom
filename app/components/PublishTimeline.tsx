@@ -68,11 +68,8 @@ export default function PublishTimeline({ posts, selected }: Props) {
   }, [active])
 
   useEffect(() => {
-
-    setTimeout(() => {
-      setActive(selected ?? null)
-      document.getElementById(selected)?.scrollIntoView({ behavior: 'instant', block: 'start' })
-    }, 300)
+    setActive(selected ?? null)
+    document.getElementById(selected)?.scrollIntoView({ behavior: 'instant', block: 'start' })
   }, [selected])
 
 
