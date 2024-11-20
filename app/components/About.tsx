@@ -40,7 +40,7 @@ export default function About({ modal, about, introduction }: Props) {
         <button className={s.close} onClick={handleClose}>Close</button>
       }
       {audio &&
-        <AudioPlayer audio={audio as FileField} open={true} show={true} className={s.audio} />
+        <AudioPlayer key={mode} audio={audio as FileField} open={true} show={true} className={s.audio} />
       }
     </article>
   );
