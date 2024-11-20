@@ -62,13 +62,19 @@ export default function PublishTimeline({ posts, selected }: Props) {
 
   }, [height, scrolledPosition, isScrolling])
 
-  useEffect(() => {
-    setActive(selected ?? null)
-  }, [selected])
 
   useEffect(() => {
     active && window.history.replaceState(null, '', `/posts/${active}`)
   }, [active])
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      setActive(selected ?? null)
+      document.getElementById(selected)?.scrollIntoView({ behavior: 'instant', block: 'start' })
+    }, 300)
+  }, [selected])
+
 
   if (!expanded) return null
 
