@@ -13,6 +13,14 @@ const postTypeMap = {
 	"text": {
 		field: "text",
 		type: 'structured_text'
+	},
+	"about": {
+		field: "text",
+		type: 'structured_text'
+	},
+	"introduction": {
+		field: "text",
+		type: 'structured_text'
 	}
 }
 type Voice = "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer"
