@@ -1,6 +1,6 @@
 html,
 body {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: normal;
 
   @include mq($from: tablet) {
@@ -12,7 +12,8 @@ body {
   }
 
   &.dyslexic {
-    word-spacing: -0.2em;
+    word-spacing: -0.4em;
+    //letter-spacing: -0.1em;
     font-family: var(--body-font);
 
     @include mq($from: tablet) {

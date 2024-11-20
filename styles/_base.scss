@@ -23,9 +23,11 @@
 	--z-modal: 2000;
 	--z-intro: 3000;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -105,9 +107,11 @@ a {
 
 	color: inherit;
 
-	&:hover {}
+	&:hover {
+	}
 
-	&:visited {}
+	&:visited {
+	}
 }
 
 article p a {
@@ -137,6 +141,7 @@ button {
 	height: var(--button-height);
 	cursor: pointer;
 	filter: var(--dropshadow);
+	letter-spacing: inherit;
 
 	@include mq($from: desktop) {
 		&:hover {
@@ -168,12 +173,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {
