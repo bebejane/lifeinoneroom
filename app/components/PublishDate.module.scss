@@ -7,7 +7,7 @@
   align-items: center;
 
   &.top {
-    margin-top: 6rem;
+    margin-top: 5rem;
     align-items: flex-start;
     @include mq($until: desktop) {
       display: none;
