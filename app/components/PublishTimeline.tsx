@@ -53,6 +53,10 @@ export default function PublishTimeline({ posts, selected }: Props) {
   }, [posts])
 
   useEffect(() => {
+    updateTimeline()
+  }, [updateTimeline])
+
+  useEffect(() => {
     if (!posts || !ref.current) return
     updateTimeline()
   }, [width, height, posts, updateTimeline])
@@ -84,7 +88,6 @@ export default function PublishTimeline({ posts, selected }: Props) {
   }, [active])
 
   useEffect(() => {
-
     if (!selected) return
     document.getElementById(selected)?.scrollIntoView({ behavior: 'instant', block: 'start' })
     setExpanded(true)
@@ -92,9 +95,6 @@ export default function PublishTimeline({ posts, selected }: Props) {
   }, [selected, setExpanded])
 
 
-  useEffect(() => {
-    updateTimeline()
-  }, [])
 
 
   if (!expanded) return null
