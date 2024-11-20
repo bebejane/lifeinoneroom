@@ -5,7 +5,7 @@ import s from './PublishTimeline.module.scss'
 import cn from 'classnames'
 import { format } from 'date-fns'
 import { useWindowSize } from 'react-use'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useScrollInfo } from 'next-dato-utils/hooks'
 
 export type Props = {
@@ -13,23 +13,32 @@ export type Props = {
   selected: string | null | undefined
 }
 
+type TimelineItem = {
+  id: string,
+  y: number,
+  slug: string,
+  date: string,
+  textColor?: string,
+  backgroundColor?: string
+}
+
 export default function PublishTimeline({ posts, selected }: Props) {
 
-  const [expanded, settings, theme] = useStore(state => [state.expanded, state.settings, state.theme])
+  const [expanded, setExpanded, settings] = useStore(state => [state.expanded, state.setExpanded, state.settings])
   const { width, height } = useWindowSize()
-  const [timeline, setTimeline] = useState<{ id: string, y: number, slug: string, date: string, textColor?: string, backgroundColor?: string }[] | null>(null)
+  const [timeline, setTimeline] = useState<TimelineItem[] | null>(null)
   const [active, setActive] = useState<string | null>(null)
   const { scrolledPosition, isScrolling } = useScrollInfo()
   const ref = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (!posts) return
+  const updateTimeline = useCallback(() => {
+    if (!ref.current) return
 
     const maxDate = new Date(posts[posts.length - 1]._firstPublishedAt).getTime()
     const minDate = new Date(posts[0]._firstPublishedAt).getTime()
     const range = maxDate - minDate
-    const labelHeight = ref.current?.querySelector('a')?.clientHeight ?? 0
-    const h = (ref.current?.offsetHeight ?? 0) - labelHeight
+    const labelHeight = ref.current.querySelector('a')?.clientHeight ?? 0
+    const h = (ref.current.offsetHeight ?? 0) - labelHeight
 
     const timeline = posts.map((item) => ({
       id: item.id,
@@ -41,10 +50,16 @@ export default function PublishTimeline({ posts, selected }: Props) {
     }))
 
     setTimeline(timeline)
-
-  }, [width, height, posts])
+  }, [posts])
 
   useEffect(() => {
+    if (!posts || !ref.current) return
+    updateTimeline()
+  }, [width, height, posts, updateTimeline])
+
+  useEffect(() => {
+
+    if (!scrolledPosition) return
 
     const sections = document.body.querySelectorAll('section');
     let mostVisible = sections[0];
@@ -58,7 +73,8 @@ export default function PublishTimeline({ posts, selected }: Props) {
         ratio = visibleRatio;
       }
     });
-    setActive(mostVisible.id ?? null);
+
+    setActive(mostVisible?.id ?? null);
 
   }, [height, scrolledPosition, isScrolling])
 
@@ -68,9 +84,17 @@ export default function PublishTimeline({ posts, selected }: Props) {
   }, [active])
 
   useEffect(() => {
-    setActive(selected ?? null)
+
+    if (!selected) return
     document.getElementById(selected)?.scrollIntoView({ behavior: 'instant', block: 'start' })
-  }, [selected])
+    setExpanded(true)
+    setActive(selected)
+  }, [selected, setExpanded])
+
+
+  useEffect(() => {
+    updateTimeline()
+  }, [])
 
 
   if (!expanded) return null

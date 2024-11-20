@@ -29,7 +29,7 @@ export default function ImagePost({ data: { id, slug, image, audio, textToVoice,
     !expanded && setOpen(!open)
     const shouldScroll = !expanded && !open
     shouldScroll && setTimeout(() => {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
   }
 
