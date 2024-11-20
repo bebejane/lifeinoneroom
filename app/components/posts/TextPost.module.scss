@@ -33,7 +33,7 @@
     //padding-left: var(--margin);
     //padding-right: var(--margin);
     @include mq($until: desktop) {
-      margin-right: calc(2 * var(--margin));
+      //margin-right: calc(2 * var(--margin));
     }
 
     margin-bottom: 1em;
@@ -41,8 +41,8 @@
 
   h2 {
     width: 100%;
-    display: flex;
-    height: var(--height);
+    display: block;
+    //height: var(--height);
     align-items: center;
     margin-left: var(--outer-margin);
 
@@ -76,6 +76,10 @@
     margin-right: var(--margin);
     text-align: center;
     margin-bottom: 1em;
+    @include mq($until: desktop) {
+      margin-left: calc(2 * var(--margin));
+      margin-right: calc(2 * var(--margin));
+    }
   }
 
   .readingline {

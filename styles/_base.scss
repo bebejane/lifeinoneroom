@@ -58,6 +58,21 @@ main {
 
 	&.compressed {
 		margin-top: 5.5rem;
+		@include mq($until: desktop) {
+			h2 {
+				display: block;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			header {
+				max-width: 65%;
+				display: flex;
+				align-items: center;
+				height: 5rem;
+			}
+		}
 	}
 
 	section:first-of-type {

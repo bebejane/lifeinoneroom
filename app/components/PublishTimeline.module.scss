@@ -7,6 +7,10 @@
   z-index: var(--z-timeline);
   color: var(--black);
 
+  @include mq($until: desktop) {
+    display: none;
+  }
+
   div {
     position: absolute;
     right: 0;

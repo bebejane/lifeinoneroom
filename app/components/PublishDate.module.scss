@@ -9,5 +9,8 @@
   &.top {
     margin-top: 6rem;
     align-items: flex-start;
+    @include mq($until: desktop) {
+      display: none;
+    }
   }
 }

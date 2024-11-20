@@ -47,7 +47,7 @@ export default function TextPost({ data: { id, slug, title, text, audio, textCol
       style={sectionStyle}
     >
       {!open ?
-        <h2>{title}</h2>
+        <header><h2><span>{title}</span></h2></header>
         :
         <>
           <h3 className={s.title}>{title}</h3>
