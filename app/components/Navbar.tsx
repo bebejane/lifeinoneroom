@@ -30,7 +30,9 @@ export default function Navbar() {
         <button
           tabIndex={1}
           data-selected={showSettings}
-          className={cn(s.accessibility, showSettings && s.active, s[theme])}
+          data-button-type="icon"
+          data-theme={theme}
+          className={cn(s.accessibility, showSettings && s.active)}
           onClick={(e) => setShowSettings(!showSettings)}
         >
           <IoAccessibility

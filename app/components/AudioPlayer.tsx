@@ -8,13 +8,14 @@ import { IoVolumeHighSharp } from "react-icons/io5";
 import { IoVolumeMuteSharp } from "react-icons/io5";
 
 type Props = {
-  audio: FileField
+  audio?: FileField
   open: boolean
   show: boolean
-  fullMargin: boolean
+  fullMargin?: boolean
+  className?: string
 }
 
-export default function AudioPlayer({ audio, open, show, fullMargin }: Props) {
+export default function AudioPlayer({ audio, open, show, fullMargin, className }: Props) {
 
 
   const { expanded, theme } = useStore((state) => ({ expanded: state.expanded, theme: state.theme }))
@@ -57,9 +58,11 @@ export default function AudioPlayer({ audio, open, show, fullMargin }: Props) {
 
   return (
     <>
-      <figure
+      <button
         aria-label="Play"
-        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed, (show || playing) && s.show, fullMargin && s.fullmargin)}
+        data-button-type="icon"
+        data-theme={theme}
+        className={cn(s.icon, s[theme], playing && s.playing, !expanded && !open && s.compressed, (show || playing) && s.show, fullMargin && s.fullmargin, className)}
         onClick={handleClick}
       >
         {playing ?
@@ -67,10 +70,12 @@ export default function AudioPlayer({ audio, open, show, fullMargin }: Props) {
           :
           <IoVolumeHighSharp />
         }
-      </figure>
-      <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
-        <source src={audio.url} type="audio/mpeg" />
-      </audio>
+      </button>
+      {audio &&
+        <audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
+          <source src={audio.url} type="audio/mpeg" />
+        </audio>
+      }
     </>
   )
 }

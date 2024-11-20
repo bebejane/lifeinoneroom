@@ -10,9 +10,10 @@ import { useScrollInfo } from 'next-dato-utils/hooks'
 
 export type Props = {
   posts: (ImageRecord | TextRecord)[]
+  selected: string | null | undefined
 }
 
-export default function PublishTimeline({ posts }: Props) {
+export default function PublishTimeline({ posts, selected }: Props) {
 
   const [expanded, settings, theme] = useStore(state => [state.expanded, state.settings, state.theme])
   const { width, height } = useWindowSize()
@@ -62,7 +63,11 @@ export default function PublishTimeline({ posts }: Props) {
   }, [height, scrolledPosition, isScrolling])
 
   useEffect(() => {
-    window.history.replaceState(null, '', !active ? `/` : `/posts/${active}`)
+    setActive(selected ?? null)
+  }, [selected])
+
+  useEffect(() => {
+    active && window.history.replaceState(null, '', `/posts/${active}`)
   }, [active])
 
   if (!expanded) return null

@@ -6,12 +6,18 @@ query About {
 			value
 			links
 		}
+		audio {
+			...AudioFragment
+		}
 	}
 	introduction {
 		text {
 			blocks
 			value
 			links
+		}
+		audio {
+			...AudioFragment
 		}
 	}
 }

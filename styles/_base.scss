@@ -163,6 +163,14 @@ button {
 			background-color: var(--foreground);
 			color: var(--background);
 			border-color: var(--foreground);
+
+			svg {
+				path {
+					fill: var(--background);
+				}
+
+				stroke: var(--background);
+			}
 		}
 	}
 
@@ -174,7 +182,19 @@ button {
 			path {
 				fill: var(--background);
 			}
+
+			stroke: var(--background);
 		}
+	}
+
+	&[data-button-type="icon"] {
+		border-radius: 50%;
+		width: var(--button-height);
+		height: var(--button-height);
+		align-items: center;
+		justify-content: center;
+		padding: 0 !important;
+		transition: all 0.1s ease-in-out;
 	}
 }
 

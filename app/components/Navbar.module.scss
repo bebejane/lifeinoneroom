@@ -22,14 +22,8 @@
   flex-direction: row;
 
   .accessibility {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin-top: var(--outer-margin);
     margin-left: var(--outer-margin);
     margin-right: calc(-0.5 * var(--outer-margin));
-    width: var(--button-height);
-    height: var(--button-height);
-    border-radius: 50%;
   }
 }

@@ -6,6 +6,7 @@ import { useStore } from '@lib/store'
 import Content from '@components/Content'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import AudioPlayer from './AudioPlayer'
 
 export type Props = {
   about: AboutQuery['about']
@@ -24,6 +25,9 @@ export default function About({ modal, about, introduction }: Props) {
     setShowAbout(false)
   }
 
+  const audio = mode === 'about' ? about.audio : introduction.audio
+  const text = mode === 'about' ? about.text : introduction.text
+
   return (
     <article className={s.about}>
       {modal &&
@@ -32,10 +36,12 @@ export default function About({ modal, about, introduction }: Props) {
           <button data-selected={mode === 'intro'} onClick={() => setMode('intro')}>Introduction</button>
         </nav>
       }
-      { }
-      <Content content={mode === 'about' ? about.text : introduction.text} />
+      <Content content={text} />
       {modal &&
         <button className={s.close} onClick={handleClose}>Close</button>
+      }
+      {audio &&
+        <AudioPlayer audio={audio as FileField} open={true} show={true} className={s.audio} />
       }
     </article>
   );

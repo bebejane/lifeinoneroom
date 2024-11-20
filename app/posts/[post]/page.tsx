@@ -1,4 +1,5 @@
 import s from './page.module.scss';
+import HomePage from '@app/page';
 import { DraftMode } from "next-dato-utils/components";
 import { notFound } from 'next/navigation';
 import { Metadata } from "next";
@@ -6,27 +7,14 @@ import ImagePost from '@app/components/posts/ImagePost';
 import TextPost from '@app/components/posts/TextPost';
 import React from 'react';
 import { getAllPosts, getPost } from '@lib/posts';
+import Home from '@app/page';
 
 export type Props = {
-  params: { post: string },
-  modal: boolean
+  params: { post: string }
 }
 
-export default async function Post(props: Props) {
-
-  const { post, draftUrl } = await getPost(props.params.post)
-
-  if (!post) return notFound()
-
-  return (
-    <>
-      <article className={s.post}>
-        {post.__typename === 'ImageRecord' && <ImagePost data={post as ImageRecord} />}
-        {post.__typename === 'TextRecord' && <TextPost data={post as TextRecord} />}
-      </article >
-      <DraftMode url={draftUrl} tag={post.id} />
-    </>
-  );
+export default async function PostPage(params: Props) {
+  return HomePage(params)
 }
 
 export async function generateStaticParams() {

@@ -15,7 +15,10 @@ export async function POST(request: Request) {
     try {
       await generate({ ...entity.attributes, id: entity.id }, api_key)
       revalidatePath('/')
-      revalidatePath(`/posts/${entity.attributes.slug}`)
+      if (entity.attributes.slug)
+        revalidatePath(`/posts/${entity.attributes.slug}`)
+      if (api_key === 'about' || api_key === 'introduction')
+        revalidatePath(`/about`)
       revalidateTag(entity.id)
     } catch (e) {
       return Response.json({ success: false, error: e.message }, { status: 500 })
