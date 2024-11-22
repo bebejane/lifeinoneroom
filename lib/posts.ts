@@ -4,7 +4,7 @@ import { AllPostsDocument, PostDocument } from "../graphql"
 export const getAllPosts = async (): Promise<{ allPosts: (ImageRecord | TextRecord)[], draftUrl: string }> => {
   const { allImages, allTexts, draftUrl } = await apiQuery<AllPostsQuery, AllPostsQueryVariables>(AllPostsDocument, {
     all: true,
-    tags: ['image', 'text']
+    tags: ['image', 'text', 'about', 'introduction'],
   })
 
   const allPosts = allImages.concat(allTexts as any).sort((a, b) => a._firstPublishedAt > b._firstPublishedAt ? -1 : 1) as (ImageRecord | TextRecord)[]
