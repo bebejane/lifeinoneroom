@@ -28,6 +28,7 @@ export async function GET(request: Request) {
       title,
       id,
       link: `${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug}`,
+      guid: `${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug}`,
       description,
       date: new Date(post._firstPublishedAt),
     });
