@@ -22,7 +22,7 @@ export async function GET(request: Request) {
     const id = post.id;
     const title = post.__typename === "ImageRecord" ? post.textToVoice : post.title;
     //@ts-ignore
-    const description = post.__typename === "ImageRecord" ? post.textToVoice : render(post.text);
+    const description = (post.__typename === "ImageRecord" ? post.textToVoice : render(post.text)).slice(0, 200) + '...';
 
     feed.addItem({
       title,
