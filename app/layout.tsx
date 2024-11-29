@@ -4,10 +4,11 @@ import { GlobalDocument } from '@graphql';
 import { Metadata } from 'next';
 import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
 import { ThemeContextProvider } from '@components/theme/ThemeContext'
+import Head from 'next/head';
 import ThemeProvider from '@components/theme/ThemeProvider'
-
 import Navbar from './components/Navbar';
 import Readingline from './components/Readingline';
+
 
 export type LayoutProps = {
   children: React.ReactNode
@@ -19,6 +20,9 @@ export default async function RootLayout({ children, modal }: LayoutProps) {
   return (
     <>
       <html lang="en">
+        <Head>
+          <link rel="alternate" type="application/rss+xml" title="Example Feed" href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`} />
+        </Head>
         <body className={"dyslexic"}>
           <ThemeContextProvider>
             <ThemeProvider>
