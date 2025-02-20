@@ -90,7 +90,7 @@ export default function PublishTimeline({ posts, selected }: Props) {
 	}, [height, scrolledPosition, isScrolling]);
 
 	useEffect(() => {
-		active && updateHistoryState(active);
+		active && updateHistoryState();
 	}, [active, updateHistoryState]);
 
 	useEffect(() => {

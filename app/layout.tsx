@@ -28,16 +28,14 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
-				<body className={'dyslexic'}>
-					<ThemeContextProvider>
-						<ThemeProvider>
-							<Navbar />
-							<AboutModal about={about} introduction={introduction} />
-							<main>{children}</main>
-							<Readingline />
-						</ThemeProvider>
-					</ThemeContextProvider>
-				</body>
+				<ThemeContextProvider>
+					<ThemeProvider>
+						<Navbar />
+						<AboutModal about={about} introduction={introduction} />
+						<main>{children}</main>
+						<Readingline />
+					</ThemeProvider>
+				</ThemeContextProvider>
 			</html>
 		</>
 	);

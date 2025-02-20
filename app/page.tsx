@@ -6,26 +6,26 @@ import { getAllPosts } from '@lib/posts';
 import Intro from './components/Intro';
 
 export type Props = {
-  params?: { post: string }
-}
+	params: Promise<{ post: string }>;
+};
 
-export default async function Home(params: Props) {
+export default async function Home({ params }: Props) {
+	const post = (await params)?.post;
+	const startIndex = 3;
+	const { allPosts, draftUrl } = await getAllPosts();
 
-  const startIndex = 3;
-  const { allPosts, draftUrl } = await getAllPosts()
-
-  return (
-    <>
-      <Intro />
-      {allPosts.map((post, idx) => (
-        post.__typename === 'ImageRecord' ?
-          <ImagePost key={post.id} data={post as ImageRecord} tabIndex={idx + 1 + startIndex} />
-          : post.__typename === 'TextRecord' ?
-            <TextPost key={post.id} data={post as TextRecord} tabIndex={idx + 1 + startIndex} />
-            : null
-      ))}
-      <PublishTimeline posts={allPosts} selected={params.params?.post} />
-      <DraftMode url={draftUrl} tag={['image', 'text', 'about']} />
-    </>
-  )
+	return (
+		<>
+			<Intro />
+			{allPosts.map((post, idx) =>
+				post.__typename === 'ImageRecord' ? (
+					<ImagePost key={post.id} data={post as ImageRecord} tabIndex={idx + 1 + startIndex} />
+				) : post.__typename === 'TextRecord' ? (
+					<TextPost key={post.id} data={post as TextRecord} tabIndex={idx + 1 + startIndex} />
+				) : null
+			)}
+			<PublishTimeline posts={allPosts} selected={post} />
+			<DraftMode url={draftUrl} tag={['image', 'text', 'about']} />
+		</>
+	);
 }
