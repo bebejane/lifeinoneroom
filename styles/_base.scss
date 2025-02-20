@@ -16,18 +16,18 @@
 	--z-readingline: 2;
 	--z-image-post: 3;
 
+	--z-modal-backdrop: 900;
 	--z-navbar: 1000;
 	--z-timeline: 1100;
 	--z-settings-backdrop: 1190;
-	--z-settings: 1200;
 	--z-modal: 2000;
+
 	--z-intro: 3000;
+	--z-settings: 4000;
 
-	@include mq($from: tablet) {
-	}
+	@include mq($from: tablet) {}
 
-	@include mq($until: tablet) {
-	}
+	@include mq($until: tablet) {}
 }
 
 html {
@@ -121,11 +121,9 @@ a {
 
 	color: inherit;
 
-	&:hover {
-	}
+	&:hover {}
 
-	&:visited {
-	}
+	&:visited {}
 }
 
 article p a {
@@ -207,14 +205,12 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {
-}
+hr {}
 
 input,
 textarea,
 select {
-	&:focus {
-	}
+	&:focus {}
 }
 
 select {

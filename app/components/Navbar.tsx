@@ -74,6 +74,7 @@ export default function Navbar() {
 				{expanded ? 'Compress' : 'Expand'}
 			</button>
 			<Settings show={showSettings} onClose={handleSettingsClosed} />
+			{showAbout && <div className={s.backdrop} />}
 		</>
 	);
 }
