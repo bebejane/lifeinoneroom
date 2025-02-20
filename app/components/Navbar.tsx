@@ -32,6 +32,7 @@ export default function Navbar() {
 		<>
 			<nav className={cn(s.navbar, s[theme])}>
 				<button
+					aria-label='Accessibility settings'
 					tabIndex={1}
 					data-selected={showSettings}
 					data-button-type='icon'
@@ -39,11 +40,7 @@ export default function Navbar() {
 					className={cn(s.accessibility, showSettings && s.active)}
 					onClick={(e) => setShowSettings(!showSettings)}
 				>
-					<IoAccessibility
-						className={s.settings}
-						aria-label='Accessibility settings'
-						role='button'
-					/>
+					<IoAccessibility className={s.settings} />
 				</button>
 				<button
 					data-selected={showAbout && !showAboutIntro}
@@ -60,9 +57,8 @@ export default function Navbar() {
 					<button
 						data-selected={showAboutIntro}
 						className={`button ${s.button} ${s.intro}`}
-						tabIndex={2}
+						tabIndex={3}
 						onClick={() => {
-							//setShowAbout(false);
 							setShowAboutIntro(true);
 						}}
 					>
