@@ -74,6 +74,7 @@ export default function AudioPlayer({ audio, open, show, fullMargin, className }
 			>
 				{playing ? <IoVolumeMuteSharp /> : <IoVolumeHighSharp />}
 			</button>
+
 			{audio && (
 				<audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
 					<source src={audio.url} type='audio/mpeg' />

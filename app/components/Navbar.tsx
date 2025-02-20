@@ -33,7 +33,6 @@ export default function Navbar() {
 			<nav className={cn(s.navbar, s[theme])}>
 				<button
 					aria-label='Accessibility settings'
-					tabIndex={1}
 					data-selected={showSettings}
 					data-button-type='icon'
 					data-theme={theme}
@@ -45,7 +44,6 @@ export default function Navbar() {
 				<button
 					data-selected={showAbout && !showAboutIntro}
 					className={`button ${s.button}`}
-					tabIndex={2}
 					onClick={() => {
 						setShowAbout(true);
 						setShowAboutIntro(false);
@@ -57,7 +55,6 @@ export default function Navbar() {
 					<button
 						data-selected={showAboutIntro}
 						className={`button ${s.button} ${s.intro}`}
-						tabIndex={3}
 						onClick={() => {
 							setShowAboutIntro(true);
 						}}
@@ -66,7 +63,7 @@ export default function Navbar() {
 					</button>
 				)}
 			</nav>
-			<button className={cn(s.button, s.toggle)} onClick={handleClick} tabIndex={3}>
+			<button className={cn(s.button, s.toggle)} onClick={handleClick}>
 				{expanded ? 'Compress' : 'Expand'}
 			</button>
 			<Settings show={showSettings} onClose={handleSettingsClosed} />
