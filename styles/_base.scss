@@ -23,9 +23,11 @@
 	--z-modal: 2000;
 	--z-intro: 3000;
 
-	@include mq($from: tablet) {}
+	@include mq($from: tablet) {
+	}
 
-	@include mq($until: tablet) {}
+	@include mq($until: tablet) {
+	}
 }
 
 html {
@@ -61,20 +63,13 @@ main {
 			display: flex;
 			align-items: center;
 			height: 5rem;
-			padding-left: var(--outer-margin);
+			//padding-left: var(--outer-margin);
 			text-align: center;
-		}
-
-		@include mq($until: desktop) {
-			header {
-				max-width: 65%;
-			}
 
 			h2 {
-				display: block;
-				overflow: hidden;
-				white-space: nowrap;
-				text-overflow: ellipsis;
+				@include mq($until: desktop) {
+					text-align: left;
+				}
 			}
 		}
 	}
@@ -126,9 +121,11 @@ a {
 
 	color: inherit;
 
-	&:hover {}
+	&:hover {
+	}
 
-	&:visited {}
+	&:visited {
+	}
 }
 
 article p a {
@@ -210,12 +207,14 @@ figcaption {
 	margin-bottom: 1em;
 }
 
-hr {}
+hr {
+}
 
 input,
 textarea,
 select {
-	&:focus {}
+	&:focus {
+	}
 }
 
 select {

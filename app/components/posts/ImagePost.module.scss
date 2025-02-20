@@ -5,6 +5,10 @@
   z-index: var(--z-image-post);
   border-bottom: 1px solid;
 
+  div {
+    max-width: none !important;
+  }
+
   .image {
     height: var(--height);
     object-fit: contain;

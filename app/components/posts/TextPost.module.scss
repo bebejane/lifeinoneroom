@@ -42,13 +42,25 @@
   h2 {
     width: 100%;
     display: block;
-    //height: var(--height);
     align-items: center;
-    margin-left: var(--outer-margin);
 
     @include mq($from: desktop) {
       justify-content: center;
       margin-left: 0;
+    }
+
+    @include mq($until: desktop) {
+    }
+
+    span {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      @include mq($until: desktop) {
+        max-width: 65%;
+        padding-left: var(--outer-margin);
+      }
     }
   }
 
