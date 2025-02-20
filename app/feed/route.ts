@@ -2,8 +2,6 @@ import { getAllPosts } from "../../lib/posts";
 import { render } from 'datocms-structured-text-to-plain-text';
 import { Feed } from "feed";
 
-export const revalidate = 60 * 60 * 6;
-
 export async function GET(request: Request) {
   const { allPosts } = await getAllPosts()
 
