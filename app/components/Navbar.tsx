@@ -46,19 +46,25 @@ export default function Navbar() {
 					/>
 				</button>
 				<button
-					data-selected={showAbout}
+					data-selected={showAbout && !showAboutIntro}
 					className={`button ${s.button}`}
 					tabIndex={2}
-					onClick={() => setShowAbout(true)}
+					onClick={() => {
+						setShowAbout(true);
+						setShowAboutIntro(false);
+					}}
 				>
 					About
 				</button>
 				{showAbout && (
 					<button
 						data-selected={showAboutIntro}
-						className={`button ${s.button}`}
+						className={`button ${s.button} ${s.intro}`}
 						tabIndex={2}
-						onClick={() => setShowAboutIntro(true)}
+						onClick={() => {
+							//setShowAbout(false);
+							setShowAboutIntro(true);
+						}}
 					>
 						Introduction
 					</button>
