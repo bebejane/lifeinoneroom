@@ -15,7 +15,9 @@ export default async function Home({ params }: Props) {
 
 	return (
 		<>
-			<h1 style={{ display: 'none' }}>Life In One Room</h1>
+			<h1 style={{ position: 'absolute', top: '-100px', left: '-100px', zIndex: -1 }}>
+				Life In One Room
+			</h1>
 			<Intro />
 			{allPosts.map((post, idx) =>
 				post.__typename === 'ImageRecord' ? (

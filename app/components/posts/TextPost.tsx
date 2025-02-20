@@ -66,7 +66,7 @@ export default function TextPost({
 				</header>
 			) : (
 				<>
-					<h3 className={s.title}>{title}</h3>
+					<h2 className={s.title}>{title}</h2>
 					<div className={s.wrapper}>
 						<AudioPlayer audio={audio} open={open} show={open} fullMargin={false} postId={postId} />
 						<Content content={text} />

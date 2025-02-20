@@ -101,12 +101,12 @@ export default function PublishTimeline({ posts, selected }: Props) {
 	}, [selected, setExpanded]);
 
 	useEffect(() => {
-		const links = document.querySelectorAll<HTMLElement>('*');
+		const links = document.querySelectorAll<HTMLAnchorElement>('a');
 		const ids = {};
 		links.forEach((link) => {
-			if (!ids[link.id]) ids[link.id] = { count: 0, items: [] };
-			ids[link.id].count++;
-			ids[link.id].items.push(link);
+			if (!ids[link.href]) ids[link.href] = { href: link.href, count: 0, items: [] };
+			ids[link.href].count++;
+			ids[link.href].items.push(link);
 		});
 
 		Object.keys(ids).forEach((id) => {

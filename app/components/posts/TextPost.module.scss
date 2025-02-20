@@ -20,6 +20,7 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+
     @include mq($until: desktop) {
       padding-left: var(--outer-margin);
       padding-right: var(--outer-margin);
@@ -30,6 +31,7 @@
     display: inline-block;
     width: auto;
     max-width: 55ch;
+
     //padding-left: var(--margin);
     //padding-right: var(--margin);
     @include mq($until: desktop) {
@@ -39,35 +41,34 @@
     margin-bottom: 1em;
   }
 
-  h2 {
-    width: 100%;
-    display: block;
-    align-items: center;
-
-    @include mq($from: desktop) {
-      justify-content: center;
-      margin-left: 0;
-    }
-
-    @include mq($until: desktop) {
-    }
-
-    span {
+  header {
+    h2 {
+      width: 100%;
       display: block;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      line-height: 1.5;
-      @include mq($until: desktop) {
-        max-width: 65%;
-        padding-left: var(--outer-margin);
+      align-items: center;
+
+      @include mq($from: desktop) {
+        justify-content: center;
+        margin-left: 0;
+      }
+
+      @include mq($until: desktop) {}
+
+      span {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 1.5;
+
+        @include mq($until: desktop) {
+          max-width: 65%;
+          padding-left: var(--outer-margin);
+        }
       }
     }
   }
 
-  h3 {
-    padding-bottom: 2rem;
-  }
 
   &.open {
     --height: auto;
@@ -89,6 +90,8 @@
     margin-right: var(--margin);
     text-align: center;
     margin-bottom: 1em;
+    padding-bottom: 2rem;
+
     @include mq($until: desktop) {
       margin-left: calc(2 * var(--margin));
       margin-right: calc(2 * var(--margin));
