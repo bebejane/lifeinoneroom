@@ -20,7 +20,7 @@ const options = [{
 },
 {
   id: 'dyslexic',
-  label: 'Dyslexic'
+  label: 'Fog'
 },
 {
   id: 'colors',
