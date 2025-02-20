@@ -40,20 +40,22 @@ export default function About({ modal, about, introduction }: Props) {
 				</nav>
 			)}
 			<Content content={text} />
-			{modal && (
-				<button className={s.close} onClick={handleClose}>
-					Close
-				</button>
-			)}
-			{audio && (
-				<AudioPlayer
-					key={mode}
-					audio={audio as FileField}
-					open={true}
-					show={true}
-					className={s.audio}
-				/>
-			)}
+			<nav>
+				{audio && (
+					<AudioPlayer
+						key={mode}
+						audio={audio as FileField}
+						open={true}
+						show={true}
+						className={s.audio}
+					/>
+				)}
+				{modal && (
+					<button className={s.close} onClick={handleClose}>
+						Close
+					</button>
+				)}
+			</nav>
 		</article>
 	);
 }

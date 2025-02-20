@@ -1,9 +1,11 @@
-.modal {
+.about {
   position: fixed;
   top: 0rem;
   left: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   z-index: var(--z-modal);
   overflow-y: scroll;
   width: 100%;
@@ -11,8 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-  filter: var(--dropshadow);
+  pointer-events: none;
   padding: var(--outer-margin);
   padding-top: calc(5 * var(--outer-margin));
 
@@ -21,16 +22,49 @@
     padding-top: calc(4.5 * var(--outer-margin));
   }
 
-  article {
-    flex: 1 1;
+
+  .wrap {
+    position: relative;
+    max-height: calc(100vh - var(--outer-margin) * 2);
+    overflow-y: scroll;
     width: 100%;
     background-color: var(--white);
     border-radius: 2rem;
     padding-top: calc(1 * var(--outer-margin));
+    pointer-events: all;
+    color: var(--black);
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @include mq($from: desktop) {
       padding: calc(2 * var(--outer-margin));
       padding-top: calc(3 * var(--outer-margin));
+    }
+
+    nav {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      right: 0;
+      margin: var(--outer-margin);
+
+      .audio {
+        position: relative;
+        margin: 0;
+        top: unset;
+        left: unset;
+      }
+
+      .close {
+        margin: 0;
+        margin-left: 1rem;
+      }
     }
   }
 }
