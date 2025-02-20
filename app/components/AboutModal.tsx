@@ -14,11 +14,17 @@ export type Props = {
 };
 
 export default function AboutModal({ about, introduction }: Props) {
-	const [setShowAbout, showAbout] = useStore((state) => [state.setShowAbout, state.showAbout]);
-	const [mode, setMode] = useState<'about' | 'intro'>('about');
+	const [setShowAbout, showAbout, setShowAboutIntro, showAboutIntro] = useStore((state) => [
+		state.setShowAbout,
+		state.showAbout,
+		state.setShowAboutIntro,
+		state.showAboutIntro,
+	]);
+	const mode = showAboutIntro ? 'intro' : 'about';
 
 	const handleClose = () => {
 		setShowAbout(false);
+		setShowAboutIntro(false);
 	};
 
 	const audio = mode === 'about' ? about.audio : introduction.audio;

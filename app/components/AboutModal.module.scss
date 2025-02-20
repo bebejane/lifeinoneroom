@@ -25,7 +25,7 @@
 
   .wrap {
     position: relative;
-    max-height: calc(100vh - var(--outer-margin) * 2);
+    height: calc(100vh - var(--outer-margin) * 2);
     overflow-y: scroll;
     width: 100%;
     background-color: var(--white);

@@ -3,23 +3,23 @@
 import s from './Navbar.module.scss';
 import cn from 'classnames';
 import { useStore } from '@lib/store';
-import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { IoAccessibility } from 'react-icons/io5';
 import Settings from './Settings';
 
 export default function Navbar() {
-	const pathname = usePathname();
-	const searchParams = useSearchParams();
-
-	const [setExpanded, expanded, theme, setShowAbout] = useStore((state) => [
-		state.setExpanded,
-		state.expanded,
-		state.theme,
-		state.setShowAbout,
-	]);
 	const [showSettings, setShowSettings] = useState(false);
+	const [setExpanded, expanded, theme, setShowAbout, showAbout, setShowAboutIntro, showAboutIntro] =
+		useStore((state) => [
+			state.setExpanded,
+			state.expanded,
+			state.theme,
+			state.setShowAbout,
+			state.showAbout,
+			state.setShowAboutIntro,
+			state.showAboutIntro,
+		]);
 
 	useEffect(() => {
 		document.querySelector('main').classList.toggle('compressed', !expanded);
@@ -27,11 +27,6 @@ export default function Navbar() {
 
 	const handleClick = () => setExpanded(!expanded);
 	const handleSettingsClosed = useCallback(() => setShowSettings(false), [setShowSettings]);
-
-	const modal = {
-		open: pathname.startsWith('/about'),
-		intro: searchParams.get('intro') === '1',
-	};
 
 	return (
 		<>
@@ -51,15 +46,20 @@ export default function Navbar() {
 					/>
 				</button>
 				<button
-					data-selected={modal.open}
+					data-selected={showAbout}
 					className={`button ${s.button}`}
 					tabIndex={2}
 					onClick={() => setShowAbout(true)}
 				>
 					About
 				</button>
-				{modal.open && (
-					<button data-selected={modal.intro} className={`button ${s.button}`} tabIndex={2}>
+				{showAbout && (
+					<button
+						data-selected={showAboutIntro}
+						className={`button ${s.button}`}
+						tabIndex={2}
+						onClick={() => setShowAboutIntro(true)}
+					>
 						Introduction
 					</button>
 				)}

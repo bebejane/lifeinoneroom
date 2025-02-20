@@ -19,6 +19,7 @@ const defaultSettings: Settings = {
 export interface StoreState {
   desktop: boolean,
   showAbout: boolean,
+  showAboutIntro: boolean,
   expanded: boolean,
   theme: 'light' | 'dark',
   open: string[]
@@ -30,12 +31,14 @@ export interface StoreState {
   setPlaying: (playing: string) => void,
   setExpanded: (expanded: boolean) => void,
   setShowAbout: (showAbout: boolean) => void,
+  setShowAboutIntro: (showAboutIntro: boolean) => void,
   setDesktop: (desktop: boolean) => void
 }
 
 const useStore = create(persist<StoreState>((set, get) => ({
   desktop: false,
   showAbout: false,
+  showAboutIntro: false,
   expanded: true,
   theme: 'dark',
   playing: null,
@@ -58,6 +61,9 @@ const useStore = create(persist<StoreState>((set, get) => ({
   },
   setShowAbout: (showAbout: boolean) => {
     set((state) => ({ showAbout }))
+  },
+  setShowAboutIntro: (showAboutIntro: boolean) => {
+    set((state) => ({ showAboutIntro }))
   },
   setDesktop: (desktop: boolean) => {
     set((state) => ({ desktop }))
