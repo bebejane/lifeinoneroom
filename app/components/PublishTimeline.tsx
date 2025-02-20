@@ -100,6 +100,22 @@ export default function PublishTimeline({ posts, selected }: Props) {
 		setActive(selected);
 	}, [selected, setExpanded]);
 
+	useEffect(() => {
+		const links = document.querySelectorAll<HTMLElement>('*');
+		const ids = {};
+		links.forEach((link) => {
+			if (!ids[link.id]) ids[link.id] = { count: 0, items: [] };
+			ids[link.id].count++;
+			ids[link.id].items.push(link);
+		});
+
+		Object.keys(ids).forEach((id) => {
+			if (ids[id].count > 1) {
+				console.log(ids[id]);
+			}
+		});
+	}, []);
+
 	if (!expanded) return null;
 
 	return (

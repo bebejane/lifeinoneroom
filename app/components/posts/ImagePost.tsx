@@ -11,11 +11,13 @@ import AudioPlayer from '../AudioPlayer';
 export type Props = {
 	data: ImageRecord;
 	tabIndex: number;
+	postId: string;
 };
 
 export default function ImagePost({
 	data: { id, slug, image, audio, textToVoice, background, colorBackground, _firstPublishedAt },
 	tabIndex,
+	postId,
 }: Props) {
 	const [expanded, settings] = useStore((state) => [state.expanded, state.settings]);
 	const [open, setOpen] = useState(true);
@@ -45,7 +47,6 @@ export default function ImagePost({
 			key={id}
 			className={cn(s.post, open && s.open)}
 			style={sectionStyle}
-			//tabIndex={tabIndex}
 			onMouseEnter={() => setHover(true)}
 			onMouseLeave={() => setHover(false)}
 			onClick={handleClick}
@@ -59,7 +60,13 @@ export default function ImagePost({
 					/>
 				</figure>
 			)}
-			<AudioPlayer audio={audio} open={open} show={hover && open} fullMargin={true} />
+			<AudioPlayer
+				audio={audio}
+				open={open}
+				show={hover && open}
+				fullMargin={true}
+				postId={postId}
+			/>
 			<PublishDate date={_firstPublishedAt} align={open ? 'top' : 'center'} />
 		</section>
 	);

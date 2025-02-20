@@ -13,15 +13,17 @@ type Props = {
 	show: boolean;
 	fullMargin?: boolean;
 	className?: string;
+	postId: string;
 };
 
-export default function AudioPlayer({ audio, open, show, fullMargin, className }: Props) {
+export default function AudioPlayer({ audio, open, show, fullMargin, className, postId }: Props) {
 	const { expanded, theme } = useStore((state) => ({
 		expanded: state.expanded,
 		theme: state.theme,
 	}));
 	const ref = useRef<HTMLAudioElement>(null);
 	const [playing, setPlaying] = useState(false);
+	const audioId = `${postId}-${audio?.id}`;
 
 	const handleClick = (e: React.MouseEvent) => {
 		e.stopPropagation();
@@ -76,7 +78,7 @@ export default function AudioPlayer({ audio, open, show, fullMargin, className }
 			</button>
 
 			{audio && (
-				<audio id={audio.id} className={s.audio} ref={ref} aria-hidden={true}>
+				<audio id={audioId} className={s.audio} ref={ref} aria-hidden={true}>
 					<source src={audio.url} type='audio/mpeg' />
 				</audio>
 			)}

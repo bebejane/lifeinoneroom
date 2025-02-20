@@ -12,11 +12,13 @@ import { Theme, ThemeContext } from '@components/theme/ThemeContext';
 export type LayoutProps = {
 	data: TextRecord;
 	tabIndex: number;
+	postId: string;
 };
 
 export default function TextPost({
 	data: { id, slug, title, text, audio, textColor, backgroundColor, _firstPublishedAt },
 	tabIndex,
+	postId,
 }: LayoutProps) {
 	const { theme } = useContext(ThemeContext) as Theme;
 	const [expanded, settings] = useStore((state) => [state.expanded, state.settings]);
@@ -66,7 +68,7 @@ export default function TextPost({
 				<>
 					<h3 className={s.title}>{title}</h3>
 					<div className={s.wrapper}>
-						<AudioPlayer audio={audio} open={open} show={open} fullMargin={false} />
+						<AudioPlayer audio={audio} open={open} show={open} fullMargin={false} postId={postId} />
 						<Content content={text} />
 					</div>
 				</>

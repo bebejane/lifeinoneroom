@@ -18,9 +18,19 @@ export default async function Home({ params }: Props) {
 			<Intro />
 			{allPosts.map((post, idx) =>
 				post.__typename === 'ImageRecord' ? (
-					<ImagePost key={post.id} data={post as ImageRecord} tabIndex={idx + 1 + startIndex} />
+					<ImagePost
+						key={post.id}
+						data={post as ImageRecord}
+						tabIndex={idx + 1 + startIndex}
+						postId={post.id}
+					/>
 				) : post.__typename === 'TextRecord' ? (
-					<TextPost key={post.id} data={post as TextRecord} tabIndex={idx + 1 + startIndex} />
+					<TextPost
+						key={post.id}
+						data={post as TextRecord}
+						tabIndex={idx + 1 + startIndex}
+						postId={post.id}
+					/>
 				) : null
 			)}
 			<PublishTimeline posts={allPosts} selected={params?.post} />

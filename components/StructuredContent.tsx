@@ -145,6 +145,8 @@ Props) {
 				renderNodeRule(isLink, ({ adapter: { renderNode }, node, children, key, ancestors }) => {
 					//@ts-ignore
 					const text = children?.[0]?.props?.children?.[0] ?? '';
+					if (!text) return null;
+
 					return renderNode(
 						`a`,
 						{
