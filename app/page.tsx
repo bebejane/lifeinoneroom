@@ -6,11 +6,10 @@ import { getAllPosts } from '@lib/posts';
 import Intro from './components/Intro';
 
 export type Props = {
-	params: Promise<{ post: string }>;
+	params: { post: string };
 };
 
 export default async function Home({ params }: Props) {
-	const post = (await params)?.post;
 	const startIndex = 3;
 	const { allPosts, draftUrl } = await getAllPosts();
 
@@ -24,7 +23,7 @@ export default async function Home({ params }: Props) {
 					<TextPost key={post.id} data={post as TextRecord} tabIndex={idx + 1 + startIndex} />
 				) : null
 			)}
-			<PublishTimeline posts={allPosts} selected={post} />
+			<PublishTimeline posts={allPosts} selected={params?.post} />
 			<DraftMode url={draftUrl} tag={['image', 'text', 'about']} />
 		</>
 	);

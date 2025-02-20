@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { getAllPosts, getPost } from '@lib/posts';
 
 export type Props = {
-	params: Promise<{ post: string }>;
+	params: { post: string };
 };
 
 export default async function PostPage(params: Props) {
@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-	const { post } = await getPost((await params).post);
+	const { post } = await getPost(params.post);
 
 	if (!post) return notFound();
 
