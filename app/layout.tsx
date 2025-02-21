@@ -28,7 +28,17 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
-				<a href='#main' style={{ position: 'absolute', top: '-100px', left: '-100px', zIndex: -1 }}>
+				<a
+					href='#main'
+					style={{
+						position: 'absolute',
+						top: '-100px',
+						left: '-100px',
+						zIndex: -1,
+						backgroundColor: 'var(--white)',
+						color: 'var(--black)',
+					}}
+				>
 					Skip to main content
 				</a>
 				<ThemeContextProvider>
