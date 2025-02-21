@@ -1,4 +1,3 @@
-import s from './page.module.scss';
 import HomePage from '@app/page';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';

@@ -6,9 +6,9 @@ import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
 import { ThemeContextProvider } from '@components/theme/ThemeContext';
 import Head from 'next/head';
 import ThemeProvider from '@components/theme/ThemeProvider';
-import Navbar from './components/Navbar';
-import Readingline from './components/Readingline';
-import AboutModal from './components/AboutModal';
+import Navbar from '@/components/Navbar';
+import Readingline from '@/components/Readingline';
+import AboutModal from '@/components/AboutModal';
 
 export type LayoutProps = {
 	children: React.ReactNode;

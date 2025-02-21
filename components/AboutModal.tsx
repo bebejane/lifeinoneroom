@@ -2,10 +2,8 @@
 
 import s from './AboutModal.module.scss';
 import cn from 'classnames';
-import { useState } from 'react';
-import useStore from '../../lib/store';
-import { useRouter } from 'next/navigation';
-import { Content } from '../../components';
+import useStore from '@/lib/store';
+import { Content } from '@/components';
 import AudioPlayer from './AudioPlayer';
 
 export type Props = {
@@ -43,6 +41,7 @@ export default function AboutModal({ about, introduction }: Props) {
 							audio={audio as FileField}
 							open={true}
 							show={true}
+							postId={'about'}
 							className={s.audio}
 						/>
 					)}

@@ -1,9 +1,9 @@
 import { DraftMode } from 'next-dato-utils/components';
-import ImagePost from './components/posts/ImagePost';
-import TextPost from './components/posts/TextPost';
-import PublishTimeline from './components/PublishTimeline';
+import ImagePost from '@/components/posts/ImagePost';
+import TextPost from '@/components/posts/TextPost';
+import PublishTimeline from '@/components/PublishTimeline';
 import { getAllPosts } from '@lib/posts';
-import Intro from './components/Intro';
+import Intro from '@/components/Intro';
 
 export type Props = {
 	params: { post: string };
