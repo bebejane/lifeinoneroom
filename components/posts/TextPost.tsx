@@ -62,7 +62,7 @@ export default function TextPost({
 		Object.keys(anchors).forEach((href) => {
 			if (anchors[href].count > 1) {
 				anchors[href].items.forEach((link) => {
-					link.setAttribute('aria-label', anchors[href].items[0].text);
+					link.setAttribute('aria-label', `${anchors[href].items[0].text} (opens in a new tab)`);
 				});
 			}
 		});
