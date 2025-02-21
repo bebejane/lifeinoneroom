@@ -48,6 +48,26 @@ export default function TextPost({
 		!expanded && setLineStyles(null);
 	}, [expanded]);
 
+	useEffect(() => {
+		// Fix for multiple links with the same href
+		const links = document.querySelectorAll<HTMLAnchorElement>('a');
+		const anchors = {};
+
+		links.forEach((link) => {
+			if (!anchors[link.href]) anchors[link.href] = { href: link.href, count: 0, items: [] };
+			anchors[link.href].count++;
+			anchors[link.href].items.push(link);
+		});
+
+		Object.keys(anchors).forEach((href) => {
+			if (anchors[href].count > 1) {
+				anchors[href].items.forEach((link) => {
+					link.setAttribute('aria-label', anchors[href].items[0].text);
+				});
+			}
+		});
+	}, []);
+
 	return (
 		<section
 			id={slug}
