@@ -28,8 +28,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
-				<a
-					href='#main'
+				<div
 					style={{
 						position: 'absolute',
 						top: '-100px',
@@ -39,8 +38,8 @@ export default async function RootLayout({ children }: LayoutProps) {
 						color: 'var(--black)',
 					}}
 				>
-					Skip to main content
-				</a>
+					<a href='#main'>Skip to main content</a>
+				</div>
 				<ThemeContextProvider>
 					<ThemeProvider>
 						<Navbar />
