@@ -2,11 +2,13 @@
   --height: 5rem;
   height: var(--height);
   position: relative;
-  z-index: var(--z-image-post);
   border-bottom: 1px solid;
+  background-color: var(--background);
+  z-index: var(--z-post-closed);
 
   div {
     max-width: none !important;
+    z-index: var(--z-image-post);
   }
 
   .image {
@@ -17,6 +19,7 @@
 
   &.open {
     --height: 100vh;
+    z-index: var(--z-post);
 
     audio {
       display: block;

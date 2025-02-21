@@ -61,7 +61,7 @@ export default function Readingline() {
 		};
 	}, [handleMouseMove]);
 
-	if (!expanded) return null;
+	//if (!expanded) return null;
 
 	return (
 		<div ref={ref} className={cn(s.readingline, lineStyles && s.show)}>
