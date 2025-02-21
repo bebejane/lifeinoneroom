@@ -33,7 +33,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 						position: 'absolute',
 						top: '-100px',
 						left: '-100px',
-						zIndex: -1,
+						zIndex: 0,
 						backgroundColor: 'var(--white)',
 						color: 'var(--black)',
 					}}
