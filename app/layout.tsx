@@ -9,6 +9,7 @@ import ThemeProvider from '@components/theme/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Readingline from '@/components/Readingline';
 import AboutModal from '@/components/AboutModal';
+import SkipLink from '@/components/SkipLink';
 
 export type LayoutProps = {
 	children: React.ReactNode;
@@ -28,18 +29,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
-				<div
-					style={{
-						position: 'absolute',
-						top: '-100px',
-						left: '-100px',
-						zIndex: 0,
-						backgroundColor: 'var(--white)',
-						color: 'var(--black)',
-					}}
-				>
-					<a href='#main'>Skip to main content</a>
-				</div>
+				<SkipLink />
 				<ThemeContextProvider>
 					<ThemeProvider>
 						<Navbar />
