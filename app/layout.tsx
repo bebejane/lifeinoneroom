@@ -29,9 +29,9 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
-				<SkipLink />
 				<ThemeContextProvider>
 					<ThemeProvider>
+						<SkipLink />
 						<Navbar />
 						<AboutModal about={about} introduction={introduction} />
 						<main id='main'>{children}</main>
