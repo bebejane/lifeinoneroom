@@ -28,11 +28,14 @@ export default async function RootLayout({ children }: LayoutProps) {
 						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
 					/>
 				</Head>
+				<a href='#main' style={{ position: 'absolute', top: '-100px', left: '-100px', zIndex: -1 }}>
+					Skip to main content
+				</a>
 				<ThemeContextProvider>
 					<ThemeProvider>
 						<Navbar />
 						<AboutModal about={about} introduction={introduction} />
-						<main>{children}</main>
+						<main id='main'>{children}</main>
 						<Readingline />
 					</ThemeProvider>
 				</ThemeContextProvider>
