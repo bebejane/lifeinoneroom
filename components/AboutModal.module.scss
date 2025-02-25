@@ -22,7 +22,6 @@
     padding-top: calc(4.5 * var(--outer-margin));
   }
 
-
   .wrap {
     position: relative;
     height: calc(100vh - var(--outer-margin) * 2);
@@ -39,10 +38,8 @@
       display: none;
     }
 
-    @include mq($from: desktop) {
-      padding: calc(2 * var(--outer-margin));
-      padding-top: calc(3 * var(--outer-margin));
-    }
+    padding: calc(2 * var(--outer-margin));
+    padding-top: calc(3 * var(--outer-margin));
 
     nav {
       position: absolute;
@@ -66,6 +63,13 @@
         margin-left: 1rem;
       }
     }
+  }
+}
+
+.logos {
+  display: flex;
+  height: 3rem;
+  img {
   }
 }
 

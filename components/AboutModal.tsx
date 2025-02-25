@@ -34,6 +34,8 @@ export default function AboutModal({ about, introduction }: Props) {
 		<div className={cn(s.about, s.modal)}>
 			<div className={cn(s.wrap)}>
 				<Content content={text} />
+				<figure className={s.logos}>
+					<img src='/images/logos.png' /></figure>
 				<nav>
 					{audio && (
 						<AudioPlayer
