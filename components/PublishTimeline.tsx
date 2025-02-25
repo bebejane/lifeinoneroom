@@ -34,7 +34,7 @@ export default function PublishTimeline({ posts, selected }: Props) {
 	const [active, setActive] = useState<string | null>(null);
 	const [updateHistoryState] = useThrottle(() => {
 		window.history.replaceState(null, '', `/posts/${active}`);
-	}, 300);
+	}, 1000);
 
 	const { scrolledPosition, isScrolling } = useScrollInfo();
 	const ref = useRef<HTMLDivElement>(null);
