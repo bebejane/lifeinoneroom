@@ -5,6 +5,7 @@ import cn from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
 import { usePathname } from 'next/navigation';
+import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 export default function Readingline() {
 	const pathname = usePathname();
@@ -17,6 +18,7 @@ export default function Readingline() {
 	const ref = useRef<HTMLDivElement>(null);
 	const clientY = useRef<number>(0);
 	const isStartPage = pathname !== '/about';
+	const isDesktop = useIsDesktop();
 
 	const handleMouseMove = useCallback(
 		(e?: MouseEvent) => {
@@ -24,17 +26,18 @@ export default function Readingline() {
 
 			clientY.current = e?.clientY ?? clientY.current;
 
+			const line = document.querySelector<HTMLDivElement>(`.${s.line}`);
 			const { y, height } = ref.current.getBoundingClientRect();
 			const yPercent = ((clientY.current - y) / height) * 100;
-			const lineHeight = '8rem';
+			const lineHeight = getComputedStyle(line).height;
 
 			setLineStyles({
-				top: { flexBasis: `calc(${yPercent}% - ${lineHeight})` },
-				bottom: { flexBasis: `calc(${100 - yPercent}% - ${lineHeight})` },
+				top: { flexBasis: isDesktop ? `calc(${yPercent}% - ${lineHeight})` : '10%' },
 				line: { flexBasis: `${lineHeight}` },
+				bottom: { flexBasis: isDesktop ? `calc(${100 - yPercent}% - ${lineHeight})` : '80%' },
 			});
 		},
-		[isStartPage, settings.readingline]
+		[isStartPage, isDesktop, settings.readingline]
 	);
 
 	useEffect(() => {

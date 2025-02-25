@@ -1,7 +1,4 @@
 .readingline {
-  @include mq($until: desktop) {
-    display: none;
-  }
 
   position: fixed;
   display: flex;
@@ -27,7 +24,7 @@
   }
 
   .line {
-
-    flex: 0 0 8rem;
+    flex: 0 0;
+    flex-basis: 8rem;
   }
 }
