@@ -33,6 +33,7 @@
     pointer-events: all;
     color: var(--black);
     scrollbar-width: none;
+    filter: var(--dropshadow);
 
     &::-webkit-scrollbar {
       display: none;
@@ -64,13 +65,25 @@
       }
     }
   }
+
+  &.dark {
+    .wrap {
+      background-color: var(--black);
+      color: var(--white);
+    }
+
+    img {
+      filter: invert(1);
+    }
+
+  }
 }
 
 .logos {
   display: flex;
   height: 3rem;
-  img {
-  }
+
+  img {}
 }
 
 .loading {

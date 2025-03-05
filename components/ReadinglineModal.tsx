@@ -1,39 +1,36 @@
 'use client';
 
-import s from './Readingline.module.scss';
+import s from './ReadinglineModal.module.scss';
 import cn from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
-import { usePathname } from 'next/navigation';
+import { useWindowSize } from 'react-use';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
+import { he } from 'date-fns/locale';
 
-export default function Readingline() {
-	const pathname = usePathname();
-	const [expanded, settings, showAbout] = useStore((state) => [
-		state.expanded,
-		state.settings,
-		state.showAbout,
-	]);
+export default function ReadinglineModal() {
+	const [settings] = useStore((state) => [state.settings]);
 	const [lineStyles, setLineStyles] = useState<{
 		top: React.CSSProperties;
 		bottom: React.CSSProperties;
 		line: React.CSSProperties;
 	} | null>(null);
+	const [containeHeight, setContainerHeight] = useState(0);
 	const ref = useRef<HTMLDivElement>(null);
 	const clientY = useRef<number>(0);
-	const isStartPage = pathname !== '/about';
 	const isDesktop = useIsDesktop();
+	const { width, height } = useWindowSize();
 
 	const handleMouseMove = useCallback(
 		(e?: MouseEvent) => {
-			if (!settings.readingline || !isStartPage || !ref.current) return setLineStyles(null);
+			if (!settings.readingline || !ref.current) return setLineStyles(null);
 
 			clientY.current = e?.clientY ?? clientY.current;
 
 			const line = document.querySelector<HTMLDivElement>(`.${s.line}`);
-			const { y, height } = ref.current.getBoundingClientRect();
-			const yPercent = ((clientY.current - y) / height) * 100;
+			const { y } = ref.current.getBoundingClientRect();
 			const lineHeight = getComputedStyle(line).height;
+			const yPercent = ((clientY.current - y) / containeHeight) * 100;
 
 			setLineStyles({
 				top: { flexBasis: isDesktop ? `calc(${yPercent}% - ${lineHeight})` : '10%' },
@@ -41,15 +38,21 @@ export default function Readingline() {
 				bottom: { flexBasis: isDesktop ? `calc(${100 - yPercent}% - ${lineHeight})` : '80%' },
 			});
 		},
-		[isStartPage, isDesktop, settings.readingline]
+		[containeHeight, isDesktop, settings.readingline]
 	);
+
+	useEffect(() => {
+		const aboutModal = document.getElementById('about-modal');
+		setContainerHeight(aboutModal.scrollHeight);
+	}, [width, height]);
 
 	useEffect(() => {
 		if (!settings.readingline) setLineStyles(null);
 		else handleMouseMove();
-	}, [settings.readingline, handleMouseMove]);
+	}, [settings.readingline, handleMouseMove, width, height]);
 
 	useEffect(() => {
+		const container = ref.current;
 		const handleScroll = () => {
 			handleMouseMove();
 		};
@@ -57,21 +60,23 @@ export default function Readingline() {
 			setLineStyles(null);
 		};
 
-		document.addEventListener('mousemove', handleMouseMove);
-		document.addEventListener('scroll', handleScroll, { passive: true });
-		document.addEventListener('mouseleave', handleLeave);
+		container.addEventListener('mousemove', handleMouseMove);
+		container.addEventListener('scroll', handleScroll, { passive: true });
+		container.addEventListener('mouseleave', handleLeave);
 
 		return () => {
-			document.removeEventListener('mousemove', handleMouseMove);
-			document.removeEventListener('scroll', handleScroll);
-			document.removeEventListener('mouseleave', handleLeave);
+			container.removeEventListener('mousemove', handleMouseMove);
+			container.removeEventListener('scroll', handleScroll);
+			container.removeEventListener('mouseleave', handleLeave);
 		};
 	}, [handleMouseMove]);
 
-	if (showAbout) return null;
-
 	return (
-		<div ref={ref} className={cn(s.readingline, lineStyles && s.show)}>
+		<div
+			ref={ref}
+			className={cn(s.readingline, lineStyles && isDesktop && s.show)}
+			style={{ height: containeHeight }}
+		>
 			<div className={s.top} style={lineStyles?.top} />
 			<div className={s.line} style={lineStyles?.line} />
 			<div className={s.bottom} style={lineStyles?.bottom} />
