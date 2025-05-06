@@ -6,7 +6,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useStore } from '@lib/store';
 import { useWindowSize } from 'react-use';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
-import { he } from 'date-fns/locale';
 
 export default function ReadinglineModal() {
 	const [settings] = useStore((state) => [state.settings]);
@@ -52,7 +51,7 @@ export default function ReadinglineModal() {
 	}, [settings.readingline, handleMouseMove, width, height]);
 
 	useEffect(() => {
-		const container = ref.current;
+		const container = document.getElementById('about-modal');
 		const handleScroll = () => {
 			handleMouseMove();
 		};

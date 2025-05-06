@@ -20,7 +20,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 
 	return (
 		<>
-			<html lang='en'>
+			<html lang='en-US'>
 				<Head>
 					<link
 						rel='alternate'
