@@ -75,20 +75,20 @@ export const generate = async (item: any, item_type: string) => {
 	}
 }
 
-export async function createAudioFileFromTextOpenAI(text: string, filePath: string, speed: number = 1.0): Promise<any> {
-
+export async function createAudioFileFromTextOpenAI(text: string, filePath: string, s: number = 1.0): Promise<any> {
+	const speed = Math.min(Math.max(s, 0.3), 2.0)
 	const mp3 = await openai.audio.speech.create({
 		model: "tts-1",
 		voice: voices[Math.floor(Math.random() * voices.length)],
 		input: text,
-		speed: Math.min(Math.max(speed, 0.3), 2.0)
+		speed
 	});
 
 	const buffer = Buffer.from(await mp3.arrayBuffer());
 	await fs.promises.writeFile(filePath, buffer);
 
 	//@ts-ignore
-	return { filePath, customData: { text } };
+	return { filePath, customData: { text, speed: `${speed}` } };
 }
 
 
