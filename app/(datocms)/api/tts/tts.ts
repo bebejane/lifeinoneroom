@@ -32,7 +32,7 @@ const voices: Voice[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 export const generate = async (item: any, item_type: string) => {
 
 	const { id } = item;
-	const speed = item?.audio_speed ? parseFloat(item.audio_speed) : 1.0;
+
 	const { field, type } = postTypeMap[item_type];
 	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field]) : null;
 
@@ -40,11 +40,14 @@ export const generate = async (item: any, item_type: string) => {
 		throw new Error('No text found');
 
 	const audio = item?.audio?.upload_id ? await client.uploads.find(item.audio.upload_id) : null
+	const speed = item?.audio_speed ? parseFloat(item.audio_speed) : 1.0;
+	const instructions = item?.audio_instructions ?? undefined
+	const currentInstructions = audio?.default_field_metadata.en.custom_data?.instructions ?? null;
 	const currentText = audio?.default_field_metadata.en.custom_data?.text ?? null;
 	const currentSpeed = audio?.default_field_metadata.en.custom_data?.speed ? parseFloat(audio.default_field_metadata.en.custom_data?.speed as string) : null;
 
-	console.log(currentSpeed, speed)
-	if ((currentText && textInput === currentText) && currentSpeed === speed)
+
+	if ((currentText && textInput === currentText) && currentSpeed === speed && currentInstructions === instructions)
 		return console.log('Already generated');
 
 	const fileName = `${id}.mp3`;
@@ -55,7 +58,7 @@ export const generate = async (item: any, item_type: string) => {
 		console.log('generating audio', textInput.length + ' characters')
 		console.time('generate')
 
-		const { filePath, customData } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`, speed);
+		const { filePath, customData } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`, speed, instructions);
 
 		console.timeEnd('generate')
 
@@ -76,15 +79,23 @@ export const generate = async (item: any, item_type: string) => {
 	}
 }
 
-export async function createAudioFileFromTextOpenAI(text: string, filePath: string, s: number = 1.0): Promise<any> {
+export async function createAudioFileFromTextOpenAI(text: string, filePath: string, s: number = 1.0, instructions?: string): Promise<any> {
 	const speed = Math.min(Math.max(s, 0.3), 2.0)
 	const mp3 = await openai.audio.speech.create({
-		model: "tts-1",
+		//model: "tts-1",
+		model: "gpt-4o-mini-tts",
 		voice: voices[Math.floor(Math.random() * voices.length)],
 		input: text,
+		instructions,
 		speed
 	});
-
+	console.log({
+		model: "gpt-4o-mini-tts",
+		voice: voices[Math.floor(Math.random() * voices.length)],
+		input: text,
+		instructions,
+		speed
+	})
 	const buffer = Buffer.from(await mp3.arrayBuffer());
 	await fs.promises.writeFile(filePath, buffer);
 
