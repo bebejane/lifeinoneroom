@@ -68,6 +68,7 @@ export const generate = async (item: any, item_type: string) => {
 		}
 
 	} catch (e) {
+		console.log(e)
 		throw new Error(`Failed to generate audio. ${e.message}`);
 	}
 }

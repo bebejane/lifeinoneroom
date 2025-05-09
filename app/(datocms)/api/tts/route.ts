@@ -21,6 +21,7 @@ export async function POST(request: Request) {
         revalidatePath(`/about`)
       revalidateTag(entity.id)
     } catch (e) {
+      console.log(e)
       return Response.json({ success: false, error: e.message }, { status: 500 })
     }
   }
