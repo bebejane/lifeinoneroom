@@ -32,6 +32,7 @@ const voices: Voice[] = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'];
 export const generate = async (item: any, item_type: string) => {
 
 	const { id } = item;
+	const speed = item?.audio_speed ? parseFloat(item.audio_speed) : 1.0;
 	const { field, type } = postTypeMap[item_type];
 	const textInput = type === 'string' ? item[field] : type === 'structured_text' ? render(item[field]) : null;
 
@@ -52,7 +53,7 @@ export const generate = async (item: any, item_type: string) => {
 		console.log('generating audio', textInput.length + ' characters')
 		console.time('generate')
 
-		const { filePath, customData } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`);
+		const { filePath, customData } = await createAudioFileFromTextOpenAI(textInput, `${os.tmpdir}/${fileName}`, speed);
 
 		console.timeEnd('generate')
 
@@ -73,24 +74,18 @@ export const generate = async (item: any, item_type: string) => {
 	}
 }
 
-async function createAudioFileFromTextOpenAI(text: string, filePath: string): Promise<any> {
+export async function createAudioFileFromTextOpenAI(text: string, filePath: string, speed: number = 1.0): Promise<any> {
 
 	const mp3 = await openai.audio.speech.create({
 		model: "tts-1",
 		voice: voices[Math.floor(Math.random() * voices.length)],
 		input: text,
+		speed: Math.min(Math.max(speed, 0.3), 2.0)
 	});
 
 	const buffer = Buffer.from(await mp3.arrayBuffer());
 	await fs.promises.writeFile(filePath, buffer);
-	/*
-	const transcription = await openai.audio.transcriptions.create({
-		file: fs.createReadStream(filePath),
-		model: "whisper-1",
-		response_format: "verbose_json",
-		timestamp_granularities: ["word"],
-	});
-	*/
+
 	//@ts-ignore
 	return { filePath, customData: { text } };
 }
