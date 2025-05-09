@@ -41,8 +41,9 @@ export const generate = async (item: any, item_type: string) => {
 
 	const audio = item?.audio?.upload_id ? await client.uploads.find(item.audio.upload_id) : null
 	const currentText = audio?.default_field_metadata.en.custom_data?.text ?? null;
+	const currentSpeed = audio?.default_field_metadata.en.custom_data?.speed ? parseFloat(audio.default_field_metadata.en.custom_data?.speed as string) : 1.0;
 
-	if (currentText && textInput === currentText)
+	if (currentText && textInput === currentText && currentSpeed === speed)
 		return console.log('Already generated');
 
 	const fileName = `${id}.mp3`;
