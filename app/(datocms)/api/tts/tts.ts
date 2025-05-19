@@ -41,11 +41,10 @@ export const generate = async (item: any, item_type: string) => {
 
 	const audio = item?.audio?.upload_id ? await client.uploads.find(item.audio.upload_id) : null
 	const speed = item?.audio_speed ? parseFloat(item.audio_speed) : 1.0;
-	const instructions = item?.audio_instructions ?? undefined
-	const currentInstructions = audio?.default_field_metadata.en.custom_data?.instructions ?? null;
-	const currentText = audio?.default_field_metadata.en.custom_data?.text ?? null;
+	const instructions = item?.audio_instructions || null
+	const currentInstructions = audio?.default_field_metadata.en.custom_data?.instructions || null;
+	const currentText = audio?.default_field_metadata.en.custom_data?.text || null;
 	const currentSpeed = audio?.default_field_metadata.en.custom_data?.speed ? parseFloat(audio.default_field_metadata.en.custom_data?.speed as string) : null;
-
 
 	if ((currentText && textInput === currentText) && currentSpeed === speed && currentInstructions === instructions)
 		return console.log('Already generated');
