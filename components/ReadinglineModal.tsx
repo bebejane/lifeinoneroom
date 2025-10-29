@@ -3,7 +3,7 @@
 import s from './ReadinglineModal.module.scss';
 import cn from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import { useWindowSize } from 'react-use';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
@@ -71,11 +71,7 @@ export default function ReadinglineModal() {
 	}, [handleMouseMove]);
 
 	return (
-		<div
-			ref={ref}
-			className={cn(s.readingline, lineStyles && isDesktop && s.show)}
-			style={{ height: containeHeight }}
-		>
+		<div ref={ref} className={cn(s.readingline, lineStyles && isDesktop && s.show)} style={{ height: containeHeight }}>
 			<div className={s.top} style={lineStyles?.top} />
 			<div className={s.line} style={lineStyles?.line} />
 			<div className={s.bottom} style={lineStyles?.bottom} />

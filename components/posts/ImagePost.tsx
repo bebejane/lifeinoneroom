@@ -5,7 +5,7 @@ import cn from 'classnames';
 import { Image } from 'react-datocms';
 import PublishDate from '../PublishDate';
 import { useEffect, useState } from 'react';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import AudioPlayer from '../AudioPlayer';
 
 export type Props = {
@@ -24,9 +24,7 @@ export default function ImagePost({
 	const [hover, setHover] = useState(false);
 
 	const sectionStyle =
-		settings.theme !== 'dark' && settings.colors
-			? { backgroundColor: colorBackground?.hex }
-			: undefined;
+		settings.theme !== 'dark' && settings.colors ? { backgroundColor: colorBackground?.hex } : undefined;
 
 	useEffect(() => {
 		setOpen(expanded);
@@ -51,7 +49,7 @@ export default function ImagePost({
 			onMouseLeave={() => setHover(false)}
 			onClick={handleClick}
 		>
-			{image.responsiveImage && (
+			{image?.responsiveImage && (
 				<figure>
 					<Image
 						data={{ ...image.responsiveImage, alt: textToVoice }}
@@ -60,13 +58,7 @@ export default function ImagePost({
 					/>
 				</figure>
 			)}
-			<AudioPlayer
-				audio={audio}
-				open={open}
-				show={hover && open}
-				fullMargin={true}
-				postId={postId}
-			/>
+			<AudioPlayer audio={audio} open={open} show={hover && open} fullMargin={true} postId={postId} />
 			<PublishDate date={_firstPublishedAt} align={open ? 'top' : 'center'} />
 		</section>
 	);

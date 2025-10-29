@@ -1,6 +1,6 @@
 'use client';
 
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import s from './PublishTimeline.module.scss';
 import cn from 'classnames';
 import { format } from 'date-fns';
@@ -24,11 +24,7 @@ type TimelineItem = {
 };
 
 export default function PublishTimeline({ posts, selected }: Props) {
-	const [expanded, setExpanded, settings] = useStore((state) => [
-		state.expanded,
-		state.setExpanded,
-		state.settings,
-	]);
+	const [expanded, setExpanded, settings] = useStore((state) => [state.expanded, state.setExpanded, state.settings]);
 	const { width, height } = useWindowSize();
 	const [timeline, setTimeline] = useState<TimelineItem[] | null>(null);
 	const [active, setActive] = useState<string | null>(null);
@@ -78,8 +74,7 @@ export default function PublishTimeline({ posts, selected }: Props) {
 
 		sections.forEach((section, i) => {
 			const rect = section.getBoundingClientRect();
-			const visibleRatio =
-				Math.max(0, Math.min(rect.bottom, height) - Math.max(rect.top, 0)) / height;
+			const visibleRatio = Math.max(0, Math.min(rect.bottom, height) - Math.max(rect.top, 0)) / height;
 			if (visibleRatio > ratio) {
 				mostVisible = section;
 				ratio = visibleRatio;
@@ -118,10 +113,7 @@ export default function PublishTimeline({ posts, selected }: Props) {
 						zIndex: i,
 					}}
 				>
-					<span className={cn(slug === active && s.active)}>
-						{format(new Date(date), 'MMM dd yyyy')}
-					</span>{' '}
-					●
+					<span className={cn(slug === active && s.active)}>{format(new Date(date), 'MMM dd yyyy')}</span> ●
 				</div>
 			))}
 		</nav>

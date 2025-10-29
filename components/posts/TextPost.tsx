@@ -2,12 +2,12 @@
 
 import s from './TextPost.module.scss';
 import cn from 'classnames';
-import Content from '@components/Content';
+import Content from '@/components/Content';
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import PublishDate from '../PublishDate';
 import AudioPlayer from '../AudioPlayer';
-import { Theme, ThemeContext } from '@components/theme/ThemeContext';
+import { Theme, ThemeContext } from '@/components/theme/ThemeContext';
 
 export type LayoutProps = {
 	data: TextRecord;
@@ -39,9 +39,7 @@ export default function TextPost({
 			}, 100);
 	};
 	const sectionStyle =
-		theme !== 'dark' && settings.colors
-			? { backgroundColor: backgroundColor?.hex, color: textColor?.hex }
-			: undefined;
+		theme !== 'dark' && settings.colors ? { backgroundColor: backgroundColor?.hex, color: textColor?.hex } : undefined;
 
 	useEffect(() => {
 		setOpen(expanded);

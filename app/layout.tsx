@@ -1,11 +1,10 @@
-import '@styles/index.scss';
+import '@/styles/index.scss';
 import { apiQuery } from 'next-dato-utils/api';
-import { AboutDocument, GlobalDocument } from '@graphql';
+import { AboutDocument, GlobalDocument } from '@/graphql';
 import { Metadata } from 'next';
 import { Icon } from 'next/dist/lib/metadata/types/metadata-types';
-import { ThemeContextProvider } from '@components/theme/ThemeContext';
-import Head from 'next/head';
-import ThemeProvider from '@components/theme/ThemeProvider';
+import { ThemeContextProvider } from '@/components/theme/ThemeContext';
+import ThemeProvider from '@/components/theme/ThemeProvider';
 import Navbar from '@/components/Navbar';
 import Readingline from '@/components/Readingline';
 import AboutModal from '@/components/AboutModal';
@@ -21,14 +20,6 @@ export default async function RootLayout({ children }: LayoutProps) {
 	return (
 		<>
 			<html lang='en-US'>
-				<Head>
-					<link
-						rel='alternate'
-						type='application/rss+xml'
-						title='Example Feed'
-						href={`${process.env.NEXT_PUBLIC_SITE_URL}/feed`}
-					/>
-				</Head>
 				<ThemeContextProvider>
 					<ThemeProvider>
 						<SkipLink />
@@ -43,7 +34,7 @@ export default async function RootLayout({ children }: LayoutProps) {
 	);
 }
 
-export async function generateMetadata() {
+export async function generateMetadata(): Promise<Metadata> {
 	const {
 		site: { globalSeo, faviconMetaTags },
 	} = await apiQuery<GlobalQuery, GlobalQueryVariables>(GlobalDocument);

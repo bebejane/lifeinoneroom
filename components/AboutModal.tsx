@@ -5,7 +5,7 @@ import cn from 'classnames';
 import useStore from '@/lib/store';
 import { Content } from '@/components';
 import AudioPlayer from './AudioPlayer';
-import ReadinglineModal from '@components/ReadinglineModal';
+import ReadinglineModal from '@/components/ReadinglineModal';
 
 export type Props = {
 	about: AboutQuery['about'];
@@ -13,15 +13,13 @@ export type Props = {
 };
 
 export default function AboutModal({ about, introduction }: Props) {
-	const [setShowAbout, showAbout, setShowAboutIntro, showAboutIntro, settings] = useStore(
-		(state) => [
-			state.setShowAbout,
-			state.showAbout,
-			state.setShowAboutIntro,
-			state.showAboutIntro,
-			state.settings,
-		]
-	);
+	const [setShowAbout, showAbout, setShowAboutIntro, showAboutIntro, settings] = useStore((state) => [
+		state.setShowAbout,
+		state.showAbout,
+		state.setShowAboutIntro,
+		state.showAboutIntro,
+		state.settings,
+	]);
 	const mode = showAboutIntro ? 'intro' : 'about';
 
 	const handleClose = () => {

@@ -1,10 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from 'next';
+import path from 'path';
+
+const nextConfig: NextConfig = {
 	sassOptions: {
-		includePaths: ['./components', './pages'],
-		silenceDeprecations: ['legacy-js-api', 'import'],
+		includePaths: ['./components', './app'],
+		silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'mixed-decls'],
 		prependData: `
-    	@use "sass:math";
+			@use "sass:math";
     	@import "./styles/mediaqueries";
   	`,
 	},
@@ -14,12 +16,19 @@ const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
-	devIndicators: {
-		buildActivity: false,
+	webpack: (config) => {
+		config.module.exprContextCritical = false;
+		config.resolve.alias['datocms.config'] = path.join(__dirname, 'datocms.config.ts');
+		return config;
+	},
+	turbopack: {
+		resolveAlias: {
+			'datocms.config': './datocms.config.ts',
+		},
 	},
 	logging: {
 		fetches: {
-			fullUrl: false,
+			fullUrl: true,
 		},
 	},
 	async headers() {

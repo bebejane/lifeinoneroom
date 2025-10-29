@@ -2,7 +2,7 @@
 
 import s from './Navbar.module.scss';
 import cn from 'classnames';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import { IoAccessibility } from 'react-icons/io5';
@@ -10,8 +10,8 @@ import Settings from './Settings';
 
 export default function Navbar() {
 	const [showSettings, setShowSettings] = useState(false);
-	const [setExpanded, expanded, theme, setShowAbout, showAbout, setShowAboutIntro, showAboutIntro] =
-		useStore((state) => [
+	const [setExpanded, expanded, theme, setShowAbout, showAbout, setShowAboutIntro, showAboutIntro] = useStore(
+		(state) => [
 			state.setExpanded,
 			state.expanded,
 			state.theme,
@@ -19,7 +19,8 @@ export default function Navbar() {
 			state.showAbout,
 			state.setShowAboutIntro,
 			state.showAboutIntro,
-		]);
+		]
+	);
 
 	useEffect(() => {
 		document.querySelector('main').classList.toggle('compressed', !expanded);

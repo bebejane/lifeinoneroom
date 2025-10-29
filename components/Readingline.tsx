@@ -3,17 +3,13 @@
 import s from './Readingline.module.scss';
 import cn from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import { usePathname } from 'next/navigation';
 import useIsDesktop from '../lib/hooks/useIsDesktop';
 
 export default function Readingline() {
 	const pathname = usePathname();
-	const [expanded, settings, showAbout] = useStore((state) => [
-		state.expanded,
-		state.settings,
-		state.showAbout,
-	]);
+	const [expanded, settings, showAbout] = useStore((state) => [state.expanded, state.settings, state.showAbout]);
 	const [lineStyles, setLineStyles] = useState<{
 		top: React.CSSProperties;
 		bottom: React.CSSProperties;

@@ -1,24 +1,19 @@
-'use client'
+'use client';
 
-import { useStore } from '@lib/store'
-import s from './PublishDate.module.scss'
-import cn from 'classnames'
-import { format } from 'date-fns'
+import { useStore } from '@/lib/store';
+import s from './PublishDate.module.scss';
+import cn from 'classnames';
+import { format } from 'date-fns';
 
 export type Props = {
-  date: string
-  align: 'top' | 'center'
-}
+	date: string;
+	align: 'top' | 'center';
+};
 
 export default function PublishDate({ date, align = 'center' }: Props) {
+	const [expanded] = useStore((state) => [state.expanded]);
 
-  const [expanded] = useStore(state => [state.expanded])
+	if (expanded) return null;
 
-  if (expanded) return null
-
-  return (
-    <div className={cn(s.date, align === 'top' && s.top)}>
-      {format(new Date(date), 'MMM dd yyyy')}
-    </div>
-  );
+	return <div className={cn(s.date, align === 'top' && s.top)}>{format(new Date(date), 'MMM dd yyyy')}</div>;
 }

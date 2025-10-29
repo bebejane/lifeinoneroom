@@ -3,7 +3,7 @@
 import s from './AudioPlayer.module.scss';
 import cn from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import { useStore } from '@lib/store';
+import { useStore } from '@/lib/store';
 import { IoVolumeHighSharp } from 'react-icons/io5';
 import { IoVolumeMuteSharp } from 'react-icons/io5';
 
