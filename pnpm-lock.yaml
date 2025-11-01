@@ -43,7 +43,7 @@ importers:
         version: 15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0)
       next-dato-utils:
         specifier: github:bebejane/next-dato-utils#latest
-        version: https://codeload.github.com/bebejane/next-dato-utils/tar.gz/3231b3969b9a0b4d2ee53d651ed942a8b388b745(@datocms/cda-client@0.2.7(graphql@16.11.0))(@datocms/cma-client-browser@5.1.26)(@datocms/cma-client-node@5.1.26)(@datocms/cma-client@5.1.26)(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(datocms-structured-text-utils@5.1.6)(graphql@16.11.0)(next@15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0))(postmark@4.0.5)(react-datocms@6.0.6(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0)(zod@3.24.4)
+        version: https://codeload.github.com/bebejane/next-dato-utils/tar.gz/c1b6b62ec9a6225249c8add4bfff209674f7d608(@datocms/cda-client@0.2.7(graphql@16.11.0))(@datocms/cma-client-browser@5.1.26)(@datocms/cma-client-node@5.1.26)(@datocms/cma-client@5.1.26)(@types/react@18.3.21)(datocms-structured-text-utils@5.1.6)(graphql@16.11.0)(next@15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0))(postmark@4.0.5)(react-datocms@6.0.6(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(sass@1.87.0)(zod@3.24.4)
       openai:
         specifier: ^4.98.0
         version: 4.98.0(ws@8.18.0)(zod@3.24.4)
@@ -55,7 +55,7 @@ importers:
         version: 1.8.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-datocms:
         specifier: ^6.0.1
-        version: 6.0.6(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 6.0.6(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-icons:
         specifier: ^5.2.1
         version: 5.5.0(react@18.3.1)
@@ -1833,11 +1833,6 @@ packages:
   '@types/prop-types@15.7.13':
     resolution: {integrity: sha512-hCZTSvwbzWGvhqxp/RqVqwU999pBf2vp7hzIjiYOsl8wqOmUxkQ6ddw1cV3l8811+kdUFus/q4d1Y3E3SyEifA==}
 
-  '@types/react-dom@18.3.7':
-    resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
-    peerDependencies:
-      '@types/react': ^18.0.0
-
   '@types/react@18.3.21':
     resolution: {integrity: sha512-gXLBtmlcRJeT09/sI4PxVwyrku6SaNUj/6cMubjE6T6XdY1fDmBL7r0nX0jbSZPU/Xr0KuwLLZh6aOYY5d91Xw==}
 
@@ -3432,9 +3427,9 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  next-dato-utils@https://codeload.github.com/bebejane/next-dato-utils/tar.gz/3231b3969b9a0b4d2ee53d651ed942a8b388b745:
-    resolution: {tarball: https://codeload.github.com/bebejane/next-dato-utils/tar.gz/3231b3969b9a0b4d2ee53d651ed942a8b388b745}
-    version: 2.0.50
+  next-dato-utils@https://codeload.github.com/bebejane/next-dato-utils/tar.gz/c1b6b62ec9a6225249c8add4bfff209674f7d608:
+    resolution: {tarball: https://codeload.github.com/bebejane/next-dato-utils/tar.gz/c1b6b62ec9a6225249c8add4bfff209674f7d608}
+    version: 2.0.67
     engines: {node: '>=0.18'}
     hasBin: true
     peerDependencies:
@@ -3442,14 +3437,11 @@ packages:
       '@datocms/cma-client': '>=5.0.0'
       '@datocms/cma-client-browser': '>=5.0.0'
       '@datocms/cma-client-node': '>=5.0.0'
-      '@types/react-dom': '>=18.2.1'
       datocms-structured-text-utils: '>=2.0.0'
       graphql: '>=16.0.0'
       next: '>=14.0.0'
       postmark: '>=4.0.0'
-      react: '>=18.0.0'
       react-datocms: '>=4.0.0'
-      react-dom: ^18.0.0
       sass: '>=1.69.0'
       zod: '>=3.0.0'
 
@@ -5703,7 +5695,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@mux/mux-player-react@3.1.0(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@mux/mux-player-react@3.1.0(@types/react@18.3.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@mux/mux-player': 3.1.0
       '@mux/playback-core': 0.27.0
@@ -5712,7 +5704,6 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
       '@types/react': 18.3.21
-      '@types/react-dom': 18.3.7(@types/react@18.3.21)
 
   '@mux/mux-player@3.1.0':
     dependencies:
@@ -6933,10 +6924,6 @@ snapshots:
       undici-types: 6.19.8
 
   '@types/prop-types@15.7.13': {}
-
-  '@types/react-dom@18.3.7(@types/react@18.3.21)':
-    dependencies:
-      '@types/react': 18.3.21
 
   '@types/react@18.3.21':
     dependencies:
@@ -8995,14 +8982,13 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  next-dato-utils@https://codeload.github.com/bebejane/next-dato-utils/tar.gz/3231b3969b9a0b4d2ee53d651ed942a8b388b745(@datocms/cda-client@0.2.7(graphql@16.11.0))(@datocms/cma-client-browser@5.1.26)(@datocms/cma-client-node@5.1.26)(@datocms/cma-client@5.1.26)(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(datocms-structured-text-utils@5.1.6)(graphql@16.11.0)(next@15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0))(postmark@4.0.5)(react-datocms@6.0.6(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0)(zod@3.24.4):
+  next-dato-utils@https://codeload.github.com/bebejane/next-dato-utils/tar.gz/c1b6b62ec9a6225249c8add4bfff209674f7d608(@datocms/cda-client@0.2.7(graphql@16.11.0))(@datocms/cma-client-browser@5.1.26)(@datocms/cma-client-node@5.1.26)(@datocms/cma-client@5.1.26)(@types/react@18.3.21)(datocms-structured-text-utils@5.1.6)(graphql@16.11.0)(next@15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0))(postmark@4.0.5)(react-datocms@6.0.6(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(sass@1.87.0)(zod@3.24.4):
     dependencies:
       '@datocms/cda-client': 0.2.7(graphql@16.11.0)
       '@datocms/cma-client': 5.1.26
       '@datocms/cma-client-browser': 5.1.26
       '@datocms/cma-client-node': 5.1.26
       '@opentelemetry/api': 1.9.0
-      '@types/react-dom': 18.3.7(@types/react@18.3.21)
       commander: 11.1.0
       datocms-listen: 0.1.15(graphql@16.11.0)
       datocms-structured-text-utils: 5.1.6
@@ -9016,9 +9002,7 @@ snapshots:
       postmark: 4.0.5
       prettier: 3.5.3
       pretty-bytes: 6.1.1
-      react: 18.3.1
-      react-datocms: 6.0.6(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-dom: 18.3.1(react@18.3.1)
+      react-datocms: 6.0.6(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-markdown: 9.1.0(@types/react@18.3.21)(react@18.3.1)
       remark-breaks: 4.0.0
       remark-gfm: 4.0.1
@@ -9027,6 +9011,7 @@ snapshots:
       zod: 3.24.4
     transitivePeerDependencies:
       - '@types/react'
+      - react
       - supports-color
 
   next@15.5.6(@babel/core@7.26.0)(@opentelemetry/api@1.9.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0):
@@ -9375,9 +9360,9 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-datocms@6.0.6(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-datocms@6.0.6(@types/react@18.3.21)(graphql@16.11.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@mux/mux-player-react': 3.1.0(@types/react-dom@18.3.7(@types/react@18.3.21))(@types/react@18.3.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@mux/mux-player-react': 3.1.0(@types/react@18.3.21)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       datocms-listen: 0.1.15(graphql@16.11.0)
       datocms-structured-text-generic-html-renderer: 4.0.2
       datocms-structured-text-utils: 4.1.2
